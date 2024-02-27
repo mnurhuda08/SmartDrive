@@ -7,6 +7,9 @@ import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { ContentWrapperComponent } from './components/layout/content-wrapper/content-wrapper.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { SidebarComponent } from './components/layout/sidebar/sidebar.component';
+import { CarBrandComponent } from './components/master/car-brand.component';
+import { CarModelComponent } from './components/master/car-model/car-model.component';
+import { CarSeriesComponent } from './components/master/car-series/car-series.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,9 @@ import { SidebarComponent } from './components/layout/sidebar/sidebar.component'
     ContentWrapperComponent,
     FooterComponent,
     SidebarComponent,
+    CarBrandComponent,
+    CarModelComponent,
+    CarSeriesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
