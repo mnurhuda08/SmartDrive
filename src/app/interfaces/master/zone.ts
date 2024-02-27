@@ -1,4 +1,4 @@
-export interface CarBrand {
+export interface Zone {
   id: number;
   name: string;
 }
