@@ -10,6 +10,7 @@ import { SidebarComponent } from './components/layout/sidebar/sidebar.component'
 import { CarModelComponent } from './components/master/car-model/car-model.component';
 import { CarSeriesComponent } from './components/master/car-series/car-series.component';
 import { CarBrandComponent } from './components/master/car-brand/car-brand.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { CarBrandComponent } from './components/master/car-brand/car-brand.compo
     CarModelComponent,
     CarSeriesComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

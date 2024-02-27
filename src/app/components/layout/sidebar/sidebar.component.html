@@ -76,34 +76,28 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a [routerLink]="['master/carbrand']" class="nav-link">
+              <a
+                [routerLink]="['master/carbrand']"
+                routerLinkActive="router-link-active"
+                class="nav-link"
+              >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Car Brand</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="assets/adminlte/index2.html" class="nav-link">
+              <a [routerLink]="['master/carmodel']" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Car Model</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="assets/adminlte/index3.html" class="nav-link">
+              <a [routerLink]="['master/carseries']" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Car Series</p>
               </a>
             </li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a
-            routerLink="/my-profile"
-            routerLinkActive="active"
-            class="nav-link"
-          >
-            <i class="nav-icon fas fa-user"></i>
-            <p>My Profile</p>
-          </a>
         </li>
       </ul>
     </nav>

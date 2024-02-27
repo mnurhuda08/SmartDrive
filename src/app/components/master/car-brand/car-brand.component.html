@@ -37,9 +37,9 @@
                     <th>Aksi</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody *ngFor="let carBrand of carBrands">
                   <tr>
-                    <td>Car Brand Name</td>
+                    <td>{{ carBrand.cabrName }}</td>
                     <td>
                       <button type="button" class="btn btn-info mr-2">
                         <i class="far fa-edit"></i>
