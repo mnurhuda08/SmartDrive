@@ -14,6 +14,9 @@ import { LoginComponent } from './components/users/login/login.component';
 import { BlankComponent } from './components/users/blank/blank.component';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { DashboardLayoutComponent } from './components/layout/dashboard-layout/dashboard-layout.component';
+import { PartnerPage } from './components/partners/pages/partner.page/partner.page.component';
+import { TableComponent } from './components/partners/components/table/table.component';
+import { ModalComponent } from './components/partners/components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { DashboardLayoutComponent } from './components/layout/dashboard-layout/d
     BlankComponent,
     LoginLayoutComponent,
     DashboardLayoutComponent,
+    PartnerPage,
+    TableComponent,
+    ModalComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

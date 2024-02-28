@@ -4,4 +4,5 @@ export interface IMenus {
   roles: string[];
   exact: boolean;
   icon: string;
+  child?: IMenus[];
 }

@@ -34,6 +34,22 @@ export const MenuConstant: IMenus[] = [
     title: 'Partner',
     roles: ['PR'],
     exact: false,
-    icon: 'fas fa-columns',
+    icon: 'fa fa-building',
+    child: [
+      {  
+        path: '/partner/partner',
+        title: 'Partner',
+        roles: ['PR'],
+        exact: false,
+        icon: 'fa fa-car',
+      },
+      {
+        path: '/partner/workorder',
+        title: 'Partner Work Order',
+        roles: ['PR'],
+        exact: false,
+        icon: 'fa fa-briefcase',
+      }
+    ]
   },
 ];
