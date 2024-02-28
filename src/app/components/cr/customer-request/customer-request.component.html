@@ -1,0 +1,124 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Customer Request</h1>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="btn-group mr-2">
+                                <button type="button" class="btn btn-default btn-flat">Type</button>
+                                <button type="button" class="btn btn-default btn-flat dropdown-toggle dropdown-icon"
+                                    data-toggle="dropdown">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a class="dropdown-item" href="#">All</a>
+                                    <a class="dropdown-item" href="#">Create Polis</a>
+                                    <a class="dropdown-item" href="#">Close</a>
+                                    <a class="dropdown-item" href="#">Claim Polis</a>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-flat">Status</button>
+                                <button type="button" class="btn btn-default btn-flat dropdown-toggle dropdown-icon"
+                                    data-toggle="dropdown">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a class="dropdown-item" href="#">OPEN</a>
+                                    <a class="dropdown-item" href="#">CLOSED</a>
+                                    <a class="dropdown-item" href="#">CANCELED</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Customer Name</th>
+                                        <th>Created On</th>
+                                        <th>Phone Number</th>
+                                        <th>Type Request</th>
+                                        <th>Insurance Plan</th>
+                                        <th>Customer Type</th>
+                                        <th>Status</th>
+                                        <th>
+                                            <button type="button" class="btn btn-info mr-2" data-toggle="modal"
+                                                data-target="#createNewPolisModal">
+                                                <i class="fas fa-plus"></i> add
+                                            </button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Galih</td>
+                                        <td>12/11/2023</td>
+                                        <td>081645678</td>
+                                        <td>Create Polis</td>
+                                        <td>TLO</td>
+                                        <td>Potential</td>
+                                        <td>Waiting</td>
+                                        <td>
+                                            <button type="button" class="btn btn-info mr-2" data-toggle="modal"
+                                                data-target="#createNewClaimModal">
+                                                Review
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Agus</td>
+                                        <td>12/11/2023</td>
+                                        <td>081645678</td>
+                                        <td>Close Polis</td>
+                                        <td>TLO</td>
+                                        <td>Potential</td>
+                                        <td>Waiting</td>
+                                        <td>
+                                            <button type="button" class="btn btn-info mr-2" data-toggle="modal"
+                                                data-target="#createClosePolisModal">
+                                                Review
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-footer clearfix">
+                            <ul class="pagination pagination-sm m-0 float-right">
+                                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card -->
+    </section>
+    <!-- /.content -->
+    <app-create-new-polis></app-create-new-polis>
+    <app-create-new-claim></app-create-new-claim>
+    <app-create-close-polis></app-create-close-polis>
+</div>
+<!-- /.content-wrapper -->

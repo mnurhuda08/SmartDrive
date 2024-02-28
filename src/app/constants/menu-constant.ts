@@ -31,7 +31,7 @@ export const MenuConstant: IMenus[] = [
   },
   {
     path: '/customer',
-    title: 'Customer',
+    title: 'Customer Request',
     roles: ['CU'],
     exact: false,
     icon: 'fas fa-users',
