@@ -43,4 +43,11 @@ export const MenuConstant: IMenus[] = [
     exact: false,
     icon: 'fas fa-columns',
   },
+  {
+    path: '/so',
+    title: 'Service Order',
+    roles: ['EM'],
+    exact: false,
+    icon: 'fas fa-cogs',
+  },
 ];
