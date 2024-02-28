@@ -1,0 +1,6 @@
+export enum SERVTYPE {
+    FEASIBILITY="FEASIBILITY",
+    POLIS="POLIS",
+    CLAIM="CLAIM",
+    CLOSED="CLOSED"
+}
