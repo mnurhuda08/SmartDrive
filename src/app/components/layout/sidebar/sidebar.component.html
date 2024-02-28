@@ -77,6 +77,21 @@
               <i class="nav-icon {{ item.icon }}"></i>
               <p>{{ item.title }}</p>
             </a>
+            <ng-container *ngIf="item.nested">
+              <ul class="nav nav-treeview" *ngFor="let nested of item.nested">
+                <li class="nav-item">
+                  <a
+                    [routerLink]="nested.path"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: item.exact }"
+                    class="nav-link"
+                  >
+                    <i class="nav-icon {{ nested.icon }}"></i>
+                    <p>{{ nested.title }}</p>
+                  </a>
+                </li>
+              </ul>
+            </ng-container>
           </li>
         </ng-container>
       </ul>

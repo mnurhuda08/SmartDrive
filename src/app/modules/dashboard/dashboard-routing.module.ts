@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { BlankComponent } from 'src/app/components/users/blank/blank.component';
-import { CarBrandComponent } from 'src/app/components/master/car-brand/car-brand.component';
-import { CarModelComponent } from 'src/app/components/master/car-model/car-model.component';
+import { CarComponent } from 'src/app/components/master/car/car.component';
+import { AddCarBrandComponent } from 'src/app/components/master/car-brand/add-car-brand.component';
 
 const routes: Routes = [
   {
@@ -19,16 +19,12 @@ const routes: Routes = [
         component: BlankComponent,
       },
       {
-        path: 'master/carbrand',
-        component: CarBrandComponent,
+        path: 'master/car',
+        component: CarComponent,
       },
       {
-        path: 'master/carmodel',
-        component: CarModelComponent,
-      },
-      {
-        path: 'master/carseries',
-        component: CarModelComponent,
+        path: 'master/car/carbrand/add',
+        component: AddCarBrandComponent,
       },
     ],
   },

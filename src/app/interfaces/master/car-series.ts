@@ -1,8 +1,8 @@
 import { CarModel } from './car-model';
 
 export interface CarSeries {
-  id: number;
-  name: string;
+  carsId: number;
+  carsName: string;
   carModelID: number;
   carModel: CarModel;
 }

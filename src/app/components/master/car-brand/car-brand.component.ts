@@ -11,17 +11,20 @@ import { CarBrandService } from 'src/app/services/master/car-brand.service';
 export class CarBrandComponent implements OnInit {
   carBrands: CarBrand[] = [];
 
-  constructor(private carBrandService: CarBrandService) {}
+  constructor(
+    private carBrandService: CarBrandService,
+    private router: Router
+  ) {}
 
   getCarBrands() {
-    this.carBrandService.getCarBrands().subscribe(
-      (response) => {
+    this.carBrandService.getCarBrands().subscribe({
+      next: (response) => {
         this.carBrands = response;
       },
-      (error) => {
+      error: (error) => {
         console.error(error);
-      }
-    );
+      },
+    });
   }
 
   ngOnInit(): void {

@@ -4,4 +4,12 @@ export interface IMenus {
   roles: string[];
   exact: boolean;
   icon: string;
+  nested?: INestedMenus[];
+}
+
+interface INestedMenus {
+  path: string;
+  title: string;
+  exact: boolean;
+  icon: string;
 }

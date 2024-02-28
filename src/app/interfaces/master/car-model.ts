@@ -1,8 +1,8 @@
 import { CarBrand } from './car-brand';
 
 export interface CarModel {
-  id: number;
-  name: string;
+  carmId: number;
+  carmName: string;
   carBrandID: number;
   carBrand: CarBrand;
 }

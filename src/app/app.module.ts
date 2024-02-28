@@ -14,6 +14,10 @@ import { BlankComponent } from './components/users/blank/blank.component';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { DashboardLayoutComponent } from './components/layout/dashboard-layout/dashboard-layout.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CarComponent } from './components/master/car/car.component';
+import { CarBrandComponent } from './components/master/car-brand/car-brand.component';
+import { AddCarBrandComponent } from './components/master/car-brand/add-car-brand.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,14 +26,22 @@ import { HttpClientModule } from '@angular/common/http';
     ContentWrapperComponent,
     FooterComponent,
     SidebarComponent,
+    CarComponent,
+    CarBrandComponent,
     CarModelComponent,
     CarSeriesComponent,
     LoginComponent,
     BlankComponent,
     LoginLayoutComponent,
     DashboardLayoutComponent,
+    AddCarBrandComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
