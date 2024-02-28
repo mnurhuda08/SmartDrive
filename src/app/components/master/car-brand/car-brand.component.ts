@@ -14,11 +14,14 @@ export class CarBrandComponent implements OnInit {
   constructor(private carBrandService: CarBrandService) {}
 
   getCarBrands() {
-    this.carBrandService.getCarBrands().subscribe({
-      next: (v) => (this.carBrands = v),
-      error: (e) => console.error(e),
-      complete: () => console.info('completed'),
-    });
+    this.carBrandService.getCarBrands().subscribe(
+      (response) => {
+        this.carBrands = response;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   ngOnInit(): void {
