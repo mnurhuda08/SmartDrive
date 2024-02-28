@@ -1,0 +1,79 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Bank</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Bank List</h3>
+                        </div>
+
+                        <div class="card-body  ">
+                            <table class="table table-bordered text-center">
+                                <thead>
+                                    <tr>
+                                        <th>Bank Id</th>
+                                        <th>Bank Name</th>
+                                        <th>Bank Desc</th>
+                                        <th>
+                                            <button type="button" class="btn btn-info mr-2"
+                                                (click)="openModal(true) ">Add
+                                                Bank <i class="fa fa-plus-circle"></i></button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let bank of banks">
+                                        <td>{{bank.bankEntityid}}</td>
+                                        <td>{{bank.bankName}}</td>
+                                        <td>{{bank.bankName}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-info mr-2" 
+                                            (click)="editBank(bank)"
+                                                (click)="openModal(false)" *ngIf="bank.bankEntityid">
+                                                <i class="far fa-edit"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger" style="margin-right: 5px">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-footer clearfix">
+                            <ul class="pagination pagination-sm m-0 float-right">
+                                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card -->
+    </section>
+
+    <!-- Add the modal component here -->
+    <!-- <app-add-bank-modal [bankComponent]="this" *ngIf="isModalOpen" (addBank)="onAddBank($event)"></app-add-bank-modal>
+
+    <app-edit-bank [bankComponent]="this" [bank]="bankToEdit" *ngIf="isModalOpen"></app-edit-bank> -->
+    <app-bank-modifier [bankComponent]="this" [isCreate]="isCreate" [bank]="bankToEdit" *ngIf="isModalOpen" (addBank)="onAddBank($event)">
+    </app-bank-modifier>
+</div>
