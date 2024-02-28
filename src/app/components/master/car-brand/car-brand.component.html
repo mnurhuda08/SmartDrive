@@ -25,21 +25,25 @@
       <div class="row">
         <div class="col-12">
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Daftar Car Brand</h3>
+            <div class="card-header d-flex justify-content-end">
+              <div>
+                <button class="btn btn-info">
+                  <i class="fa fa-plus-circle"></i> Tambah
+                </button>
+              </div>
             </div>
 
             <div class="card-body">
-              <table class="table table-bordered">
+              <table class="table table-striped table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th>Car Brand Name</th>
+                    <th>Car Brand</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let carBrand of carBrands">
                   <tr>
-                    <td>{{ carBrand.cabrName }}</td>
+                    <td class="col-10">{{ carBrand.cabrName }}</td>
                     <td>
                       <button type="button" class="btn btn-info mr-2">
                         <i class="far fa-edit"></i>

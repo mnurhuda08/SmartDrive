@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { BlankComponent } from 'src/app/components/users/blank/blank.component';
 import { PartnerPage } from 'src/app/components/partners/pages/partner.page/partner.page.component';
+import { CarBrandComponent } from 'src/app/components/master/car-brand/car-brand.component';
+import { CarModelComponent } from 'src/app/components/master/car-model/car-model.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,18 @@ const routes: Routes = [
       {
         path: 'my-profile',
         component: BlankComponent,
+      },
+      {
+        path: 'master/carbrand',
+        component: CarBrandComponent,
+      },
+      {
+        path: 'master/carmodel',
+        component: CarModelComponent,
+      },
+      {
+        path: 'master/carseries',
+        component: CarModelComponent,
       },
       {
         path: 'partner/partner',
