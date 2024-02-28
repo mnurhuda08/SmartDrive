@@ -14,6 +14,7 @@ import { BlankComponent } from './components/users/blank/blank.component';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { DashboardLayoutComponent } from './components/layout/dashboard-layout/dashboard-layout.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ServicefeasibilityComponent } from './components/so/servicefeasibility/servicefeasibility.component';
 
 @NgModule({
   declarations: [
