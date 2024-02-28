@@ -18,6 +18,7 @@ import { CarComponent } from './components/master/car/car.component';
 import { CarBrandComponent } from './components/master/car-brand/car-brand.component';
 import { AddCarBrandComponent } from './components/master/car-brand/add-car-brand.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ServicefeasibilityComponent } from './components/so/servicefeasibility/servicefeasibility.component';
 
 @NgModule({
   declarations: [
