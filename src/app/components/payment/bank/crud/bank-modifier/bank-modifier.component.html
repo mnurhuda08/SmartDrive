@@ -4,13 +4,13 @@
         <div class="modal-content" *ngIf="bank">
             <div class="modal-header" *ngIf="isCreate ==true">
                 <h4 class="modal-title">Create New Bank</h4>
-                <button type="button" data-dismiss="modal" aria-label="bankModal" (click)="closeModal()">
+                <button type="button" data-dismiss="modal" aria-label="bankModal">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-header" *ngIf="isCreate ==false">
                 <h4 class="modal-title">Edit Bank</h4>
-                <button type="button" data-dismiss="modal" aria-label="bankModal" (click)="closeModal()">
+                <button type="button" data-dismiss="modal" aria-label="bankModal">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -49,10 +49,10 @@
 
                 <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="bankModal"
                     *ngIf="isCreate ==true" (click)="paymentPageComponent.createNewBank(bank)"
-                    (click)="closeModal()">Create</button>
+                    (click)="paymentPageComponent.getAllBanks()">Create</button>
 
                 <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="bankModal"
-                    *ngIf="isCreate ==false" (click)="paymentPageComponent.editBank(bank)" (click)="closeModal()">Save
+                    *ngIf="isCreate ==false" (click)="paymentPageComponent.editBank(bank)"  >Save
                     changes</button>
             </div>
         </div>

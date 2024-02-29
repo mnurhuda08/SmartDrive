@@ -27,16 +27,9 @@ export class PaymentPageComponentComponent implements OnInit {
   @Output() updatedFintech = new EventEmitter<Fintech[]>();
 
   ngOnInit(): void {
-    this.bankService
-      .getBanks()
-      .subscribe((result: Bank[]) => (this.bankList = result))
+    this.getAllBanks();
 
-    console.log(this.bankList)
-    this.fintechService
-
-      .getFintechs()
-      .subscribe((result: Fintech[]) => (this.fintechList = result))
-    console.log(this.fintechList)
+    this.getAllFintechs();
   }
   //#region Bank Region
   initNewBank() {
@@ -47,30 +40,47 @@ export class PaymentPageComponentComponent implements OnInit {
     this.bankToEdit = bank;
   }
 
-  createNewBank(bank: Bank) {
-    this.bankService.createBank(this.bankToEdit)
-      .subscribe((banks: Bank[]) => this.updatedBank.emit(banks))
+  getAllFintechs() {
+    this.fintechService
+      .getFintechs()
+      .subscribe((result: Fintech[]) => (this.fintechList =  result))
+  }
 
+  getAllBanks() {
     this.bankService
       .getBanks()
-      .subscribe((banks: Bank[]) => this.updatedBank.emit(banks))
+      .subscribe((result: Bank[]) => (this.bankList = result))
+
+  }
+
+  createNewBank(bank: Bank) {
+    this.bankService.createBank(this.bankToEdit)
+      .subscribe((banks: Bank[]) => {
+        this.updatedBank.emit(banks);
+        this.getAllBanks();
+        this.closeModal();
+      });
   }
 
   editBank(bank: Bank) {
     this.bankService.updateBank(bank)
       .subscribe((banks: Bank[]) => this.updatedBank.emit(banks))
+    this.closeModal();
   }
 
   deleteBank(bank: Bank) {
-    this.bankToEdit = bank;
     this.bankService.deleteBank(bank)
-      .subscribe((banks: Bank[]) => this.updatedBank.emit(banks));
+      .subscribe((banks: Bank[]) => {
+        this.updatedBank.emit(banks);
+        this.getAllBanks()
+      });
+
   }
   //#endregion
 
 
 
-  
+
   //#region Fintech Region
   initNewFintech() {
     this.fintechToEdit = new Fintech();
@@ -82,18 +92,26 @@ export class PaymentPageComponentComponent implements OnInit {
 
   createNewFintech(fintech: Fintech) {
     this.fintechService.createFintech(this.fintechToEdit)
-      .subscribe((fintechs: Fintech[]) => this.updatedFintech.emit(fintechs))
+      .subscribe((fintechs: Fintech[]) => {
+        this.updatedFintech.emit(fintechs);
+        this.getAllFintechs()
+        this.closeModal();
+      });
   }
 
   editFintech(fintech: Fintech) {
     this.fintechService.updateFintech(fintech)
       .subscribe((fintechs: Fintech[]) => this.updatedFintech.emit(fintechs))
+
+    this.closeModal();
   }
 
   deleteFintech(fintech: Fintech) {
-    this.fintechToEdit = fintech;
     this.fintechService.deleteFintech(fintech)
-      .subscribe((fintechs: Fintech[]) => this.updatedFintech.emit(fintechs));
+      .subscribe((fintechs: Fintech[]) => {
+        this.updatedFintech.emit(fintechs);
+        this.getAllFintechs();
+      });
   }
 
   //#endregion
