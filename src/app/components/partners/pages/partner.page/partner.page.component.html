@@ -16,129 +16,126 @@
     </div> -->
     <!-- /.container-fluid -->
   </section>
-  
-    <!-- Main content -->
-    <section class="content">
-      <!-- Default box -->
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header d-flex align-items-center justify-content-between overflow-auto">
-                <h2 class="card-title font-weight-bold">Data Partner</h2>
-                <div>
-                  <form action="simple-results.html" class="d-inline-block">
-                      <div class="input-group">
-                          <input type="search" class="form-control form-control" placeholder="name, npwp">
-                          <div class="input-group-append">
-                              <button type="submit" class="btn btn btn-default">
-                                  <i class="fa fa-search"></i>
-                              </button>
-                          </div>
-                      </div>
-                  </form>
+
+  <!-- Main content -->
+  <section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between overflow-auto">
+              <h2 class="card-title font-weight-bold">Data Partner</h2>
+              <div>
+                <!-- <form action="simple-results.html" class="d-inline-block"> -->
+                  <div class="input-group">
+                    <input type="search" class="form-control form-control" placeholder="name, npwp" [(ngModel)]="pagingPartnerParameter.search">
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn btn-default" (click)="onSearchPartner()">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                <!-- </form> -->
+              </div>
+              <button class="btn" type="button" data-toggle="modal" data-target="#modal-partner" (click)="openModal('PARTNER',enumAction.CREATE)">
+                <i class="fa fa-plus" style="color: #28a745;"></i>
+                Add
+              </button>
+            </div>
+
+            <div class="card-body">
+              <div class="row mb-2">
+                <div class="row col-12 col-md-12 col-sm-12">
+                  <div class="col-3 col-md-3 col-sm-3">
+                    Name
+                  </div>
+                  <div class="col-9 col-md-9 col-sm-9">
+                    <p class="card-title">{{ partner?.partName }}</p>
+                  </div>
                 </div>
-                <button class="btn" type="button">
-                    <i class="fa fa-plus" style="color: #28a745;"></i>
-                    Add
-                </button>
               </div>
-  
-              <div class="card-body">
-                  <!-- <div class="col-2 col-md-2 col-sm-2">
-                    <p> Nama </p>
-                    <p> Alamat </p>
-                    <p> NPWP </p>
-                    <p> Join Date </p>
-                    <p> Acount Number </p>
-                  </div> -->
-                  <div class="row mb-2">
-                    <div class="row col-12 col-md-12 col-sm-12">
-                      <div class="col-3 col-md-3 col-sm-3">
-                        Name
-                      </div>
-                      <div class="col-9 col-md-9 col-sm-9">
-                        Lorem ipsum dolor sit amet consectetur.
-                      </div>
-                    </div>
+              <div class="row mb-2">
+                <div class="row col-12 col-md-12 col-sm-12">
+                  <div class="col-3 col-md-3 col-sm-3">
+                    Alamat
                   </div>
-                  <div class="row mb-2">
-                    <div class="row col-12 col-md-12 col-sm-12">
-                      <div class="col-3 col-md-3 col-sm-3">
-                        Alamat
-                      </div>
-                      <div class="col-9 col-md-9 col-sm-9">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad fuga repudiandae aliquam aut, unde nostrum.
-                      </div>
-                    </div>
+                  <div class="col-9 col-md-9 col-sm-9">
+                    {{ partner?.partAddress }}
                   </div>
-                  <div class="row mb-2">
-                    <div class="row col-12 col-md-12 col-sm-12">
-                      <div class="col-3 col-md-3 col-sm-3">
-                        NPWP
-                      </div>
-                      <div class="col-9 col-md-9 col-sm-9">
-                        Lorem ipsum dolor sit amet consectetur.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mb-2">
-                    <div class="row col-12 col-md-12 col-sm-12">
-                      <div class="col-3 col-md-3 col-sm-3">
-                        Join Date
-                      </div>
-                      <div class="col-9 col-md-9 col-sm-9">
-                        Lorem ipsum dolor sit amet consectetur.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mb-2">
-                    <div class="row col-12 col-md-12 col-sm-12">
-                      <div class="col-3 col-md-3 col-sm-3">
-                        Status Partner
-                      </div>
-                      <div class="col-9 col-md-9 col-sm-9">
-                        Active
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mb-2">
-                    <div class="row col-12 col-md-12 col-sm-12">
-                      <div class="col-3 col-md-3 col-sm-3">
-                        Acount Number
-                      </div>
-                      <div class="col-7 col-md-7 col-sm-7">
-                        0823138127836817
-                      </div>
-                      <div class="col-2 col-md-2 col-sm-2">
-                        <button type="button" class="btn">
-                          <i class="far fa-edit" style="color: #007bff"></i>
-                          edit
-                        </button>
-                        <button type="button" class="btn">
-                          <i class="fa fa-times" style="color: #dc3545;"></i>
-                          delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                </div>
               </div>
-              <div class="card-footer d-flex justify-content-center">
-                <ul class="pagination pagination-sm m-0 text-center">
-                  <li class="page-item"><a class="page-link" href="#">«</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">»</a></li>
-                </ul>
+              <div class="row mb-2">
+                <div class="row col-12 col-md-12 col-sm-12">
+                  <div class="col-3 col-md-3 col-sm-3">
+                    NPWP
+                  </div>
+                  <div class="col-9 col-md-9 col-sm-9">
+                    {{ partner?.partNpwp }}
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="row col-12 col-md-12 col-sm-12">
+                  <div class="col-3 col-md-3 col-sm-3">
+                    Join Date
+                  </div>
+                  <div class="col-9 col-md-9 col-sm-9">
+                    {{ partner?.partJoinDate }}
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="row col-12 col-md-12 col-sm-12">
+                  <div class="col-3 col-md-3 col-sm-3">
+                    Status Partner
+                  </div>
+                  <div class="col-9 col-md-9 col-sm-9">
+                    {{ partner?.partStatus }}
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="row col-12 col-md-12 col-sm-12">
+                  <div class="col-3 col-md-3 col-sm-3">
+                    Kota/Kabupaten
+                  </div>
+                  <div class="col-9 col-md-9 col-sm-9">
+                    {{ partner?.cityName }}
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="row col-12 col-md-12 col-sm-12">
+                  <div class="col-3 col-md-3 col-sm-3">
+                    Acount Number
+                  </div>
+                  <div class="col-7 col-md-7 col-sm-7">
+                    {{ partner?.partAccountNo }}
+                  </div>
+                  <div class="col-2 col-md-2 col-sm-2">
+                    <button type="button" class="btn" (click)="openModal('PARTNER', enumAction.UPDATE)"
+                      data-toggle="modal" data-target="#modal-partner">
+                      <i class="far fa-edit" style="color: #007bff"></i>
+                      edit
+                    </button>
+                    <button type="button" class="btn" (click)="onDeletePartner(partner!.partEntityid)" >
+                      <i class="fa fa-times" style="color: #dc3545;"></i>
+                      delete
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
+            <partner-pagination [currentPage]="paginationPartner!.currentPages" [totalPage]="paginationPartner!.totalPages" [pagesToShow]="3" [pagingParameter]="pagingPartnerParameter" (onPaging)="onPartnerPaging($event)"></partner-pagination>
           </div>
         </div>
       </div>
-      <!-- /.card -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  
+    </div>
+    <!-- /.card -->
+  </section>
+  <!-- /.content -->
+</div>
+<partner-modal [isModalOpen]="isModalOpen" (closeModal)="closeModal($event)" [actionStatus]="actionStatus" [partner]="partner" (submitData)="create($event)">
+</partner-modal>
+<!-- /.content-wrapper -->

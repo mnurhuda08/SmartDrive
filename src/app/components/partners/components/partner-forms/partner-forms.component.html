@@ -1,0 +1,78 @@
+<div class="card-body">
+    <form [formGroup]="form">
+        <div class="col-12 col-md-12 col-sm-12">
+            <div class="row">
+                <div class="col-6 col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <input type="hidden" formControlName="partEntityid">
+                        <label for="partName">Partner Name</label>
+                        <input type="text" id="partName" formControlName="partName" class="form-control" placeholder="Enter Partner Name">
+                        <div  class="text-danger" *ngIf="form.get('partName')?.errors !== null && form.get('partName')?.errors?.['required']">
+                            <p>Partner Name is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="partNpwp">Partner NPWP</label>
+                        <input type="text" id="partNpwp" formControlName="partNpwp" name="partNpwp" pattern="[0-9]*" class="form-control" placeholder="Enter NPWP Partner">
+                        <div class="text-danger" *ngIf="form.get('partNpwp')?.errors !== null">
+                            <p *ngIf="form.get('partNpwp')?.errors?.['required']">Partner NPWP is required.</p>
+                            <p *ngIf="form.get('partNpwp')?.errors?.['pattern']">Partner NPWP must contain only numbers.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="partAddress">Partner Address</label>
+                        <textarea name="partAddress" id="partAddress" formControlName="partAddress" cols="30" rows="4" class="form-control">
+                        </textarea>
+                        <div  class="text-danger" *ngIf="form.get('partAddress')?.errors !== null && form.get('partAddress')?.errors?.['required']">
+                            <p>Partner Address is required.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="partJoinDate">Partner Join Date</label>
+                        <input type="date" name="partJoinDate" formControlName="partJoinDate" class="form-control" placeholder="Enter Join Date Partner">
+                        <div  class="text-danger" *ngIf="form.get('partJoinDate')?.errors !== null && form.get('partJoinDate')?.errors?.['required']">
+                            <p>Partner Join Date is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="partCityId">Partner City</label>
+                        <select name="partCityId" id="" class="form-control" formControlName="partCityId">
+                            <option value="" *ngIf="actionStatus?.action == enumAction.CREATE " selected disabled> Select City of Partner </option>
+                            <option *ngFor="let item of cities" value="{{ item.cityId }}">{{ item.cityName }}</option>
+                        </select>
+                        <div  class="text-danger" *ngIf="form.get('partCityId')?.errors !== null && form.get('partCityId')?.errors?.['required']">
+                            <p>Partner City is required.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="partAccountNo">Partner Account No.</label>
+                        <input type="text" pattern="[0-9]*" formControlName="partAccountNo" name="partAccountNo" class="form-control" placeholder="Enter Account No Partner">
+                        <div  class="text-danger" *ngIf="form.get('partAccountNo')?.errors !== null ">
+                            <p *ngIf="form.get('partAccountNo')?.errors?.['required']">Partner Account No is required.</p>
+                            <p *ngIf="form.get('partAccountNo')?.errors?.['pattern']"> Partner Account contain only numbers</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="partStatus">Partner Status</label>
+                        <select name="partStatus" formControlName="partStatus" id="partStatus" class="form-control">
+                            <option value="" disabled selected>Select status partner</option>
+                            <option value="ACTIVE">ACTIVE</option>
+                            <option value="INACTIVE">INACTIVE</option>
+                        </select>
+                        <div  class="text-danger" *ngIf="form.get('partStatus')?.errors !== null && form.get('partStatus')?.errors?.['required']">
+                            <p>Partner Status is required.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

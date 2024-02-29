@@ -1,12 +1,14 @@
-import { PartnerStatus } from "../common/partnerStatus"
+import { PartnerStatus } from "src/app/constants/partnerStatus";
 
 export interface Partner {
-    partEntityid ?: number,
+    type: 'partner'
+    partEntityid : number,
     partName : string,
     partAddress : string,
     partJoinDate : Date,
     partAccountNo : string,
     partNpwp : string,
-    partCityId: number
-    partnerStatus: PartnerStatus
+    partStatus: PartnerStatus,
+    partCityId: number,
+    cityName: string,
 }

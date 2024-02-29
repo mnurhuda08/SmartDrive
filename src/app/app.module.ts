@@ -17,6 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { PartnerPage } from './components/partners/pages/partner.page/partner.page.component';
 import { TableComponent } from './components/partners/components/table/table.component';
 import { ModalComponent } from './components/partners/components/modal/modal.component';
+import { PartnerFormsComponent } from './components/partners/components/partner-forms/partner-forms.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginationComponent } from './components/partners/components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -27,15 +30,23 @@ import { ModalComponent } from './components/partners/components/modal/modal.com
     SidebarComponent,
     CarModelComponent,
     CarSeriesComponent,
-    LoginComponent,
+    LoginComponent, 
     BlankComponent,
     LoginLayoutComponent,
     DashboardLayoutComponent,
     PartnerPage,
     TableComponent,
     ModalComponent,
+    PartnerFormsComponent,
+    PaginationComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule, 
+    AppRoutingModule, 
+    HttpClientModule, 
+    FormsModule, 
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
