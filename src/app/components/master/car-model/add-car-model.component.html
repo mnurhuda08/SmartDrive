@@ -27,31 +27,31 @@
           <div class="card">
             <div class="card-header d-flex justify-content-between">
               <div class="col-10">
-                <h3>Add Car Brand</h3>
+                <h3>Add Car Model</h3>
               </div>
             </div>
 
             <div class="card-body" style="max-height: 400px">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="mb-3 form-group">
-                  <label for="carBrandName" class="form-label"
-                    >Car Brand Name</label
+                  <label for="carModelName" class="form-label"
+                    >Car Model Name</label
                   >
                   <input
                     type="text"
                     class="form-control"
-                    formControlName="cabr_name"
-                    id="carBrandName"
+                    formControlName="carm_name"
+                    id="carModelName"
                   />
                   <div
-                    *ngIf="submitted && form.controls['cabr_name'].errors"
+                    *ngIf="submitted && form.controls['carm_name'].errors"
                     class="error"
                   >
                     <span
-                      *ngIf="form.controls['cabr_name'].errors['required']"
+                      *ngIf="form.controls['carm_name'].errors['required']"
                       class="text-danger"
                     >
-                      Car Brand Name is required
+                      Car Model Name is required
                     </span>
                   </div>
                 </div>
@@ -59,7 +59,7 @@
                 <button
                   type="submit"
                   class="btn btn-warning ml-1"
-                  [routerLink]="['/master/car']"
+                  (click)="(['/master/car'])"
                 >
                   <strong>Cancel</strong>
                 </button>

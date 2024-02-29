@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CarBrand } from 'src/app/interfaces/master/car-brand';
-import { CarBrandService } from 'src/app/services/master/car-brand.service';
+import { CarModel } from 'src/app/interfaces/master/car-model';
+import { CarModelService } from 'src/app/services/master/car-model.service';
 
 @Component({
-  selector: 'app-add-car-brand',
-  templateUrl: './add-car-brand.component.html',
-  styleUrls: ['./add-car-brand.component.css'],
+  selector: 'app-add-car-model',
+  templateUrl: './add-car-model.component.html',
+  styleUrls: ['./add-car-model.component.css'],
 })
-export class AddCarBrandComponent implements OnInit {
+export class AddCarModelComponent implements OnInit {
   form: FormGroup;
   submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private carBrandService: CarBrandService,
+    private carModelService: CarModelService,
     private router: Router
   ) {
     this.form = this.formBuilder.group({
-      cabr_name: ['', Validators.required],
+      carm_name: ['', Validators.required],
     });
   }
 
@@ -33,10 +33,10 @@ export class AddCarBrandComponent implements OnInit {
       return;
     }
 
-    const cabrName: string = this.f.cabr_name?.value;
+    const carmName: string = this.f.carm_name?.value;
 
-    this.carBrandService
-      .addCarBrand({ cabrName } as CarBrand)
+    this.carModelService
+      .addCarModel({ carmName } as CarModel)
       .subscribe(() => this.router.navigate(['master/car']));
   }
 

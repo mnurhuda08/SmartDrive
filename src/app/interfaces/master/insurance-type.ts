@@ -1,4 +1,4 @@
 export interface InsuranceType {
-  name: string;
-  description: string;
+  intyName: string;
+  intyDesc: string;
 }

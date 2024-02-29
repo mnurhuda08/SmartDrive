@@ -26,6 +26,14 @@ export class CarBrandComponent implements OnInit {
       },
     });
   }
+  updateCarBrand(id: number) {
+    this.router.navigate(['master/car/carbrand/edit', id]);
+  }
+
+  deleteCarBrand(carBrand: CarBrand) {
+    this.carBrands.filter((f) => f !== carBrand);
+    this.carBrandService.deleteCarBrand(carBrand).subscribe();
+  }
 
   ngOnInit(): void {
     this.getCarBrands();

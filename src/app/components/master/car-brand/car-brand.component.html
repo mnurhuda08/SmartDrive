@@ -6,8 +6,8 @@
     <div class="col-2 d-flex justify-content-end">
       <button
         type="button"
-        class="btn btn-info"
-        [routerLink]="['/master/car/carbrand/add']"
+        class="btn btn-info float-end"
+        (click)="('/master/car/carbrand/add')"
       >
         <i class="fa fa-plus-circle"></i> Tambah
       </button>
@@ -26,13 +26,18 @@
         <tr>
           <td class="col-10">{{ carBrand.cabrName }}</td>
           <td>
-            <button type="button" class="btn btn-info mr-2">
+            <button
+              type="button"
+              class="btn btn-info mr-2"
+              (click)="updateCarBrand(carBrand.cabrId)"
+            >
               <i class="far fa-edit"></i>
             </button>
             <button
               type="button"
               class="btn btn-danger"
               style="margin-right: 5px"
+              (click)="deleteCarBrand(carBrand)"
             >
               <i class="fas fa-trash"></i>
             </button>

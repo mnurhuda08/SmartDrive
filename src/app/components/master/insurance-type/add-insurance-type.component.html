@@ -1,0 +1,77 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Category</h1>
+          </div>
+          <!-- <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item active">Setting</li>
+                    </ol>
+                  </div> -->
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+  
+    <!-- Main content -->
+    <section class="content">
+      <!-- Default box -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between">
+                <div class="col-10">
+                  <h3>Add Category</h3>
+                </div>
+              </div>
+  
+              <div class="card-body" style="max-height: 400px">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                  <div class="mb-3 form-group">
+                    <label for="categoryName" class="form-label">
+                      Category Name
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="cate_name"
+                      id="categoryName"
+                    />
+                    <div
+                      *ngIf="submitted && form.controls['cate_name'].errors"
+                      class="error"
+                    >
+                      <span
+                        *ngIf="form.controls['cate_name'].errors['required']"
+                        class="text-danger"
+                      >
+                        Car Brand Name is required
+                      </span>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button
+                    type="submit"
+                    class="btn btn-warning ml-1"
+                    [routerLink]="['/master/car']"
+                  >
+                    <strong>Cancel</strong>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  

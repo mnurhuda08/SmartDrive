@@ -9,6 +9,14 @@ import { CarModelComponent } from 'src/app/components/master/car-model/car-model
 import { ServiceordersComponent } from 'src/app/components/so/serviceorders/serviceorders.component';
 import { ServicefeasibilityComponent } from 'src/app/components/so/servicefeasibility/servicefeasibility.component';
 import { HttpClient } from '@angular/common/http';
+import { UpdateCarBrandComponent } from 'src/app/components/master/car-brand/update-car-brand.component';
+import { AddCarModelComponent } from 'src/app/components/master/car-model/add-car-model.component';
+import { UpdateCarModelComponent } from 'src/app/components/master/car-model/update-car-model.component';
+import { AddCarSeriesComponent } from 'src/app/components/master/car-series/add-car-series.component';
+import { UpdateCarSeriesComponent } from 'src/app/components/master/car-series/update-car-series.component';
+import { CategoryComponent } from 'src/app/components/master/category/category.component';
+import { AddCategoryComponent } from 'src/app/components/master/category/add-category.component';
+import { UpdateCategoryComponent } from 'src/app/components/master/category/UpdateCategoryComponent';
 
 const routes: Routes = [
   {
@@ -32,13 +40,45 @@ const routes: Routes = [
         component: AddCarBrandComponent,
       },
       {
+        path: 'master/car/carbrand/edit/:id',
+        component: UpdateCarBrandComponent,
+      },
+      {
+        path: 'master/car/carmodel/add',
+        component: AddCarModelComponent,
+      },
+      {
+        path: 'master/car/carmodel/edit/:id',
+        component: UpdateCarModelComponent,
+      },
+      {
+        path: 'master/car/carseries/add',
+        component: AddCarSeriesComponent,
+      },
+      {
+        path: 'master/car/carseries/edit/:id',
+        component: UpdateCarSeriesComponent,
+      },
+      {
+        path: 'master/category',
+        component: CategoryComponent,
+      },
+      {
+        path: 'master/category/add',
+        component: AddCategoryComponent,
+      },
+      {
+        path: 'master/category/edit/:id',
+        component: UpdateCategoryComponent,
+      },
+      {
         path: 'so',
         component: ServiceordersComponent,
       },
       {
-        path:'so/:id',
-        component:ServicefeasibilityComponent,
-        providers:[HttpClient]
+        path: 'so/:id',
+        component: ServicefeasibilityComponent,
+        providers: [HttpClient],
       },
     ],
   },

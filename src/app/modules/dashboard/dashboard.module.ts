@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { CarBrandComponent } from 'src/app/components/master/car-brand/car-brand.component';
-import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [DashboardComponent],
-  imports: [CommonModule, DashboardRoutingModule],
+  imports: [
+    CommonModule,
+    DashboardRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class DashboardModule {}

@@ -16,18 +16,26 @@ export class CarModelComponent implements OnInit {
     private router: Router
   ) {}
 
-  getCarBrands() {
-    this.carModelService.getCarBrands().subscribe(
-      (response) => {
+  getCarModels() {
+    this.carModelService.getCarModels().subscribe({
+      next: (response) => {
         this.carModels = response;
       },
-      (error) => {
+      error: (error) => {
         console.error(error);
-      }
-    );
+      },
+    });
+  }
+  updateCarModel(id: number) {
+    this.router.navigate(['master/car/carmodel/edit', id]);
+  }
+
+  deleteCarModel(carModel: CarModel) {
+    this.carModels.filter((f) => f !== carModel);
+    this.carModelService.deleteCarModel(carModel).subscribe();
   }
 
   ngOnInit(): void {
-    this.getCarBrands();
+    this.getCarModels();
   }
 }

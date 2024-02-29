@@ -28,6 +28,30 @@ export const MenuConstant: IMenus[] = [
         exact: false,
         icon: 'fas fa-car',
       },
+      {
+        path: '/master/category',
+        title: 'Category',
+        exact: false,
+        icon: 'fas fa-folder',
+      },
+      {
+        path: '/master/insurance-type',
+        title: 'Insurance Type',
+        exact: false,
+        icon: 'fas fa-file',
+      },
+      {
+        path: '/master/zone',
+        title: 'Zone',
+        exact: false,
+        icon: 'fas fa-globe',
+      },
+      {
+        path: '/master/region',
+        title: 'Region',
+        exact: false,
+        icon: 'fas fa-map-marker',
+      },
     ],
   },
   {

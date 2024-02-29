@@ -1,8 +1,8 @@
 import { Province } from './province';
 
 export interface RegionPlat {
-  name: string;
-  description: string;
-  provinceID: number;
+  regpName: string;
+  regpDesc: string;
+  regpProvId: number;
   province: Province;
 }

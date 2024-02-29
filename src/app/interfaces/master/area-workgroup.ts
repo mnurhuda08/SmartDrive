@@ -1,8 +1,8 @@
 import { City } from './city';
 
 export interface AreaWorkgroup {
-  code: string;
-  description: string;
-  cityID: number;
+  arwgCode: string;
+  arwgDesc: string;
+  arwgCityId: number;
   city: City;
 }

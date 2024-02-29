@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class CarBrandService {
-  private apiUrl: string = environment.baseUrl + '/carbrand';
+  private apiUrl: string = environment.baseUrl + 'master/carbrand';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -20,22 +20,30 @@ export class CarBrandService {
   getCarBrands(): Observable<CarBrand[]> {
     return this.http.get<CarBrand[]>(this.apiUrl);
   }
+  getCarBrand(id: number): Observable<CarBrand> {
+    const url = `${this.apiUrl}/${id}`;
 
-  addCarBrand(carbrand: CarBrand): Observable<CarBrand> {
-    return this.http.post<CarBrand>(this.apiUrl, carbrand, this.httpOptions);
+    return this.http.get<CarBrand>(url);
   }
 
-  updateCarBrand(carbrand: CarBrand): any {
+  addCarBrand(carbrand: CarBrand): Observable<CarBrand> {
     return this.http
-      .put(this.apiUrl, carbrand, this.httpOptions)
+      .post<CarBrand>(this.apiUrl, carbrand, this.httpOptions)
+      .pipe(catchError(this.handleError<CarBrand>('addCarBrand')));
+  }
+
+  updateCarBrand(carBrand: CarBrand): any {
+    const apiUrl = `${this.apiUrl}/${carBrand.cabrId}`;
+    return this.http
+      .put(apiUrl, carBrand, this.httpOptions)
       .pipe(catchError(this.handleError<CarBrand>('updateCarBrand')));
   }
 
-  deleteCarBrand(carbrand: CarBrand): Observable<CarBrand> {
-    const apiurl = `${this.apiUrl}/${carbrand.cabrId}`;
+  deleteCarBrand(carBrand: CarBrand): Observable<CarBrand> {
+    const apiUrl = `${this.apiUrl}/${carBrand.cabrId}`;
 
     return this.http
-      .delete<CarBrand>(apiurl, this.httpOptions)
+      .delete<CarBrand>(apiUrl, this.httpOptions)
       .pipe(
         catchError(
           this.handleError<CarBrand>('deleteCarBrand id=${carbrand.id}')

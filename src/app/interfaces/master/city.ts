@@ -1,8 +1,8 @@
 import { Province } from './province';
 
 export interface City {
-  id: number;
-  name: string;
-  provinceID: number;
+  cityId: number;
+  cityName: string;
+  cityProvId: number;
   province: Province;
 }

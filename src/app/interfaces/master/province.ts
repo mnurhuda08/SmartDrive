@@ -1,8 +1,8 @@
 import { Zone } from './zone';
 
 export interface Province {
-  id: number;
-  name: string;
-  zoneID: number;
+  provId: number;
+  provName: string;
+  provZonesId: number;
   zone: Zone;
 }
