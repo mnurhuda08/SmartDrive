@@ -12,15 +12,16 @@ import { CarSeriesComponent } from './components/master/car-series/car-series.co
 import { LoginComponent } from './components/users/login/login.component';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { DashboardLayoutComponent } from './components/layout/dashboard-layout/dashboard-layout.component';
-import { HttpClientModule } from '@angular/common/http';
-import { BankComponent } from './components/payment/bank/bank.component';
+import { HttpClientModule } from '@angular/common/http'; 
 import { BankModifierComponent } from './components/payment/bank/crud/bank-modifier/bank-modifier.component';
 import { FintechComponent } from './components/payment/fintech/fintech.component';
 import { UserAccountComponent } from './components/payment/user-account/user-account.component';
 import { PaymentTransactionComponent } from './components/payment/payment-transaction/payment-transaction.component';
 import { FormsModule } from '@angular/forms';
 import { BlankComponent } from './components/users/blank/blank.component';
-
+import { FintechModifierComponent } from './components/payment/fintech/crud/fintech-modifier/fintech-modifier.component';
+import { PaymentPageComponentComponent } from './components/payment/PaymentPage/payment.page.component/payment.page.component.component';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,13 +33,15 @@ import { BlankComponent } from './components/users/blank/blank.component';
     CarSeriesComponent,
     LoginComponent,
     LoginLayoutComponent,
-    DashboardLayoutComponent,
-    BankComponent,
+    DashboardLayoutComponent, 
     BankModifierComponent,
     FintechComponent,
     UserAccountComponent,
     PaymentTransactionComponent,
-    BlankComponent
+    BlankComponent,
+    FintechModifierComponent,
+    PaymentPageComponentComponent
+    
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

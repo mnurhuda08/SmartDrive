@@ -1,0 +1,59 @@
+<div class="modal fade show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" *ngIf="fintech">
+            <div class="modal-header" *ngIf="isCreate ==true">
+                <h4 class="modal-title">Create New fintech</h4>
+                <button type="button" data-dismiss="modal" aria-label="exampleModal" (click)="closeModal()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-header" *ngIf="isCreate ==false">
+                <h4 class="modal-title">Edit fintech</h4>
+                <button type="button" data-dismiss="modal" aria-label="exampleModal" (click)="closeModal()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body" *ngIf="isCreate ==true">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">fintech Name</label>
+                        <input [(ngModel)]="fintech.fintName" type="text" class="form-control"
+                            placeholder="Enter fintech Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">fintech Desc</label>
+                        <input [(ngModel)]="fintech.fintDesc" type="text" class="form-control"
+                            placeholder="Enter fintech Desc">
+                    </div>
+                </div>
+
+                <div class="card-body" *ngIf="isCreate ==false">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Edit fintech Name</label>
+                        <input  [(ngModel)]="fintech.fintName" type="text" class="form-control"
+                            placeholder="Enter fintech Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Edit fintech Desc</label>
+                        <input  [(ngModel)]="fintech.fintDesc" type="text" class="form-control"
+                            placeholder="Enter fintech Desc">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="exampleModal"
+                    (click)="closeModal()">Close</button>
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="exampleModal"
+                    *ngIf="isCreate ==true" (click)="paymentPageComponent.createNewFintech(fintech)"
+                    (click)="closeModal()">Create</button>
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="exampleModal"
+                    *ngIf="isCreate ==false" (click)="paymentPageComponent.editFintech(fintech)"
+                    (click)="closeModal()">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>

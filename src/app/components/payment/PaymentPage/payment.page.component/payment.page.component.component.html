@@ -1,0 +1,161 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Bank</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bank content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Bank List</h3>
+                        </div>
+
+                        <div class="card-body  ">
+                            <table class="table table-bordered text-center">
+                                <thead>
+                                    <tr>
+                                        <th>Bank Id</th>
+                                        <th>Bank Name</th>
+                                        <th>Bank Desc</th>
+                                        <th>
+                                            <button type="button" class="btn btn-info mr-2"
+                                                (click)="openModal(true,pageEnumSelect.BANK)" (click)="initNewBank()"
+                                                data-toggle="modal" data-target="#bankModal">
+                                                Add Bank <i class="fa fa-plus-circle"></i></button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let bank of bankList">
+                                        <td>{{bank.bankEntityid}}</td>
+                                        <td>{{bank.bankName}}</td>
+                                        <td>{{bank.bankDesc}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-info mr-2" (click)="editInit(bank)"
+                                                data-toggle="modal" data-target="#bankModal"
+                                                (click)="openModal(false,pageEnumSelect.BANK)"
+                                                *ngIf="bank.bankEntityid">
+                                                Edit
+                                                <i class="far fa-edit"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger" style="margin-right: 5px"
+                                                (click)="deleteBank(bank)">
+                                                Delete
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-footer clearfix">
+                            <ul class="pagination pagination-sm m-0 float-right">
+                                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fintech Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Fintech</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fintech content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Fintech List</h3>
+                            </div>
+
+                            <div class="card-body  ">
+                                <table class="table table-bordered text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Fintech Id</th>
+                                            <th>Fintech Name</th>
+                                            <th>Fintech Desc</th>
+                                            <th>
+                                                <button type="button" class="btn btn-info mr-2"
+                                                    (click)="openModal(true,pageEnumSelect.FINTECH)"
+                                                    (click)="initNewFintech()" data-toggle="modal"
+                                                    data-target="#exampleModal">
+                                                    Add
+                                                    Fintech <i class="fa fa-plus-circle"></i></button>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let fintech of fintechList">
+                                            <td>{{fintech.fintEntityid}}</td>
+                                            <td>{{fintech.fintName}}</td>
+                                            <td>{{fintech.fintDesc}}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-info mr-2"
+                                                    (click)="editInitFintech(fintech)" data-toggle="modal"
+                                                    data-target="#exampleModal"
+                                                    (click)="openModal(false,pageEnumSelect.FINTECH)">
+                                                    Edit
+                                                    <i class="far fa-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-danger" style="margin-right: 5px"
+                                                    (click)="deleteFintech(fintech)"> Delete
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="card-footer clearfix">
+                                <ul class="pagination pagination-sm m-0 float-right">
+                                    <li class="page-item"><a class="page-link" href="#">«</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">»</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </section>
+
+
+    <app-bank-modifier [paymentPageComponent]="this" [isCreate]="isCreate" [bank]="bankToEdit"
+        (updatedBank)="updateBankList($event)" *ngIf="isModalOpen">
+    </app-bank-modifier>
+
+    <app-fintech-modifier [paymentPageComponent]="this" [isCreate]="isCreate" [fintech]="fintechToEdit"
+        (updatedFintech)="updateFintechList($event)" *ngIf="isModalOpen"></app-fintech-modifier>
+</div>

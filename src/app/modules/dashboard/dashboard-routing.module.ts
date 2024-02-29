@@ -3,8 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { CarBrandComponent } from 'src/app/components/master/car-brand/car-brand.component';
 import { CarModelComponent } from 'src/app/components/master/car-model/car-model.component';
-import { BankComponent } from 'src/app/components/payment/bank/bank.component';
 import { BlankComponent } from 'src/app/components/users/blank/blank.component';
+import { FintechComponent } from 'src/app/components/payment/fintech/fintech.component';
+import { PaymentPageComponentComponent } from 'src/app/components/payment/PaymentPage/payment.page.component/payment.page.component.component';
 
 const routes: Routes = [
   {
@@ -32,8 +33,8 @@ const routes: Routes = [
         component: CarModelComponent,
       },
       {
-        path: 'payment/bank',
-        component: BankComponent,
+        path: 'payment/payment',
+        component: PaymentPageComponentComponent,
       },
     ],
   },

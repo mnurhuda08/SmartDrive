@@ -44,3 +44,4 @@ export const MenuConstant: IMenus[] = [
     icon: 'fas fa-columns',
   },
 ];
+
