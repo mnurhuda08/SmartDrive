@@ -5,14 +5,14 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Insurance Type</h1>
+          <h1>Region Plat</h1>
         </div>
         <!-- <div class="col-sm-6">
-                      <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Setting</li>
-                      </ol>
-                    </div> -->
+                          <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Setting</li>
+                          </ol>
+                        </div> -->
       </div>
     </div>
     <!-- /.container-fluid -->
@@ -27,54 +27,58 @@
           <div class="card">
             <div class="card-header d-flex justify-content-between">
               <div class="col-10">
-                <h3>Update Insurance Type</h3>
+                <h3>Update Region Plat</h3>
               </div>
             </div>
 
             <div class="card-body" style="max-height: 400px">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="mb-3 form-group">
-                  <label for="categoryId" class="form-label"
-                    >Insurance Type Name</label
+                  <label for="regionPlatName" class="form-label"
+                    >Region Plat Name</label
                   >
                   <input
                     type="text"
                     class="form-control"
-                    formControlName="category_id"
+                    formControlName="regionPlat_name"
                     [disabled]="true"
                   />
                   <div
-                    *ngIf="submitted && form.controls['category_id'].errors"
+                    *ngIf="submitted && form.controls['regionPlat_name'].errors"
                     class="error"
                   >
                     <span
-                      *ngIf="form.controls['category_id'].errors['required']"
+                      *ngIf="
+                        form.controls['regionPlat_name'].errors['required']
+                      "
                       class="text-danger"
                     >
-                      Category ID is required
+                      Region Plat Name is required
                     </span>
                   </div>
                 </div>
 
                 <div class="mb-3 form-group">
-                  <label for="carBrandName" class="form-label"
-                    >Category Name</label
+                  <label for="regionPlatDesc" class="form-label"
+                    >Region Plat Description</label
                   >
                   <input
                     type="text"
                     class="form-control"
-                    formControlName="category_name"
+                    formControlName="regionPlat_desc"
                     required
                   />
                   <div
-                    *ngIf="submitted && form.controls['category_name'].errors"
+                    *ngIf="submitted && form.controls['regionPlat_desc'].errors"
                     class="error"
                   >
                     <span
-                      *ngIf="form.controls['category_name'].errors['required']"
+                      *ngIf="
+                        form.controls['regionPlat_desc'].errors['required']
+                      "
                       class="text-danger"
                     >
-                      Category Name is required
+                      Region Plat Description is required
                     </span>
                   </div>
                 </div>
@@ -82,7 +86,7 @@
                 <button
                   type="submit"
                   class="btn btn-warning ml-1"
-                  [routerLink]="['/master/category']"
+                  [routerLink]="['/master/region']"
                 >
                   <strong>Cancel</strong>
                 </button>

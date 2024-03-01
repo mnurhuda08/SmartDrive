@@ -30,6 +30,22 @@ import { UpdateCategoryComponent } from './components/master/category/UpdateCate
 import { InsuranceTypeComponent } from './components/master/insurance-type/insurance-type.component';
 import { AddInsuranceTypeComponent } from './components/master/insurance-type/add-insurance-type.component';
 import { UpdateInsuranceTypeComponent } from './components/master/insurance-type/update-insurance-type.component';
+import { ZoneComponent } from './components/master/zone/zone.component';
+import { AddZoneComponent } from './components/master/zone/add-zone.component';
+import { UpdateZoneComponent } from './components/master/zone/update-zone.component';
+import { ProvinceComponent } from './components/master/region/province/province.component';
+import { AddProvinceComponent } from './components/master/region/province/add-province.component';
+import { UpdateProvinceComponent } from './components/master/region/province/update-province.component';
+import { CityComponent } from './components/master/region/city/city.component';
+import { AddCityComponent } from './components/master/region/city/add-city.component';
+import { UpdateCityComponent } from './components/master/region/city/update-city.component';
+import { RegionPlateComponent } from './components/master/region/region-plat/region-plate.component';
+import { AreaworkgroupComponent } from './components/master/region/areaworkgroup/areaworkgroup.component';
+import { AddAreaworkgroupComponent } from './components/master/region/areaworkgroup/add-areaworkgroup.component';
+import { UpdateAreaworkgroupComponent } from './components/master/region/areaworkgroup/update-areaworkgroup.component';
+import { RegionComponent } from './components/master/region/region.component';
+import { AddRegionPlateComponent } from './components/master/region/region-plat/add-region-plate.component';
+import { UpdateRegionPlateComponent } from './components/master/region/region-plat/update-region-plate.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +74,22 @@ import { UpdateInsuranceTypeComponent } from './components/master/insurance-type
     InsuranceTypeComponent,
     AddInsuranceTypeComponent,
     UpdateInsuranceTypeComponent,
+    ZoneComponent,
+    AddZoneComponent,
+    UpdateZoneComponent,
+    ProvinceComponent,
+    AddProvinceComponent,
+    UpdateProvinceComponent,
+    CityComponent,
+    AddCityComponent,
+    UpdateCityComponent,
+    RegionPlateComponent,
+    AddRegionPlateComponent,
+    UpdateRegionPlateComponent,
+    AreaworkgroupComponent,
+    AddAreaworkgroupComponent,
+    UpdateAreaworkgroupComponent,
+    RegionComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,14 +5,14 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Insurance Type</h1>
+          <h1>Zones</h1>
         </div>
         <!-- <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Setting</li>
-                </ol>
-              </div> -->
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Setting</li>
+                  </ol>
+                </div> -->
       </div>
     </div>
     <!-- /.container-fluid -->
@@ -27,13 +27,13 @@
           <div class="card">
             <div class="card-header d-flex justify-content-between">
               <div class="col-10">
-                <h4>Insurance Type</h4>
+                <h4>Zones</h4>
               </div>
               <div class="col-2 d-flex justify-content-end">
                 <button
                   type="button"
                   class="btn btn-info float-end"
-                  [routerLink]="['/master/category/add']"
+                  [routerLink]="['/master/zone/add']"
                 >
                   <i class="fa fa-plus-circle"></i> Tambah
                 </button>
@@ -45,19 +45,17 @@
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
-                <tbody *ngFor="let insuranceType of insuranceTypes">
+                <tbody *ngFor="let zone of zones">
                   <tr>
-                    <td class="col-3">{{ insuranceType.intyName }}</td>
-                    <td class="col-6">{{ insuranceType.intyDesc }}</td>
+                    <td class="col-3">{{ zone.zonesName }}</td>
                     <td>
                       <button
                         type="button"
                         class="btn btn-info mr-2"
-                        (click)="updateInsuranceType(insuranceType.intyName)"
+                        (click)="updateZone(zone.zonesId)"
                       >
                         <i class="far fa-edit"></i>
                       </button>
@@ -65,7 +63,7 @@
                         type="button"
                         class="btn btn-danger"
                         style="margin-right: 5px"
-                        (click)="deleteInsuranceType(insuranceType)"
+                        (click)="deleteZone(zone)"
                       >
                         <i class="fas fa-trash"></i>
                       </button>

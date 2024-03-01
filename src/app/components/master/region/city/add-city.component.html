@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Insurance Type</h1>
+          <h1>Province</h1>
         </div>
         <!-- <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
@@ -27,54 +27,31 @@
           <div class="card">
             <div class="card-header d-flex justify-content-between">
               <div class="col-10">
-                <h3>Update Insurance Type</h3>
+                <h4>city</h4>
               </div>
             </div>
 
             <div class="card-body" style="max-height: 400px">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="mb-3 form-group">
-                  <label for="categoryId" class="form-label"
-                    >Insurance Type Name</label
-                  >
+                  <label for="cityName" class="form-label">
+                    Province Name
+                  </label>
                   <input
                     type="text"
                     class="form-control"
-                    formControlName="category_id"
-                    [disabled]="true"
+                    formControlName="city_name"
+                    id="cityName"
                   />
                   <div
-                    *ngIf="submitted && form.controls['category_id'].errors"
+                    *ngIf="submitted && form.controls['city_name'].errors"
                     class="error"
                   >
                     <span
-                      *ngIf="form.controls['category_id'].errors['required']"
+                      *ngIf="form.controls['city_name'].errors['required']"
                       class="text-danger"
                     >
-                      Category ID is required
-                    </span>
-                  </div>
-                </div>
-
-                <div class="mb-3 form-group">
-                  <label for="carBrandName" class="form-label"
-                    >Category Name</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="category_name"
-                    required
-                  />
-                  <div
-                    *ngIf="submitted && form.controls['category_name'].errors"
-                    class="error"
-                  >
-                    <span
-                      *ngIf="form.controls['category_name'].errors['required']"
-                      class="text-danger"
-                    >
-                      Category Name is required
+                      CIty Name is required
                     </span>
                   </div>
                 </div>
@@ -82,7 +59,7 @@
                 <button
                   type="submit"
                   class="btn btn-warning ml-1"
-                  [routerLink]="['/master/category']"
+                  [routerLink]="['/master/region']"
                 >
                   <strong>Cancel</strong>
                 </button>

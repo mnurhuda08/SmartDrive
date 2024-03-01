@@ -45,7 +45,7 @@ export class CategoryService {
       .delete<Category>(apiUrl, this.httpOptions)
       .pipe(
         catchError(
-          this.handleError<Category>('deleteCategory id=${category.id}')
+          this.handleError<Category>('deleteCategory id=${category.cateId}')
         )
       );
   }

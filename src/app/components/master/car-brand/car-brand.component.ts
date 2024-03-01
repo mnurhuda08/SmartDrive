@@ -26,6 +26,7 @@ export class CarBrandComponent implements OnInit {
       },
     });
   }
+
   updateCarBrand(id: number) {
     this.router.navigate(['master/car/carbrand/edit', id]);
   }

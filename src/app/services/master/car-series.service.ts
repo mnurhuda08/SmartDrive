@@ -45,7 +45,7 @@ export class CarSeriesService {
       .delete<CarSeries>(apiUrl, this.httpOptions)
       .pipe(
         catchError(
-          this.handleError<CarSeries>('deleteCarSeries id=${carSeries.id}')
+          this.handleError<CarSeries>('deleteCarSeries id=${carSeries.carsId}')
         )
       );
   }

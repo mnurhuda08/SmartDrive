@@ -26,9 +26,9 @@ export class CarBrandService {
     return this.http.get<CarBrand>(url);
   }
 
-  addCarBrand(carbrand: CarBrand): Observable<CarBrand> {
+  addCarBrand(carBrand: CarBrand): Observable<CarBrand> {
     return this.http
-      .post<CarBrand>(this.apiUrl, carbrand, this.httpOptions)
+      .post<CarBrand>(this.apiUrl, carBrand, this.httpOptions)
       .pipe(catchError(this.handleError<CarBrand>('addCarBrand')));
   }
 
@@ -46,7 +46,7 @@ export class CarBrandService {
       .delete<CarBrand>(apiUrl, this.httpOptions)
       .pipe(
         catchError(
-          this.handleError<CarBrand>('deleteCarBrand id=${carbrand.id}')
+          this.handleError<CarBrand>('deleteCarBrand id=${carBrand.cabrId}')
         )
       );
   }

@@ -26,9 +26,9 @@ export class CarModelService {
     return this.http.get<CarModel>(url);
   }
 
-  addCarModel(carmodel: CarModel): Observable<CarModel> {
+  addCarModel(carModel: CarModel): Observable<CarModel> {
     return this.http
-      .post<CarModel>(this.apiUrl, carmodel, this.httpOptions)
+      .post<CarModel>(this.apiUrl, carModel, this.httpOptions)
       .pipe(catchError(this.handleError<CarModel>('addCarModel')));
   }
 
@@ -46,7 +46,7 @@ export class CarModelService {
       .delete<CarModel>(apiUrl, this.httpOptions)
       .pipe(
         catchError(
-          this.handleError<CarModel>('deleteCarModel id=${carmodel.id}')
+          this.handleError<CarModel>('deleteCarModel id=${carModel.carmId}')
         )
       );
   }
