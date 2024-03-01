@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { BlankComponent } from './components/users/blank/blank.component';
 import { FintechModifierComponent } from './components/payment/fintech/crud/fintech-modifier/fintech-modifier.component';
 import { PaymentPageComponentComponent } from './components/payment/PaymentPage/payment.page.component/payment.page.component.component';
+import { PaymentBatchComponent } from './components/payment/Payment/payment.batch/payment.batch.component';
  
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PaymentPageComponentComponent } from './components/payment/PaymentPage/
     PaymentTransactionComponent,
     BlankComponent,
     FintechModifierComponent,
-    PaymentPageComponentComponent
+    PaymentPageComponentComponent,
+    PaymentBatchComponent
     
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],

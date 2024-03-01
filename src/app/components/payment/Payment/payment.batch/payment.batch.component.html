@@ -1,0 +1,154 @@
+<div class="content-wrapper">
+    <div class="col-12 ">
+        <div class="card card-primary card-tabs">
+            <div class="card-header p-0 pt-1">
+                <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="custom-tabs-one-employee-tab" data-toggle="pill"
+                            href="#custom-tabs-one-employee" role="tab" aria-controls="custom-tabs-one-employee"
+                            aria-selected="true">Employee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-one-partner-tab" data-toggle="pill"
+                            href="#custom-tabs-one-partner" role="tab" aria-controls="custom-tabs-one-partner"
+                            aria-selected="false">Partner</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="custom-tabs-one-tabContent">
+                    <div class="tab-pane fade active show" id="custom-tabs-one-employee" role="tabpanel"
+                        aria-labelledby="custom-tabs-one-employee-tab">
+
+                        <!-- Employee Salary Content -->
+                        <div class="row justify-content-end" id="employee">
+                            <div class="col-auto ml-auto">
+                                <a class="btn btn-primary" href="#" role="button">Generate Batch Salary</a>
+                            </div>
+                            <div class="col-auto">
+                                <a class="btn btn-primary" href="#" role="button">Generate Transfer</a>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Employee Salary</h3>
+                                        <div class="card-tools">
+                                            <div class="input-group input-group-sm" style="width: 150px;">
+                                                <input type="text" name="table_search" class="form-control float-right"
+                                                    placeholder="Search">
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-default">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body table-responsive p-0" style="height: 300px;">
+                                        <table class="table table-hover table-head-fixed text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>emp-id</th>
+                                                    <th>Employee Name</th>
+                                                    <th>Created On</th>
+                                                    <th>Salary</th>
+                                                    <th>Account Number</th>
+                                                    <th>Transfer Date</th>
+                                                    <th>Transaction Number</th>
+                                                    <th> status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-center">
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Employee 1</td>
+                                                    <td>2024-03-01</td>
+                                                    <td>5000</td>
+                                                    <td>1234567890</td>
+                                                    <td>2024-03-01</td>
+                                                    <td>987654</td>
+                                                    <td><a class="btn btn-light" href="#" role="button">Processed</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="custom-tabs-one-partner" role="tabpanel"
+                        aria-labelledby="custom-tabs-one-partner-tab">
+
+                        <!-- Partner Invoice Content -->
+                        <div class="row justify-content-end" id="partner">
+                            <div class="col-auto ml-auto">
+                                <a class="btn btn-primary" href="#" role="button">Generate Partner Invoice</a>
+                            </div>
+                            <div class="col-auto">
+                                <a class="btn btn-primary" href="#" role="button">Generate Transfer</a>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Partner Invoice</h3>
+                                        <div class="card-tools">
+                                            <div class="input-group input-group-sm" style="width: 150px;">
+                                                <input type="text" name="table_search" class="form-control float-right"
+                                                    placeholder="Search">
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-default">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body table-responsive p-0" style="height: 300px;">
+                                        <table class="table table-hover table-head-fixed text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Invoice No</th>
+                                                    <th>Created On</th>
+                                                    <th>Police Number</th>
+                                                    <th>Polis Number</th>
+                                                    <th>Sub Total</th>
+                                                    <th>Tax</th>
+                                                    <th>Account Number</th>
+                                                    <th>Paid Date</th>
+                                                    <th>Partner</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-center">
+                                                <tr>
+                                                    <td>INV2-23171</td>
+                                                    <td>2024-03-01</td>
+                                                    <td>D 928 H</td>
+                                                    <td>52-12501-25</td>
+                                                    <td>25.000.000</td>
+                                                    <td>2.500.000</td>
+                                                    <td>9521-251</td>
+                                                    <td>2024-01-24</td>
+                                                    <td>Makmur Jaya</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
