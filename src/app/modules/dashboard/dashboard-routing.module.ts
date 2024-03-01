@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { BlankComponent } from 'src/app/components/users/blank/blank.component';
+import { MyProfileComponent } from 'src/app/components/users/my-profile/my-profile.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,7 @@ const routes: Routes = [
       },
       {
         path: 'my-profile',
-        component: BlankComponent,
+        component: MyProfileComponent,
       },
     ],
   },

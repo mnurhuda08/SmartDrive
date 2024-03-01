@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Profile</h3>
+      </div>
+
+      <div class="card-body position-relative">
+        <button
+          class="btn btn-primary button-update"
+          type="button"
+          data-toggle="modal"
+          data-target="#editProfileModal"
+        >
+          <i class="fa fa-edit"></i>
+          Update Profile
+        </button>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam
+          eos odit asperiores
+        </p>
+        <div class="row">
+          <div class="col-lg-2">
+            <img
+              src="assets/adminlte/dist/img/user2-160x160.jpg"
+              alt="profile-img"
+              class="rounded-circle"
+              height="160px"
+            />
+          </div>
+          <div class="col-lg-10">
+            <p>Your Name</p>
+            <p>Role Name</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<app-edit-profile-popup />

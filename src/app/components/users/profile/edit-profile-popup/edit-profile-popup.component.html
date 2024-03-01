@@ -1,0 +1,68 @@
+<div
+  class="modal fade"
+  id="editProfileModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editProfileModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProfileModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <form>
+              <div class="form-group">
+                <label for="username" class="col-form-label">Username:</label>
+                <input type="text" class="form-control" id="username" />
+              </div>
+              <div class="form-group">
+                <label for="fullname" class="col-form-label">Fullname:</label>
+                <input type="text" class="form-control" id="fullname" />
+              </div>
+              <div class="form-group">
+                <label for="birthplace" class="col-form-label"
+                  >Birthplace:</label
+                >
+                <input type="text" class="form-control" id="birthplace" />
+              </div>
+              <div class="form-group">
+                <label for="birthdate" class="col-form-label">Birthdate:</label>
+                <input type="date" class="form-control" id="birthdate" />
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6 d-flex flex-column align-items-end">
+            <div class="form-group">
+              <label for="image" class="col-form-label">image:</label>
+              <input type="file" class="form-control" id="image" />
+            </div>
+            <img
+              src="assets/adminlte/dist/img/user2-160x160.jpg"
+              alt="profile-img"
+              class="w-full"
+              height="160px"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

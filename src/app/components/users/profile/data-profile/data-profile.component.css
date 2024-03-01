@@ -1,0 +1,7 @@
+.button-update {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  cursor: pointer;
+  z-index: 99;
+}
