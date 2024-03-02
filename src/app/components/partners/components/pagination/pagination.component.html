@@ -1,8 +1,8 @@
-<div class="card-footer d-flex justify-content-center">
+<div class="d-flex justify-content-center my-3">
     <ul class="pagination pagination-md m-0 text-center">
         <!-- <li class="page-item"><button class="page-link">«</button></li> -->
         <li class="page-item" *ngFor="let i of getPageNumber()">
-            <button  class="page-link" [ngClass]="{ 'bg-primary' : i === currentPage }" (click)=" i !== '...' && goPages(i) " type="button">{{ i }}</button
+            <button  class="page-link" [ngClass]="{ 'bg-primary' : i === currentPage, 'bg-secondary': i !== currentPage }" (click)=" i !== '...' && goPages(i) " type="button">{{ i }}</button
         ></li>
         <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
         <li class="page-item"><a class="page-link" href="#">2</a></li>

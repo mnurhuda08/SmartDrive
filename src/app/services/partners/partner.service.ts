@@ -18,7 +18,11 @@ export class PartnerService {
   urlApi: string = `${environment.baseUrl}/partner`
   constructor(private http: HttpClient) { }
 
-  getPartners(parameter: PagingParameter): Observable<PaginationList<Partner>> {
+  getPartners(): Observable<Partner[]>{
+    return this.http.get<Partner[]>(`${this.urlApi}`)
+  }  
+
+  getPartnersPaging(parameter: PagingParameter): Observable<PaginationList<Partner>> {
     return this.http.get<PaginationList<Partner>>(`${this.urlApi}/paging${parameter.toUrl()}`)
   }
 

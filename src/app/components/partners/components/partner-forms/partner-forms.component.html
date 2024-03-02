@@ -13,7 +13,7 @@
                     </div>
                     <div class="form-group">
                         <label for="partNpwp">Partner NPWP</label>
-                        <input type="text" id="partNpwp" formControlName="partNpwp" name="partNpwp" pattern="[0-9]*" class="form-control" placeholder="Enter NPWP Partner">
+                        <input type="text" id="partNpwp" formControlName="partNpwp" name="partNpwp" class="form-control" placeholder="Enter NPWP Partner">
                         <div class="text-danger" *ngIf="form.get('partNpwp')?.errors !== null">
                             <p *ngIf="form.get('partNpwp')?.errors?.['required']">Partner NPWP is required.</p>
                             <p *ngIf="form.get('partNpwp')?.errors?.['pattern']">Partner NPWP must contain only numbers.</p>
@@ -43,7 +43,7 @@
                     <div class="form-group">
                         <label for="partCityId">Partner City</label>
                         <select name="partCityId" id="" class="form-control" formControlName="partCityId">
-                            <option value="" *ngIf="actionStatus?.action == enumAction.CREATE " selected disabled> Select City of Partner </option>
+                            <option value="" *ngIf="actionStatus?.action === enumAction.CREATE" selected disabled> Select City of Partner </option>
                             <option *ngFor="let item of cities" value="{{ item.cityId }}">{{ item.cityName }}</option>
                         </select>
                         <div  class="text-danger" *ngIf="form.get('partCityId')?.errors !== null && form.get('partCityId')?.errors?.['required']">
@@ -54,7 +54,7 @@
                 <div class="col-6 col-md-6 col-sm-6">
                     <div class="form-group">
                         <label for="partAccountNo">Partner Account No.</label>
-                        <input type="text" pattern="[0-9]*" formControlName="partAccountNo" name="partAccountNo" class="form-control" placeholder="Enter Account No Partner">
+                        <input type="text"formControlName="partAccountNo" name="partAccountNo" class="form-control" placeholder="Enter Account No Partner">
                         <div  class="text-danger" *ngIf="form.get('partAccountNo')?.errors !== null ">
                             <p *ngIf="form.get('partAccountNo')?.errors?.['required']">Partner Account No is required.</p>
                             <p *ngIf="form.get('partAccountNo')?.errors?.['pattern']"> Partner Account contain only numbers</p>

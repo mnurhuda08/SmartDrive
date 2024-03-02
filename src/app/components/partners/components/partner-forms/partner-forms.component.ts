@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Action } from 'src/app/constants/action';
+import { PartnerEntity } from 'src/app/constants/partner-entity';
 import { ActionStatus } from 'src/app/interfaces/common/actionStatus';
 import { City } from 'src/app/interfaces/master/city';
 import { Partner } from 'src/app/interfaces/partners/partner';
@@ -19,6 +20,8 @@ export class PartnerFormsComponent implements OnInit {
   form !: FormGroup
   cities !: City[]
   public enumAction = Action
+  public enumPartnerEntity = PartnerEntity
+
   constructor(private partnerService: PartnerService, private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       partEntityid: 0,
@@ -32,10 +35,10 @@ export class PartnerFormsComponent implements OnInit {
     })
   }
 
-  private updateFormValues(partner?: Partner | null): void {
+  private updateFormValues(): void {
     
     if(this.partner !== null && this.partner !== undefined && this.actionStatus.action == Action.UPDATE){   
-      const dateTimeString = partner?.partJoinDate.toString();
+      const dateTimeString = this.partner?.partJoinDate.toString();
       const datePart = dateTimeString?.split('T')[0];
       this.form.patchValue({
         partEntityid: this.partner.partEntityid,
@@ -58,14 +61,14 @@ export class PartnerFormsComponent implements OnInit {
       partAddress: '',
       partStatus: '',
       partAccountNo: '',
-      partCityId: 0,
+      partCityId: '',
       partJoinDate: '',
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['actionStatus'] && changes['actionStatus'].currentValue.action === Action.UPDATE ) {
-      this.updateFormValues(this.partner);
+      this.updateFormValues();
     }
 
     if (changes['actionStatus'] && changes['actionStatus'].currentValue.action === Action.CREATE ) {
@@ -80,7 +83,7 @@ export class PartnerFormsComponent implements OnInit {
     })
 
     this.form.valueChanges.subscribe((value : Partner) => {
-      value.type = 'partner'
+      value.type = this.enumPartnerEntity.PARTNER
       this.formDataValueChange.emit(value)
     })
     

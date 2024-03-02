@@ -20,6 +20,8 @@ import { ModalComponent } from './components/partners/components/modal/modal.com
 import { PartnerFormsComponent } from './components/partners/components/partner-forms/partner-forms.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationComponent } from './components/partners/components/pagination/pagination.component';
+import { PartnerContactFormsComponent } from './components/partners/components/partner-contact-forms/partner-contact-forms.component';
+import { PartnerAreaWorkgroupFormsComponent } from './components/partners/components/partner-area-workgroup-forms/partner-area-workgroup-forms.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { PaginationComponent } from './components/partners/components/pagination
     ModalComponent,
     PartnerFormsComponent,
     PaginationComponent,
+    PartnerContactFormsComponent,
+    PartnerAreaWorkgroupFormsComponent,
   ],
   imports: [
     BrowserModule, 

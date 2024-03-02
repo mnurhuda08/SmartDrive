@@ -1,7 +1,8 @@
+import { PartnerEntity } from "src/app/constants/partner-entity";
 import { PartnerStatus } from "src/app/constants/partnerStatus";
 
 export interface Partner {
-    type: 'partner'
+    type: PartnerEntity.PARTNER,
     partEntityid : number,
     partName : string,
     partAddress : string,

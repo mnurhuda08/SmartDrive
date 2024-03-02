@@ -1,5 +1,5 @@
 <div class="modal fade show"  id="modal-partner" [ngStyle]="{  'display': isModalOpen ? 'block' : 'none' }" (click)="onBackdropClick($event)"  aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog" [ngClass]="{ 'modal-lg': actionStatus.entity === enumPartnerEntity.PARTNER, '': actionStatus.entity === enumPartnerEntity.PARTNER_CONTACT }">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">{{  actionStatus.action + ' ' + actionStatus.entity }}</h4>
@@ -8,7 +8,29 @@
                 </button>
             </div>
             <div class="modal-body">
-                <partner-forms (formValidityChange)="handleFormValidityChanged($event)" [actionStatus]="actionStatus" [partner]="partner" (formDataValueChange)="handleFormValueChanged($event)"></partner-forms>
+                <partner-forms  
+                    *ngIf="actionStatus.entity === enumPartnerEntity.PARTNER"  
+                    (formValidityChange)="handleFormValidityChanged($event)" 
+                    [actionStatus]="actionStatus" [partner]="partner" 
+                    (formDataValueChange)="handleFormValueChanged($event)"
+                >
+                </partner-forms>
+                <partner-contact-forms 
+                    *ngIf="actionStatus.entity === enumPartnerEntity.PARTNER_CONTACT" 
+                    [actionStatus]="actionStatus"
+                    [partnerContact]="partnerContact"
+                    (formDataValueChange)="handleFormValueChanged($event)"
+                    (formValidityChange)="handleFormValidityChanged($event)" 
+                >
+                </partner-contact-forms>
+                <partner-area-workgroup-forms
+                    *ngIf="actionStatus.entity === enumPartnerEntity.PARTNER_AREA_WORKGROUP" 
+                    [actionStatus]="actionStatus"
+                    [partnerAreaWorkgroupForm]="partnerAreaWorkgroup"
+                    (formDataValueChange)="handleFormValueChanged($event)"
+                    (formValidityChange)="handleFormValidityChanged($event)"
+                >
+                </partner-area-workgroup-forms>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal" (click)="onCloseModal()">Close</button>

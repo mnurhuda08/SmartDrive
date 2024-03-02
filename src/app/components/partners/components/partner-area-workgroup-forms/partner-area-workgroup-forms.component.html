@@ -1,0 +1,37 @@
+<div class="card-body">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="pawoArwgCode">Area Workgroup </label>
+            <select name="pawoArwgCode" id="pawoArwgCode" class="form-control" formControlName="pawoArwgCode">
+                <option value="" disabled selected>Please Select Area Workgroup</option>
+                <option *ngFor="let area of areaWorkgroups" [value]="area.arwgCode">{{ area.arwgDesc }}</option>
+            </select>
+            <div *ngIf="form.get('pawoArwgCode')?.errors && form.get('pawoArwgCode')?.errors?.['required']">
+                <small class="form-text text-danger">Area Workgroup is required.</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pawoId">Partner Assignment Contact</label>
+            <select name="pawoId" id="pawoId" class="form-control" formControlName="pawoId">
+                <option value="" disabled selected>Please Select Partner Assignment Contact</option>
+                <option *ngFor="let contact of partnerContacts"
+                    [value]="contact.pacoPatrnEntityid + '-'+ contact.pacoUserEntityid">
+                    {{ contact.fullName+"   ("+contact.pacoPatrnEntityName+')' }}</option>
+            </select>
+            <div *ngIf="form.get('pawoId')?.errors && form.get('pawoId')?.errors?.['required']">
+                <small class="form-text text-danger">Partner Assignment Contact is required.</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pawoStatus">Partner Status</label>
+            <select name="pawoStatus" id="pawoStatus" formControlName="pawoStatus" class="form-control">
+                <option value="" disabled selected>Select Status Contact</option>
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="INACTIVE">INACTIVE</option>
+            </select>
+            <div *ngIf="form.get('pawoStatus')?.errors !== null && form.get('pawoStatus')?.errors?.['required']">
+                <small class="form-text text-danger">Assignment Status is required.</small>
+            </div>
+        </div>
+    </form>
+</div>
