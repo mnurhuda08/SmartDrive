@@ -24,8 +24,8 @@ export class ServicefeasibilityComponent implements OnInit {
   // data
   service = {} as ServiceDto;
   Sero = {} as ServiceOrderDto;
-  isGenerateAvailable: boolean = false;
-  isGeneratePermitted: boolean = false;
+  isGenerateAvailable: boolean | null = false;
+  isGeneratePermitted: boolean | null = false;
   // enum
   SOWOSTATUS = SOWOSTATUS;
   SEOTSTATUS = SEOTSTATUS;
@@ -61,11 +61,7 @@ export class ServicefeasibilityComponent implements OnInit {
     }
 
   }
-  getDate(date: string) {
-    let newDate = date?.split('T')[0]?.split('-')
-    return `${newDate[2]}/${newDate[1]}/${newDate[0]}`
-  }
-  workorderSubmit(e: SubmitEvent) {
+  workorderSubmit(e: SubmitEvent,sowoIndex:number) {
     e.preventDefault()
     if (confirm("Apakah anda yakin?")) {
       // search input tag inside target html
@@ -89,7 +85,9 @@ export class ServicefeasibilityComponent implements OnInit {
             (res) => {
               if (res.status.toString().startsWith('2')) {
                 alert("Berhasil")
-                location.reload()
+                this.Sero.seots[sowoIndex].sowos.forEach((element,index) => {
+                  if(element.sowoId==Number(id)) this.Sero.seots[sowoIndex].sowos[index].sowoStatus=body.sowoStatus
+                });
               }
             });
         }
@@ -110,7 +108,9 @@ export class ServicefeasibilityComponent implements OnInit {
       this.serviceOrder.updateTask(body).subscribe((res) => {
         if (res.status.toString().startsWith('2')) {
           alert("Berhasil")
-          location.reload()
+          this.Sero.seots.forEach((element,index) => {
+            if(element.seotId==Number(id)) this.Sero.seots[index].seotStatus=body.seotStatus
+          });
         }
       })
     }
@@ -120,7 +120,7 @@ export class ServicefeasibilityComponent implements OnInit {
     if (confirm("Apakah anda yakin?")) {
       let body = {
         servId: this.service.servId,
-        agentId: Number(this.service.seros[0].seroAgentEntityid),
+        agentId: Number(this.Sero.seroAgentEntityid),
         createPolisDate: this.service.servCreatedOn,
         polisStartDate: this.service.servStartdate,
         polisEndDate: this.service.servEnddate,
@@ -128,7 +128,6 @@ export class ServicefeasibilityComponent implements OnInit {
       this.serviceOrder.createServicePolis(body).subscribe((res) => {
         if (res.statusText == "OK") {
           alert("Berhasil")
-          location.reload()
         }
       })
     }
@@ -140,8 +139,5 @@ export class ServicefeasibilityComponent implements OnInit {
       }
     }
     return false;
-  }
-  getEmpName():string{
-    return this.service?.servCreqEntity?.creqAgenEntity?.eawgEntity?.empName;
   }
 }

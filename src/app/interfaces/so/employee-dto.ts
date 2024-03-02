@@ -1,3 +1,3 @@
 export interface EmployeeDto {
-    empName:string,
+    empName:string | null,
 }
