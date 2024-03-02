@@ -5,10 +5,8 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { IClaims } from '../interfaces/users/i-login-claims';
-import { LoginService } from '../services/users/login.service';
-import { environment } from 'src/environments/environment';
 import { Observable, map } from 'rxjs';
+
 
 export class PermissionGuard {
   constructor(
@@ -38,18 +36,21 @@ export class PermissionGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    
+    console.log("MASUK")
     // this.fetchMe();
     //  Get the required roles/permissions for the route
     const requiredRoles: string[] = (route.data as { requiredRoles: string[] })
-      .requiredRoles;
-
+    .requiredRoles;
+    
     // Check if the user has the required roles/permissions
     const hasPermission: boolean = requiredRoles.some((role) =>
-      this.currentRoles.includes(role)
+    this.currentRoles.includes(role)
     );
+    console.log(hasPermission)
     if (!hasPermission) {
       // Redirect to unauthorized page or handle as needed
-      return this.router.parseUrl('/unauthorized');
+      return this.router.parseUrl('/login');
     }
     return true;
   }
