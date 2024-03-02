@@ -27,54 +27,47 @@
           <div class="card">
             <div class="card-header d-flex justify-content-between">
               <div class="col-10">
-                <h3>Update Car Model</h3>
+                <h3>Add Car Series</h3>
               </div>
             </div>
 
             <div class="card-body" style="max-height: 400px">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="mb-3 form-group">
-                  <label for=" carModel_id" class="form-label"
-                    >Car Model Id</label
+                  <label for="carModelName" class="form-label">Car Model</label>
+                  <br />
+                  <select
+                    class="form-select form-control"
+                    formControlName="carmodel_id"
+                    aria-label="Car Brand"
                   >
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName=" carModel_id"
-                    [disabled]="true"
-                  />
-                  <div
-                    *ngIf="submitted && form.controls[' carModel_id'].errors"
-                    class="error"
-                  >
-                    <span
-                      *ngIf="form.controls[' carModel_id'].errors['required']"
-                      class="text-danger"
+                    <option
+                      *ngFor="let carModel of carModels"
+                      [value]="carModel.carmId"
                     >
-                      Car Model ID is required
-                    </span>
-                  </div>
+                      {{ carModel.carmName }}
+                    </option>
+                  </select>
                 </div>
-
                 <div class="mb-3 form-group">
-                  <label for=" carModel_name" class="form-label"
-                    >Car Model Name</label
+                  <label for="carSeriesName" class="form-label"
+                    >Car Series Name</label
                   >
                   <input
                     type="text"
                     class="form-control"
-                    formControlName="carModel_name"
-                    required
+                    formControlName="cars_name"
+                    id="carSeriesName"
                   />
                   <div
-                    *ngIf="submitted && form.controls['carModel_name'].errors"
+                    *ngIf="submitted && form.controls['cars_name'].errors"
                     class="error"
                   >
                     <span
-                      *ngIf="form.controls['carModel_name'].errors['required']"
+                      *ngIf="form.controls['cars_name'].errors['required']"
                       class="text-danger"
                     >
-                      Car Model Name is required
+                      Car Series Name is required
                     </span>
                   </div>
                 </div>
@@ -82,7 +75,7 @@
                 <button
                   type="submit"
                   class="btn btn-warning ml-1"
-                  [routerLink]="['/master/car']"
+                  (click)="(['/master/car'])"
                 >
                   <strong>Cancel</strong>
                 </button>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CarModel } from 'src/app/interfaces/master/car-model';
 import { CarSeries } from 'src/app/interfaces/master/car-series';
+import { CarModelService } from 'src/app/services/master/car-model.service';
 import { CarSeriesService } from 'src/app/services/master/car-series.service';
 
 @Component({
@@ -13,10 +15,12 @@ export class UpdateCarSeriesComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
 
+  carModels: CarModel[] = [];
   carSeries!: CarSeries;
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private carModelService: CarModelService,
     private carSeriesService: CarSeriesService,
     private router: Router
   ) {
@@ -29,8 +33,23 @@ export class UpdateCarSeriesComponent implements OnInit {
           this.form = new FormGroup({
             carSeries_id: new FormControl(this.carSeries.carsId),
             carSeries_name: new FormControl(this.carSeries.carsName),
+            carsIdCarmId: new FormControl({
+              value: this.carSeries.carsCarmId,
+              disabled: false,
+            }),
           });
         });
+    });
+  }
+
+  getCarModels() {
+    this.carModelService.getCarModels().subscribe({
+      next: (response) => {
+        this.carModels = response;
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
   }
 
@@ -52,5 +71,7 @@ export class UpdateCarSeriesComponent implements OnInit {
       .subscribe(() => this.router.navigate(['master/car']));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCarModels();
+  }
 }

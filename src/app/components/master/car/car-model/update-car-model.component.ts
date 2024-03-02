@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CarBrand } from 'src/app/interfaces/master/car-brand';
 import { CarModel } from 'src/app/interfaces/master/car-model';
+import { CarBrandService } from 'src/app/services/master/car-brand.service';
 import { CarModelService } from 'src/app/services/master/car-model.service';
 
 @Component({
@@ -13,11 +15,13 @@ export class UpdateCarModelComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
 
+  carBrands: CarBrand[] = [];
   carModel!: CarModel;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private carModelService: CarModelService,
+    private carBrandService: CarBrandService,
     private router: Router
   ) {
     this.activatedRoute.params.subscribe((params) => {
@@ -27,10 +31,31 @@ export class UpdateCarModelComponent implements OnInit {
         .subscribe((res: CarModel) => {
           this.carModel = res;
           this.form = new FormGroup({
-            carModel_id: new FormControl(this.carModel.carmId),
-            carModel_name: new FormControl(this.carModel.carmName),
+            carmId: new FormControl({
+              value: this.carModel.carmId,
+              disabled: false,
+            }),
+            carmIdCabrId: new FormControl({
+              value: this.carModel.carmCabrId,
+              disabled: false,
+            }),
+            carmName: new FormControl({
+              value: this.carModel.carmName,
+              disabled: false,
+            }),
           });
         });
+    });
+  }
+
+  getCarBrands() {
+    this.carBrandService.getCarBrands().subscribe({
+      next: (response) => {
+        this.carBrands = response;
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
   }
 
@@ -44,13 +69,16 @@ export class UpdateCarModelComponent implements OnInit {
       return;
     }
 
-    const carmId: number = this.f.carModel_id?.value;
-    const carmName: string = this.f.carModel_name?.value;
+    const carmCabrId: number = this.f.carmId?.value;
+    const carmId: number = this.f.carmCabrId?.value;
+    const carmName: string = this.f.carmName?.value;
 
     this.carModelService
-      .updateCarModel({ carmId, carmName } as CarModel)
+      .updateCarModel({ carmId, carmName, carmCabrId } as CarModel)
       .subscribe(() => this.router.navigate(['master/car']));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCarBrands();
+  }
 }

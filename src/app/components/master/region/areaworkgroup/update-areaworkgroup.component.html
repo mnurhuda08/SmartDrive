@@ -34,6 +34,23 @@
             <div class="card-body" style="max-height: 400px">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="mb-3 form-group">
+                  <label for="cityName" class="form-label">City</label>
+                  <br />
+                  <select
+                    class="form-select form-control"
+                    formControlName="city_id"
+                    aria-label="cityName"
+                  >
+                    <option
+                      *ngFor="let city of cities; let i = index"
+                      [value]="city.cityId"
+                      [selected]="i == 0"
+                    >
+                      {{ city.cityName }}
+                    </option>
+                  </select>
+                </div>
+                <div class="mb-3 form-group">
                   <label for="regionPlatName" class="form-label">
                     Area Workgroup Name
                   </label>

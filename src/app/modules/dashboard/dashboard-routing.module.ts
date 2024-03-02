@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+//layout component
 import { DashboardComponent } from './dashboard.component';
 import { BlankComponent } from 'src/app/components/users/blank/blank.component';
+//master component
 import { CarComponent } from 'src/app/components/master/car/car.component';
-import { AddCarBrandComponent } from 'src/app/components/master/car-brand/add-car-brand.component';
-import { ServiceordersComponent } from 'src/app/components/so/serviceorders/serviceorders.component';
-import { ServicefeasibilityComponent } from 'src/app/components/so/servicefeasibility/servicefeasibility.component';
-import { HttpClient } from '@angular/common/http';
-import { UpdateCarBrandComponent } from 'src/app/components/master/car-brand/update-car-brand.component';
-import { AddCarModelComponent } from 'src/app/components/master/car-model/add-car-model.component';
-import { UpdateCarModelComponent } from 'src/app/components/master/car-model/update-car-model.component';
-import { AddCarSeriesComponent } from 'src/app/components/master/car-series/add-car-series.component';
-import { UpdateCarSeriesComponent } from 'src/app/components/master/car-series/update-car-series.component';
+import { AddCarBrandComponent } from 'src/app/components/master/car/car-brand/add-car-brand.component';
+import { UpdateCarBrandComponent } from 'src/app/components/master/car/car-brand/update-car-brand.component';
+import { AddCarModelComponent } from 'src/app/components/master/car/car-model/add-car-model.component';
+import { UpdateCarModelComponent } from 'src/app/components/master/car/car-model/update-car-model.component';
+import { AddCarSeriesComponent } from 'src/app/components/master/car/car-series/add-car-series.component';
+import { UpdateCarSeriesComponent } from 'src/app/components/master/car/car-series/update-car-series.component';
 import { CategoryComponent } from 'src/app/components/master/category/category.component';
 import { AddCategoryComponent } from 'src/app/components/master/category/add-category.component';
 import { UpdateCategoryComponent } from 'src/app/components/master/category/UpdateCategoryComponent';
@@ -34,6 +34,8 @@ import { AreaworkgroupComponent } from 'src/app/components/master/region/areawor
 import { AddAreaworkgroupComponent } from 'src/app/components/master/region/areaworkgroup/add-areaworkgroup.component';
 import { UpdateAreaworkgroupComponent } from 'src/app/components/master/region/areaworkgroup/update-areaworkgroup.component';
 import { RegionComponent } from 'src/app/components/master/region/region.component';
+import { ServiceordersComponent } from 'src/app/components/so/serviceorders/serviceorders.component';
+import { ServicefeasibilityComponent } from 'src/app/components/so/servicefeasibility/servicefeasibility.component';
 
 const routes: Routes = [
   {

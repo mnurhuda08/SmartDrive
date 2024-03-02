@@ -34,6 +34,23 @@
             <div class="card-body" style="max-height: 400px">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="mb-3 form-group">
+                  <label for="zoneName" class="form-label">Zone</label>
+                  <br />
+                  <select
+                    class="form-select form-control"
+                    formControlName="zone_id"
+                    aria-label="zoneName"
+                  >
+                    <option
+                      *ngFor="let zone of zones; let i = index"
+                      [value]="zone.zonesId"
+                      [selected]="i == 0"
+                    >
+                      {{ zone.zonesName }}
+                    </option>
+                  </select>
+                </div>
+                <div class="mb-3 form-group">
                   <label for="provinceName" class="form-label">
                     Province Name
                   </label>
@@ -59,7 +76,7 @@
                 <button
                   type="submit"
                   class="btn btn-warning ml-1"
-                  [routerLink]="['/master/region']"
+                  [routerLink]="['/master/region/']"
                 >
                   <strong>Cancel</strong>
                 </button>

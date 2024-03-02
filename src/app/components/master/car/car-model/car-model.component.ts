@@ -26,6 +26,7 @@ export class CarModelComponent implements OnInit {
       },
     });
   }
+  
   updateCarModel(id: number) {
     this.router.navigate(['master/car/carmodel/edit', id]);
   }

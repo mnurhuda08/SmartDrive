@@ -34,6 +34,24 @@
             <div class="card-body" style="max-height: 400px">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="mb-3 form-group">
+                  <label for="carBrandName" class="form-label">Car Brand</label>
+                  <br />
+                  <select
+                    class="form-select form-control"
+                    formControlName="carbrand_id"
+                    aria-label="Car Brand"
+                  >
+                    <option
+                      *ngFor="let carBrand of carBrands; let i = index"
+                      [value]="carBrand.cabrId"
+                      [selected]="i == 0"
+                    >
+                      {{ carBrand.cabrName }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="mb-3 form-group">
                   <label for="carModelName" class="form-label"
                     >Car Model Name</label
                   >

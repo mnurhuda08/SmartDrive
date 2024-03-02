@@ -28,7 +28,7 @@ export class AreaworkgroupComponent implements OnInit {
   }
 
   updateAreaWorkgroup(name: string) {
-    this.router.navigate(['master/region/region-plat/edit', name]);
+    this.router.navigate(['master/region/areaworkgroup/edit', name]);
   }
 
   deleteAreaWorkgroup(areaWorkgroups: AreaWorkgroup) {

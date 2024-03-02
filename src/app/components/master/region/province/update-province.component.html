@@ -34,6 +34,23 @@
             <div class="card-body" style="max-height: 400px">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="mb-3 form-group">
+                  <label for="provinceName" class="form-label">Province</label>
+                  <br />
+                  <select
+                    class="form-select form-control"
+                    formControlName="province_id"
+                    aria-label="provinceName"
+                  >
+                    <option
+                      *ngFor="let zone of zones; let i = index"
+                      [value]="zone.zonesId"
+                      [selected]="i == 0"
+                    >
+                      {{ zone.zonesName }}
+                    </option>
+                  </select>
+                </div>
+                <div class="mb-3 form-group">
                   <label for="provinceId" class="form-label">Province Id</label>
                   <input
                     type="text"
@@ -49,14 +66,14 @@
                       *ngIf="form.controls['province_id'].errors['required']"
                       class="text-danger"
                     >
-                      Category ID is required
+                      Province ID is required
                     </span>
                   </div>
                 </div>
 
                 <div class="mb-3 form-group">
                   <label for="carBrandName" class="form-label"
-                    >Category Name</label
+                    >Province Name</label
                   >
                   <input
                     type="text"
@@ -72,7 +89,7 @@
                       *ngIf="form.controls['province_name'].errors['required']"
                       class="text-danger"
                     >
-                      Category Name is required
+                      Province Name is required
                     </span>
                   </div>
                 </div>
@@ -80,7 +97,7 @@
                 <button
                   type="submit"
                   class="btn btn-warning ml-1"
-                  [routerLink]="['/master/region/province']"
+                  [routerLink]="['/master/region/']"
                 >
                   <strong>Cancel</strong>
                 </button>

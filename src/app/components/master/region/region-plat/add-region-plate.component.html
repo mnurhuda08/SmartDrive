@@ -34,6 +34,23 @@
             <div class="card-body" style="max-height: 400px">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="mb-3 form-group">
+                  <label for="provinceName" class="form-label">Province</label>
+                  <br />
+                  <select
+                    class="form-select form-control"
+                    formControlName="province_id"
+                    aria-label="provinceName"
+                  >
+                    <option
+                      *ngFor="let province of provinces; let i = index"
+                      [value]="province.provId"
+                      [selected]="i == 0"
+                    >
+                      {{ province.provName }}
+                    </option>
+                  </select>
+                </div>
+                <div class="mb-3 form-group">
                   <label for="regionPlatName" class="form-label">
                     Region Plat Name
                   </label>

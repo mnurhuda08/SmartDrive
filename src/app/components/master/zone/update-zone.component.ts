@@ -25,8 +25,8 @@ export class UpdateZoneComponent implements OnInit {
       this.zoneService.getZone(params['id']).subscribe((res: Zone) => {
         this.zone = res;
         this.form = new FormGroup({
+          zone_id: new FormControl(this.zone.zonesId),
           zone_name: new FormControl(this.zone.zonesId),
-          zone_desc: new FormControl(this.zone.zonesName),
         });
       });
     });
@@ -42,8 +42,8 @@ export class UpdateZoneComponent implements OnInit {
       return;
     }
 
-    const zonesId: number = this.f.zone_name?.value;
-    const zonesName: string = this.f.zone_desc?.value;
+    const zonesId: number = this.f.zone_id?.value;
+    const zonesName: string = this.f.zone_name?.value;
 
     this.zoneService
       .updateZone({ zonesId, zonesName } as Zone)
