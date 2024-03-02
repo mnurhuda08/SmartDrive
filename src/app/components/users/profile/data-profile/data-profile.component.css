@@ -5,3 +5,7 @@
   cursor: pointer;
   z-index: 99;
 }
+
+.img-profile {
+  object-fit: cover;
+}

@@ -45,6 +45,10 @@ export class UserService {
     return this.apiService.put(url, body, {});
   };
 
+  patchUser = (url: string, body: any): Observable<any> => {
+    return this.apiService.patch(url, body, {});
+  };
+
   deleteUser = (url: string): Observable<any> => {
     return this.apiService.delete(url, {});
   };

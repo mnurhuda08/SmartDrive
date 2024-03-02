@@ -3,20 +3,20 @@ import { IUserPhone } from './i-user-phone';
 import { IUserRole } from './i-user-role';
 
 export interface IUser {
-  userEntityid: number;
+  userEntityid?: number;
   userName: string;
-  userPassword: null;
+  userPassword?: null;
   userFullName: string;
   userEmail: string;
   userBirthPlace: string;
   userBirthDate: string;
   userNationalId: string;
   userNpwp: string;
-  userPhoto: null | string;
-  userModifiedDate: string;
-  userRoles: IUserRole[] | null;
-  userPhones: IUserPhone[] | null;
-  userAddresses: IUserAddress[] | null;
+  userPhoto?: null | string;
+  userModifiedDate?: string;
+  userRoles?: IUserRole[] | null;
+  userPhones?: IUserPhone[] | null;
+  userAddresses?: IUserAddress[] | null;
 }
 
 export interface IUsers {
@@ -25,4 +25,13 @@ export interface IUsers {
   page: number;
   perPage: number;
   totalPages: number;
+}
+
+export interface IUpdateProfile {
+  userEntityid?: number;
+  userName?: string;
+  userFullName?: string;
+  userBirthPlace?: string;
+  userBirthDate?: string | Date;
+  userPhoto?: File | string | null | undefined;
 }

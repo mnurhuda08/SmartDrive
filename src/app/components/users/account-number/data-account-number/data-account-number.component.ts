@@ -53,7 +53,6 @@ export class DataAccountNumberComponent {
       .getUserAccount(`${environment.baseUrl}/UserAccounts`)
       .subscribe({
         next: (data) => {
-          console.log('datas: ', data);
           this.userAccounts = data;
         },
         error: (err) => {
@@ -82,7 +81,6 @@ export class DataAccountNumberComponent {
       .deleteUserAccount(`${environment.baseUrl}/UserAccounts/${usacId}`)
       .subscribe({
         next: (res) => {
-          console.log('delted: ', res);
           this.getuserAccounts(this.currentUser.sub);
           this.toaster.success('Data deleted successfully');
         },

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="user">
   <div class="col-12">
     <div class="card">
       <div class="card-header">
@@ -15,22 +15,33 @@
           <i class="fa fa-edit"></i>
           Update Profile
         </button>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam
-          eos odit asperiores
-        </p>
+        <p>This information will be display, so becareful what you share</p>
         <div class="row">
           <div class="col-lg-2">
             <img
-              src="assets/adminlte/dist/img/user2-160x160.jpg"
+              src="{{
+                user.userPhoto
+                  ? baseUrlResources +
+                    '/Images/users/' +
+                    user.userPhoto +
+                    '?' +
+                    dateNow
+                  : 'assets/adminlte/dist/img/user2-160x160.jpg'
+              }}"
               alt="profile-img"
-              class="rounded-circle"
+              class="rounded-circle img-profile"
+              width="160px"
               height="160px"
             />
           </div>
           <div class="col-lg-10">
-            <p>Your Name</p>
-            <p>Role Name</p>
+            <p>{{ user.userFullName }}</p>
+            <div>
+              <ng-container *ngFor="let item of currentUser.roles; index as i">
+                <span>{{ item | rolename }}</span>
+                <span *ngIf="i !== currentUser.roles.length - 1"> / </span>
+              </ng-container>
+            </div>
           </div>
         </div>
       </div>
@@ -39,4 +50,8 @@
 </div>
 
 <!-- Modal -->
-<app-edit-profile-popup />
+<app-edit-profile-popup
+  *ngIf="user"
+  [user]="user"
+  (confirm)="onConfirmEdit($event)"
+/>
