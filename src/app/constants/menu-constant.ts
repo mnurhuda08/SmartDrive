@@ -20,7 +20,14 @@ export const MenuConstant: IMenus[] = [
     title: 'Master',
     roles: ['EM'],
     exact: false,
-    icon: 'fas fa-columns',
+    icon: 'fas fa-home',
+  },
+  {
+    path: '/master/carbrand',
+    title: 'Car Brand',
+    roles: ['EM'],
+    exact: false,
+    icon: 'fas fa-car',
   },
   {
     path: '/customer',
@@ -35,5 +42,12 @@ export const MenuConstant: IMenus[] = [
     roles: ['PR'],
     exact: false,
     icon: 'fas fa-columns',
+  },
+  {
+    path: '/so',
+    title: 'Service Order',
+    roles: ['EM'],
+    exact: false,
+    icon: 'fas fa-cogs',
   },
 ];
