@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { IClaims } from 'src/app/interfaces/users/i-login-claims';
 import { IUpdatePassword } from 'src/app/interfaces/users/i-update-password';

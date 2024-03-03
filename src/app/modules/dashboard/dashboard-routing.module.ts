@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Router, RouterModule, Routes, mapToCanActivate } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
-import { BlankComponent } from 'src/app/components/users/blank/blank.component';
+import { RouterModule, Routes, mapToCanActivate } from '@angular/router';
 import { MyProfileComponent } from 'src/app/components/users/my-profile/my-profile.component';
-import { PermissionGuard } from 'src/app/guard/permission-guard.guard';
 import { AuthGuard } from 'src/app/guard/admin-guard.guard';
-import { authGuard } from 'src/app/guard/auth.guard';
+import { DashboardComponent } from './dashboard.component';
+import { UnauthorizedComponent } from 'src/app/components/error/unauthorized/unauthorized.component';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    canActivate:mapToCanActivate([AuthGuard]),
-    data:{requiredRoles:['EM']},
+    canActivate: mapToCanActivate([AuthGuard]),
+    data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
     children: [
       {
         path: '',
@@ -21,7 +19,10 @@ const routes: Routes = [
       {
         path: 'my-profile',
         component: MyProfileComponent,
+        canActivate: mapToCanActivate([AuthGuard]),
+        data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
       },
+      { path: 'unauthorized', component: UnauthorizedComponent },
     ],
   },
 ];

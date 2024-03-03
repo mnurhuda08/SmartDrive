@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +19,8 @@ import { CarSeriesComponent } from './components/master/car-series/car-series.co
 import { BlankComponent } from './components/users/blank/blank.component';
 import { LoginComponent } from './components/users/login/login.component';
 import { AuthInterceptorInterceptor } from './services/interceptors/auth-interceptor.interceptor';
+import { UnauthorizedComponent } from './components/error/unauthorized/unauthorized.component';
+import { RegisterComponent } from './components/users/register/register.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,8 @@ import { AuthInterceptorInterceptor } from './services/interceptors/auth-interce
     BlankComponent,
     LoginLayoutComponent,
     DashboardLayoutComponent,
+    UnauthorizedComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,6 @@ import { AuthInterceptorInterceptor } from './services/interceptors/auth-interce
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgbModule,
   ],
   providers: [
     {

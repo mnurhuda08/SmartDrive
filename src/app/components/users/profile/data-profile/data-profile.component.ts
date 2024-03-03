@@ -23,19 +23,6 @@ export class DataProfileComponent {
   baseUrlResources = environment.resources;
   dateNow = Date.now();
 
-  // userProfile: IUser = {
-  //   userEntityid: 0,
-  //   userName: '',
-  //   userFullName: '',
-  //   userEmail: '',
-  //   userBirthPlace: '',
-  //   userPhoto: '',
-  //   userNpwp: '',
-  //   userBirthDate: '',
-  //   userModifiedDate: '',
-  //   userNationalId: '',
-  // };
-
   user!: IUser;
 
   onConfirmEdit(userProfile: IUpdateProfile) {
@@ -48,7 +35,6 @@ export class DataProfileComponent {
       .getUserById(`${environment.baseUrl}/User/${userId}`)
       .subscribe({
         next: (data) => {
-          console.log('get usre: ', data);
           this.user = data;
         },
         error: (error) => {
@@ -67,6 +53,7 @@ export class DataProfileComponent {
         next: (res) => {
           this.getUser(this.currentUser.sub);
           this.toaster.success('Profile successfully updated');
+          window.location.reload();
         },
         error: (error) => {
           this.getUser(this.currentUser.sub);

@@ -5,7 +5,7 @@ import { IUserRole } from './i-user-role';
 export interface IUser {
   userEntityid?: number;
   userName: string;
-  userPassword?: null;
+  userPassword?: null | string;
   userFullName: string;
   userEmail: string;
   userBirthPlace: string;
@@ -34,4 +34,9 @@ export interface IUpdateProfile {
   userBirthPlace?: string;
   userBirthDate?: string | Date;
   userPhoto?: File | string | null | undefined;
+}
+
+export interface IRegisterUser extends IUser {
+  roleName: string;
+  isRoleActive: boolean;
 }
