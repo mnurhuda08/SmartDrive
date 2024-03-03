@@ -70,6 +70,7 @@ export class PartnerContactFormsComponent implements OnInit {
     if (changes['actionStatus'] && changes['actionStatus'].currentValue.action === Action.CREATE ) {
       this.initializeEmptyForm()
     }
+    
   }
 
   ngOnInit(): void {

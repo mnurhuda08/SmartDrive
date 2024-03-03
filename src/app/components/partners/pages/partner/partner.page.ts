@@ -15,8 +15,8 @@ import { PartnerService } from 'src/app/services/partners/partner.service';
 
 @Component({
   selector: 'app-partner-page',
-  templateUrl: './partner.page.component.html',
-  styleUrls: ['./partner.page.component.scss']
+  templateUrl: './partner.page.html',
+  styleUrls: ['./partner.page.scss']
 })
 
 export class PartnerPage implements OnInit {

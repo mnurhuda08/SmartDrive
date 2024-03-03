@@ -14,7 +14,7 @@ import { BlankComponent } from './components/users/blank/blank.component';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { DashboardLayoutComponent } from './components/layout/dashboard-layout/dashboard-layout.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PartnerPage } from './components/partners/pages/partner.page/partner.page.component';
+import { PartnerPage } from './components/partners/pages/partner/partner.page';
 import { TableComponent } from './components/partners/components/table/table.component';
 import { ModalComponent } from './components/partners/components/modal/modal.component';
 import { PartnerFormsComponent } from './components/partners/components/partner-forms/partner-forms.component';
@@ -22,6 +22,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationComponent } from './components/partners/components/pagination/pagination.component';
 import { PartnerContactFormsComponent } from './components/partners/components/partner-contact-forms/partner-contact-forms.component';
 import { PartnerAreaWorkgroupFormsComponent } from './components/partners/components/partner-area-workgroup-forms/partner-area-workgroup-forms.component';
+import { PartnerAreaWorkgroupPage } from './components/partners/pages/partner-area-workgroup/partner-area-workgroup.page';
+import { ModalWorkOrderComponent } from './components/partners/components/modal-work-order/modal-work-order.component';
+import { ClaimsSparepartFormsComponent } from './components/partners/components/claims-sparepart-forms/claims-sparepart-forms.component';
+import { ClaimEvidenceFormsComponent } from './components/partners/components/claim-evidence-forms/claim-evidence-forms.component';
 
 @NgModule({
   declarations: [
@@ -36,13 +40,17 @@ import { PartnerAreaWorkgroupFormsComponent } from './components/partners/compon
     BlankComponent,
     LoginLayoutComponent,
     DashboardLayoutComponent,
-    PartnerPage,
     TableComponent,
     ModalComponent,
     PartnerFormsComponent,
     PaginationComponent,
     PartnerContactFormsComponent,
     PartnerAreaWorkgroupFormsComponent,
+    PartnerAreaWorkgroupPage,
+    PartnerPage,
+    ModalWorkOrderComponent,
+    ClaimsSparepartFormsComponent,
+    ClaimEvidenceFormsComponent,
   ],
   imports: [
     BrowserModule, 

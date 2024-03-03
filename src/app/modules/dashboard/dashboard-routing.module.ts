@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { BlankComponent } from 'src/app/components/users/blank/blank.component';
-import { PartnerPage } from 'src/app/components/partners/pages/partner.page/partner.page.component';
+import { PartnerPage } from 'src/app/components/partners/pages/partner/partner.page';
 import { CarBrandComponent } from 'src/app/components/master/car-brand/car-brand.component';
 import { CarModelComponent } from 'src/app/components/master/car-model/car-model.component';
+import { PartnerAreaWorkgroupPage } from 'src/app/components/partners/pages/partner-area-workgroup/partner-area-workgroup.page';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
       {
         path: 'partner/partner',
         component: PartnerPage
+      },
+      {
+        path: 'partner/workorder',
+        component: PartnerAreaWorkgroupPage
       }
     ],
   },
