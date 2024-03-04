@@ -35,8 +35,6 @@ export class EditProfilePopupComponent {
     if (target.files && target.files[0]) {
       this.fileToUpload = target.files[0];
       this.userProfile.userPhoto = target.files[0];
-      console.log('this.userProfile: ', this.userProfile);
-      console.log('filetoUpload: ', this.fileToUpload);
     }
   }
 

@@ -40,3 +40,12 @@ export interface IRegisterUser extends IUser {
   roleName: string;
   isRoleActive: boolean;
 }
+
+export interface IForgotPassword {
+  userName: string;
+  userBirthPlace: string;
+  userNationalId: string;
+  userNpwp: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}

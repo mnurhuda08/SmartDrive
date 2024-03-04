@@ -21,6 +21,7 @@ import { RegisterComponent } from './components/users/register/register.componen
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { DashboardLayoutComponent } from './components/layout/dashboard-layout/dashboard-layout.component';
 import { ServicefeasibilityComponent } from './components/so/servicefeasibility/servicefeasibility.component';
+import { ForgotPasswordComponent } from './components/users/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ServicefeasibilityComponent } from './components/so/servicefeasibility/
     DashboardLayoutComponent,
     UnauthorizedComponent,
     RegisterComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

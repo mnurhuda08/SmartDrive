@@ -53,7 +53,6 @@ export class SidebarComponent {
       .subscribe({
         next: (data) => {
           this.user = data;
-          console.log('user: ', this.user);
         },
         error: (error) => {
           console.log('error get user: ', error);
