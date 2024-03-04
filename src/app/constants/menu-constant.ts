@@ -59,4 +59,11 @@ export const MenuConstant: IMenus[] = [
       }
     ]
   },
+  {
+    path: '/so',
+    title: 'Service Order',
+    roles: ['EM'],
+    exact: false,
+    icon: 'fas fa-cogs',
+  },
 ];
