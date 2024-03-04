@@ -28,14 +28,14 @@ export class ClaimEvidenceFormsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _claimAssetEvidenceService : ClaimAssetEvidenceService
+    private _claimAssetEvidenceService: ClaimAssetEvidenceService
   ) {
     this.form = this.fb.group({
       rows: this.fb.array([])
     })
   }
 
-  createRow(): FormGroup{
+  createRow(): FormGroup {
     return this.fb.group({
       caevNote: ['', Validators.required],
       caevFee: [null, Validators.required],
@@ -45,14 +45,14 @@ export class ClaimEvidenceFormsComponent implements OnInit {
     })
   }
 
-  addRow(){
+  addRow() {
     const newRow = this.createRow()
     this.rows.push(newRow)
     this.updateFormValidity()
     this.emitFormDataValue()
   }
 
-  removeRow(index: number){
+  removeRow(index: number) {
     this.rows.removeAt(index)
     this.updateFormValidity()
     this.emitFormDataValue()
@@ -64,8 +64,9 @@ export class ClaimEvidenceFormsComponent implements OnInit {
 
   getFileInputLabel(index: number) {
     const control = this.rows.at(index).get('photo');
-    const name =  control?.value?.name || 'No file selected';
-    return name;  }
+    const name = control?.value?.name || 'No file selected';
+    return name;
+  }
 
   updateFormValidity(): void {
     let isValid = true;
@@ -74,7 +75,7 @@ export class ClaimEvidenceFormsComponent implements OnInit {
         isValid = false;
       }
     });
-    
+
     this.formValidityChange.emit(isValid);
   }
 
@@ -82,15 +83,22 @@ export class ClaimEvidenceFormsComponent implements OnInit {
     return this.form.get('rows') as FormArray
   }
 
-  onFileSelected(event:any, index: number) {
-    if(event.target.files) {
-      const controle = this.rows.at(index).get("photo")
-      controle?.patchValue(event.target.files[0])
+  onFileSelected(event: any, index: number) {        
+    const control = this.rows.at(index).get("photo");
+    const file = event.target.files[0];
+    if (file instanceof File) {
+      control?.setValue(file);
+      console.log("control?.value", control?.value);
+      this.emitFormDataValue()
+    } else {
+      console.error("Invalid file selected");
     }
-    
+
   }
 
-  getFormData():FormData{
+  getFormData(): FormData {
+    console.log("getFormData", this.form.value);
+    
     const formData = new FormData();
     const formArray = this.form.get('rows') as FormArray;
     formArray.controls.forEach((controlGroup) => {
@@ -101,6 +109,7 @@ export class ClaimEvidenceFormsComponent implements OnInit {
       const photoFile = controlGroup.get('photo')?.value;
       formData.append('photo', photoFile);
     });
+    
     return formData
   }
 
@@ -109,7 +118,7 @@ export class ClaimEvidenceFormsComponent implements OnInit {
     this.formDataValueChange.emit(formData);
   }
 
-  getClaimEvidence(){
+  getClaimEvidence() {
     this._claimAssetEvidenceService.getEvidence(this.workOrderId?.seroPartId as number, this.workOrderId?.seroId as string).subscribe({
       next: (v) => this.claimAssetEvidences = v
     })
@@ -126,7 +135,7 @@ export class ClaimEvidenceFormsComponent implements OnInit {
     }
   }
 
-  resetForm(){
+  resetForm() {
     this.form = this.fb.group({
       rows: this.fb.array([])
     })

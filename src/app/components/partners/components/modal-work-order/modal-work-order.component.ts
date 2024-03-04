@@ -45,9 +45,7 @@ export class ModalWorkOrderComponent implements OnInit {
     if(this.actionStatus.entity === this.enumEntity.CLAIM_ASSET_SPAREPARTS){
       this.submit.emit(this.data as PartnerUnion[])
     }
-    if(this.actionStatus.entity === this.enumEntity.CLAIM_ASSET_EVIDENCE) {
-      console.log("modal");
-      
+    if(this.actionStatus.entity === this.enumEntity.CLAIM_ASSET_EVIDENCE) {      
       this.submit.emit(this.data as FormData)
     }
   }

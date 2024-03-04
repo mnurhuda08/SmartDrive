@@ -11,6 +11,7 @@ import { PartnerWorkOrder } from 'src/app/interfaces/partners/partner-work-order
 import { ClaimAssetEvidenceService } from 'src/app/services/partners/claim-asset-evidence.service';
 import { ClaimAssetSparepartService } from 'src/app/services/partners/claim-asset-sparepart.service';
 import { PartnerWorkOrderService } from 'src/app/services/partners/partner-work-order.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-partner-area-workgroup',
@@ -46,7 +47,7 @@ export class PartnerAreaWorkgroupPage implements OnInit {
   getWorkOrder() {
     this._partnerWorkOrderService.getWorkOrderPaging(this.seroPartId, this.seotArwgCode, this.workOrdersPagingParameter).subscribe({
       next: (v) => this.workOrdersPagination = v,
-      error: (e) => console.log(e),
+      error: (e) => Swal.fire('Error', 'Cannot Fetch Data', 'error')
     })
   }
   
@@ -73,14 +74,39 @@ export class PartnerAreaWorkgroupPage implements OnInit {
   submit(data: PartnerUnion[] | FormData){    
     switch (this.actionStatus.entity) {
       case PartnerEntity.CLAIM_ASSET_SPAREPARTS:
-        this._claimAssetSparepart.createSparePart(data as ClaimAssetsSparepart[]).subscribe({
-          next: () => this.getWorkOrder() 
-        })    
+        Swal.fire({
+          title: 'Are you sure want to submit?',
+          text: "You won't be able to revert this!",
+          showCancelButton: true,
+          confirmButtonText: `Yes`,
+          denyButtonText: `No`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this._claimAssetSparepart.createSparePart(data as ClaimAssetsSparepart[]).subscribe({
+              next: () => this.getWorkOrder(),
+              error: (e) => Swal.fire('Error', e.error.message, 'error'),
+              complete: () => Swal.fire('Success', 'Claim Asset Sparepart has been submitted', 'success') 
+            }) 
+          }
+        })
+   
         break;
       case PartnerEntity.CLAIM_ASSET_EVIDENCE:
-        this._claimAssetEvidence.create(data as FormData).subscribe({
-          next: () => this.getWorkOrder() 
-        })    
+        Swal.fire({
+          title: 'Are you sure want to submit?',
+          text: "You won't be able to revert this!",
+          showCancelButton: true,
+          confirmButtonText: `Yes`,
+          denyButtonText: `No`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this._claimAssetEvidence.create(data as FormData).subscribe({
+              next: () => this.getWorkOrder(),
+              error: (e) => Swal.fire('Error', e.error.message, 'error'),
+              complete: () => Swal.fire('Success', 'Claim Asset Evidence has been submitted', 'success') 
+            }) 
+          }
+        })
         break;
       default:
         break;

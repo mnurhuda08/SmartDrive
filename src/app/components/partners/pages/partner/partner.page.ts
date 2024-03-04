@@ -120,29 +120,58 @@ export class PartnerPage implements OnInit {
   }
 
   onDeletePartner(partEntityid: number) {
-    this._partnerService.deletPartner(partEntityid).subscribe({
-      next: (v) => {
-        if (this.partnerPagingParameter.pageNumber === this.paginationPartner.totalPages) {
-          this.partnerPagingParameter.pageNumber--
-        }
-        this.getPartner()
-      },
-      error: (e) => console.log(e),
-      complete: () => console.log("complete")
+    Swal.fire({
+      title: 'Are you sure want to delete?',
+      text: 'You will not be able to recover this data!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this._partnerService.deletPartner(partEntityid).subscribe({
+          next: (v) => {
+            if (this.partnerPagingParameter.pageNumber === this.paginationPartner.totalPages) {
+              this.partnerPagingParameter.pageNumber--
+            }
+            this.getPartner()
+          },
+          error: (e) => {            
+            this.swalError(e)
+          },
+          complete: () => {
+            this.swalDelete(null)
+          }
+        })
+      }
     })
   }
 
   onDeletePartnerContact(pacoPatrnEntityid: number, pacoUserEntityid: number){
-    this._partnerContactService.delete(pacoPatrnEntityid, pacoUserEntityid).subscribe({
-      next: (v) => {
-        if (this.partnerContactPagination.data.length === 1) {          
-          this.partnerContactPagingParameter.pageNumber--
+    Swal.fire({
+      title: 'Are you sure want to delete?',
+      text: 'You will not be able to recover this data!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      this._partnerContactService.delete(pacoPatrnEntityid, pacoUserEntityid).subscribe({
+        next: (v) => {
+          if (this.partnerContactPagination.data.length === 1) {          
+            this.partnerContactPagingParameter.pageNumber--
+          }
+          this.getPartnerContact()
+        },
+        error: (e) => {
+          this.swalError(e)
+        },
+        complete: () => {
+          if (result.value) {
+            this.swalDelete(null)
+          }
         }
-
-        this.getPartnerContact()
-      },
-      error: (e) => console.log(e),
-      complete: () => console.log("complete")
+      })
     })
   }
 
@@ -151,16 +180,30 @@ export class PartnerPage implements OnInit {
     pawoUserEntityid: number,
     pawoArwgCode: string
   ){
-    this._partnerAreaWorkgroup.delete(pawoPatrEntityid, pawoUserEntityid, pawoArwgCode).subscribe({
-      next: (v) => {
-        if (this.partnerAreaWorkgroupPagination.data.length === 1) {          
-          this.partnerAreaWorkgroupPagingParameter.pageNumber--
+    Swal.fire({
+      title: 'Are you sure want to delete?',
+      text: 'You will not be able to recover this data!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      this._partnerAreaWorkgroup.delete(pawoPatrEntityid, pawoUserEntityid, pawoArwgCode).subscribe({
+        next: (v) => {
+          if (this.partnerAreaWorkgroupPagination.data.length === 1) {          
+            this.partnerAreaWorkgroupPagingParameter.pageNumber--
+          }
+          this.getPartnerAreaWorkgroup()
+        },
+        error: (e) => console.log(e),
+        complete: () => {
+          if (result.value) {
+            this.swalDelete(null)
+          } 
         }
-        this.getPartnerAreaWorkgroup()
-      },
-      error: (e) => console.log(e),
-      complete: () => console.log("complete")
+      })
     })
+
   }
 
   handlePartner(action: Action, data: Partner) {
@@ -168,15 +211,15 @@ export class PartnerPage implements OnInit {
       case this.enumAction.CREATE:
         this._partnerService.createPartner(data).subscribe({
           next: (v) => this.partner = v,
-          error: (e) => console.log(e),
-          complete: () => console.log("complete")
+          error: (e) => this.swalDelete(e),
+          complete: () => this.swalSuccess('created')
         })
         break;
       case this.enumAction.UPDATE:
         this._partnerService.updatePartner(data).subscribe({
           next: (v) => this.partner = v,
-          error: (e) => console.log(e),
-          complete: () => console.log("complete")
+          error: (e) => this.swalDelete(e),
+          complete: () => this.swalSuccess('updated')
         })
         break;
       default:
@@ -189,15 +232,15 @@ export class PartnerPage implements OnInit {
       case this.enumAction.CREATE:        
         this._partnerContactService.create(data).subscribe({
           next: (v) => this.getPartnerContact(),
-          error: (e) => console.log(e),
-          complete: () => console.log("complete")          
+          error: (e) => this.swalError(e),
+          complete: () => this.swalSuccess('created')        
         })
         break;
       case this.enumAction.UPDATE:
         this._partnerContactService.update(data, this.partnerContactId).subscribe({
           next: (v) => this.getPartnerContact(),
-          error: (e) => console.log(e),
-          complete: () => console.log("complete")
+          error: (e) => this.swalError(e),
+          complete: () => this.swalSuccess('updated')
         })
         break;
       default:
@@ -220,15 +263,21 @@ export class PartnerPage implements OnInit {
     switch (action) {
       case this.enumAction.CREATE:        
         this._partnerAreaWorkgroup.create(data).subscribe({
-          next: (v) => this.getPartnerAreaWorkgroup(),
-          error: (e) => console.log(e),
+          next: (v) => {
+            this.getPartnerAreaWorkgroup()
+            this.swalSuccess('created')
+          },
+          error: (e) => this.swalError(e),
           complete: () => console.log("complete")          
         })
         break;
       case this.enumAction.UPDATE:
         this._partnerAreaWorkgroup.update(data, this.partnerAreaWorkgroupId).subscribe({
-          next: (v) => this.getPartnerAreaWorkgroup(),
-          error: (e) => console.log(e),
+          next: (v) => {
+            this.getPartnerAreaWorkgroup()
+            this.swalSuccess('updated')
+          },
+          error: (e) => this.swalError(e),
           complete: () => console.log("complete")
         })
         break;
@@ -293,29 +342,29 @@ export class PartnerPage implements OnInit {
     this.getPartnerAreaWorkgroup()
   }
 
-  // confirmBox(){
-  //   Swal.fire({
-  //     title: 'Are you sure want to remove?',
-  //     text: 'You will not be able to recover this file!',
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonText: 'Yes, delete it!',
-  //     cancelButtonText: 'No, keep it'
-  //   }).then((result) => {
-  //     if (result.value) {
-  //       Swal.fire(
-  //         'Deleted!',
-  //         'Your imaginary file has been deleted.',
-  //         'success'
-  //       )
-  //     } else if (result.dismiss === Swal.DismissReason.cancel) {
-  //       Swal.fire(
-  //         'Cancelled',
-  //         'Your imaginary file is safe :)',
-  //         'error'
-  //       )
-  //     }
-  //   })
-  // }
+  swalError(e: any){
+    Swal.fire(
+      'Error!',
+      `${e.error.Message} ?? Error Occured`,
+      'error'
+    )
+  }
+
+  swalDelete(e: any){
+    Swal.fire(
+      'Deleted!',
+      'Your data has been deleted.',
+      'success'
+    )
+  }
+
+  swalSuccess(action: string){
+    Swal.fire(
+      'Success!',
+      `Your data has been ${action}.`,
+      'success'
+    )
+  }
+
 
 }

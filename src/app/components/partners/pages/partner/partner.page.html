@@ -163,6 +163,7 @@
                     <th>Contact Name</th>
                     <th>Phone Number</th>
                     <th>Partner</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -171,6 +172,7 @@
                     <td class="align-middle">{{ contact.fullName }}</td>
                     <td class="align-middle">{{ contact.phoneNumber }}</td>
                     <td class="align-middle">{{ contact.pacoPatrnEntityName }}</td>
+                    <td class="align-middle">{{ contact.pacoStatus }}</td>
                     <td class="text-center">
                       <button type="button" class="btn" (click)="openModal(
                           enumPartnerEntity.PARTNER_CONTACT, 
@@ -202,8 +204,6 @@
   </section>
 
   <section class="content">
-    <!-- Default box -->
-    <!-- <button (click)="confirmBox()">Confirm Box</button> -->
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
