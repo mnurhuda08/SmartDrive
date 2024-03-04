@@ -1,1 +1,58 @@
-<p>payment-transaction works!</p>
+<div class="content-wrapper">
+
+    <!-- Payment Transaction content -->
+    <section class="content " class="card-footer clearfix d-flex justify-content-center mt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Payment Transaction</h3>
+                        </div>
+
+                        <div class="card-body  ">
+                            <div class="card-footer clearfix d-flex justify-content-center" *ngIf="data.length ==0">You
+                                Haven't made Any Transaction</div>
+                            <table class="table table-bordered text-center" *ngIf="data.length >0" matSort>
+                                <thead>
+                                    <tr>
+                                        <th>Transaction Number</th>
+                                        <th>Created On</th>
+                                        <th>Debet</th>
+                                        <th>Credit</th>
+                                        <th>Account Number From</th>
+                                        <th>Account Number To</th>
+                                        <th>Transaction Type</th>
+                                        <th>Invoice Number</th>
+                                        <th>Notes</th>
+                                        <th>Transaction Number Ref</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let tr of data |paginate:{
+                                        itemsPerPage:tableSize,
+                                        currentPage:page,
+                                        totalItems:count  
+                                        }">
+                                        <td>{{tr.patrTrxno}}</td>
+                                        <td>{{tr.patrCreatedOn | date: 'dd-mm-yyyy'}}</td>
+                                        <td>{{tr.patrDebet}}</td>
+                                        <td>{{tr.patrCredit}}</td>
+                                        <td>{{tr.patrUsacAccountNoFrom}}</td>
+                                        <td>{{tr.patrUsacAccountNoTo}}</td>
+                                        <td>{{tr.patrType}}</td>
+                                        <td>{{tr.patrInvoiceNo}}</td>
+                                        <td>{{tr.patrNotes}}</td>
+                                        <td>{{tr.patrTrxnoRev}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <pagination-controls class="card-footer clearfix d-flex justify-content-center"
+                            previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"
+                            *ngIf="data.length >0"></pagination-controls>
+
+                    </div>
+                </div>
+            </div>

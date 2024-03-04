@@ -3,9 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { CarBrandComponent } from 'src/app/components/master/car-brand/car-brand.component';
 import { CarModelComponent } from 'src/app/components/master/car-model/car-model.component';
-import { BlankComponent } from 'src/app/components/users/blank/blank.component'; 
+import { BlankComponent } from 'src/app/components/users/blank/blank.component';
 import { PaymentPageComponentComponent } from 'src/app/components/payment/PaymentPage/payment.page.component/payment.page.component.component';
 import { PaymentBatchComponent } from 'src/app/components/payment/Payment/payment.batch/payment.batch.component';
+import { PaymentTransactionComponent } from 'src/app/components/payment/payment-transaction/payment-transaction.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'payment/payment-batch',
         component: PaymentBatchComponent,
+      },
+      {
+        path: 'payment/payment-transaction',
+        component: PaymentTransactionComponent,
       },
     ],
   },

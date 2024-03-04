@@ -12,7 +12,7 @@ import { CarSeriesComponent } from './components/master/car-series/car-series.co
 import { LoginComponent } from './components/users/login/login.component';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { DashboardLayoutComponent } from './components/layout/dashboard-layout/dashboard-layout.component';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 import { BankModifierComponent } from './components/payment/bank/crud/bank-modifier/bank-modifier.component';
 import { FintechComponent } from './components/payment/fintech/fintech.component';
 import { UserAccountComponent } from './components/payment/user-account/user-account.component';
@@ -22,7 +22,9 @@ import { BlankComponent } from './components/users/blank/blank.component';
 import { FintechModifierComponent } from './components/payment/fintech/crud/fintech-modifier/fintech-modifier.component';
 import { PaymentPageComponentComponent } from './components/payment/PaymentPage/payment.page.component/payment.page.component.component';
 import { PaymentBatchComponent } from './components/payment/Payment/payment.batch/payment.batch.component';
- 
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +36,7 @@ import { PaymentBatchComponent } from './components/payment/Payment/payment.batc
     CarSeriesComponent,
     LoginComponent,
     LoginLayoutComponent,
-    DashboardLayoutComponent, 
+    DashboardLayoutComponent,
     BankModifierComponent,
     FintechComponent,
     UserAccountComponent,
@@ -42,11 +44,19 @@ import { PaymentBatchComponent } from './components/payment/Payment/payment.batc
     BlankComponent,
     FintechModifierComponent,
     PaymentPageComponentComponent,
-    PaymentBatchComponent
-    
+    PaymentBatchComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    NgxPaginationModule,
+    MatSortModule,
+    MatTableModule,
+  ],
+
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

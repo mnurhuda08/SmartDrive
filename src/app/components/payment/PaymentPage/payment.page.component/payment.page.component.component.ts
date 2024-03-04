@@ -78,9 +78,7 @@ export class PaymentPageComponentComponent implements OnInit {
   }
   //#endregion
 
-
-
-
+ 
   //#region Fintech Region
   initNewFintech() {
     this.fintechToEdit = new Fintech();
