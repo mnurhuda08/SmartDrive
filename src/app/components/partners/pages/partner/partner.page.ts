@@ -12,6 +12,7 @@ import { PartnerUnion } from 'src/app/interfaces/partners/partner-page-union';
 import { PartnerAreaWorkgroupService } from 'src/app/services/partners/partner-area-workgroup.service';
 import { PartnerContactService } from 'src/app/services/partners/partner-contact.service';
 import { PartnerService } from 'src/app/services/partners/partner.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-partner-page',
@@ -291,5 +292,30 @@ export class PartnerPage implements OnInit {
     this.getPartnerContact()
     this.getPartnerAreaWorkgroup()
   }
+
+  // confirmBox(){
+  //   Swal.fire({
+  //     title: 'Are you sure want to remove?',
+  //     text: 'You will not be able to recover this file!',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Yes, delete it!',
+  //     cancelButtonText: 'No, keep it'
+  //   }).then((result) => {
+  //     if (result.value) {
+  //       Swal.fire(
+  //         'Deleted!',
+  //         'Your imaginary file has been deleted.',
+  //         'success'
+  //       )
+  //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+  //       Swal.fire(
+  //         'Cancelled',
+  //         'Your imaginary file is safe :)',
+  //         'error'
+  //       )
+  //     }
+  //   })
+  // }
 
 }

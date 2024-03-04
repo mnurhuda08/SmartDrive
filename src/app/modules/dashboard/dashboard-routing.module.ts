@@ -50,7 +50,7 @@ const routes: Routes = [
       {
         path: 'partner/workorder',
         component: PartnerAreaWorkgroupPage
-      }
+      },
       {
         path: 'so',
         component: ServiceordersComponent,
