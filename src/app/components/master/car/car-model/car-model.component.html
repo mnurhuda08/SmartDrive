@@ -1,43 +1,51 @@
 <div class="card">
-  <div class="card-header d-flex justify-content-between">
-    <div class="col-10">
-      <h3>Car Model</h3>
-    </div>
-    <div class="col-2 d-flex justify-content-end">
-      <button
-        type="button"
-        class="btn btn-info float-end"
-        [routerLink]="['/master/car/carmodel/add']"
-      >
-        <i class="fa fa-plus-circle"></i> Tambah
-      </button>
+  <div class="card-header">
+    <div class="row d-flex justify-content-between">
+      <div>
+        <h3>{{ title }}</h3>
+      </div>
+      <div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#carModelAddModal"
+        >
+          <i class="fa fa-plus-circle"></i> Tambah
+        </button>
+      </div>
     </div>
   </div>
 
-  <div class="card-body maxHeight">
+  <div class="card-body maxHeight" style="overflow-y: auto">
     <table class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
           <th>Car Model</th>
-          <th>Aksi</th>
+          <th>Action</th>
         </tr>
       </thead>
-      <tbody *ngFor="let carModel of carModels">
-        <tr>
-          <td class="col-10">{{ carModel.carmName }}</td>
+      <tbody>
+        <tr *ngFor="let carModel of carModels">
+          <td>{{ carModel.carmName }}</td>
           <td>
             <button
               type="button"
               class="btn btn-info mr-2"
               (click)="updateCarModel(carModel.carmId)"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Edit"
             >
               <i class="far fa-edit"></i>
             </button>
             <button
               type="button"
               class="btn btn-danger"
-              style="margin-right: 5px"
               (click)="deleteCarModel(carModel)"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Delete"
             >
               <i class="fas fa-trash"></i>
             </button>
@@ -55,5 +63,82 @@
       <li class="page-item"><a class="page-link" href="#">3</a></li>
       <li class="page-item"><a class="page-link" href="#">»</a></li>
     </ul>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="carModelAddModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Car Model</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+          <div class="mb-3 form-group">
+            <label for="carBrandName" class="form-label">Car Brand</label>
+            <br />
+            <select
+              class="form-select form-control"
+              formControlName="carBrand_id"
+              aria-label="Car Brand"
+            >
+              <option value="" selected>~ Select Car Brand ~</option>
+              <option
+                *ngFor="let carBrand of carBrands"
+                [value]="carBrand.cabrId"
+              >
+                {{ carBrand.cabrName }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3 form-group">
+            <label for="carModelName" class="form-label">Car Model Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="carm_name"
+              id="carModelName"
+            />
+            <div
+              *ngIf="submitted && form.controls['carm_name'].errors"
+              class="error"
+            >
+              <span
+                *ngIf="form.controls['carm_name'].errors['required']"
+                class="text-danger"
+              >
+                Car Model Name is required
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button
+            type="button"
+            class="close btn btn-secondary"
+            data-dismiss="modal"
+            (click)="closeModal()"
+          >
+            Close
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

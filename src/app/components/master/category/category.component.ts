@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/interfaces/master/category';
 import { CategoryService } from 'src/app/services/master/category.service';
@@ -9,14 +10,26 @@ import { CategoryService } from 'src/app/services/master/category.service';
   styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit {
+  form: FormGroup;
+  submitted = false;
+  title = 'Category';
   categories: Category[] = [];
 
   constructor(
+    private formBuilder: FormBuilder,
     private categoryService: CategoryService,
     private router: Router
-  ) {}
+  ) {
+    this.form = this.formBuilder.group({
+      category_name: ['', Validators.required],
+    });
+  }
 
-  getCategories() {
+  ngOnInit(): void {
+    this.getCategories();
+  }
+
+  getCategories(): void {
     this.categoryService.getCategories().subscribe({
       next: (response) => {
         this.categories = response;
@@ -26,16 +39,44 @@ export class CategoryComponent implements OnInit {
       },
     });
   }
-  updateCategory(id: number) {
+
+  updateCategory(id: number): void {
     this.router.navigate(['master/category/edit', id]);
   }
 
-  deleteCategory(categories: Category) {
-    this.categories.filter((f) => f !== categories);
-    this.categoryService.deleteCategory(categories).subscribe();
+  deleteCategory(category: Category): void {
+    this.categories = this.categories.filter((f) => f !== category);
+    this.categoryService.deleteCategory(category).subscribe();
   }
 
-  ngOnInit(): void {
-    this.getCategories();
+  openModal(): void {
+    const modalID = document.getElementById('carBrandAddModal');
+    if (modalID) {
+      modalID.style.display = 'block';
+    }
+  }
+
+  closeModal(): void {
+    const modalID = document.getElementById('carBrandAddModal');
+    if (modalID) {
+      modalID.style.display = 'none';
+    }
+  }
+
+  get f(): any {
+    return this.form.controls;
+  }
+
+  onSubmit(): void {
+    this.submitted = true;
+    if (this.form.invalid) {
+      return;
+    }
+
+    const cateName: string = this.f.category_name?.value;
+
+    this.categoryService
+      .addCategory({ cateName } as Category)
+      .subscribe(() => this.closeModal());
   }
 }

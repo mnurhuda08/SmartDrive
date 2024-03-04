@@ -9,6 +9,9 @@ import { environment } from 'src/environments/environment.development';
 })
 export class ProvinceService {
   private apiUrl: string = environment.baseUrl + 'master/provinsi';
+  private apiUrlPaginate: string =
+    environment.baseUrl +
+    'master/provinsi//paginate?SearchBy=D&PageNumber=5&PageSize=10';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

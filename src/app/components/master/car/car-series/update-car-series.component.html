@@ -96,6 +96,25 @@
                     </span>
                   </div>
                 </div>
+                <div class="mb-3 form-group">
+                  <label for="" class="form-label">Seat</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="carSeries_seat"
+                  />
+                  <div
+                    *ngIf="submitted && form.controls['carSeries_seat'].errors"
+                    class="error"
+                  >
+                    <span
+                      *ngIf="form.controls['carSeries_seat'].errors['required']"
+                      class="text-danger"
+                    >
+                      Car Series Seat is required
+                    </span>
+                  </div>
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <button
                   type="submit"

@@ -33,7 +33,8 @@ export class UpdateCarSeriesComponent implements OnInit {
           this.form = new FormGroup({
             carSeries_id: new FormControl(this.carSeries.carsId),
             carSeries_name: new FormControl(this.carSeries.carsName),
-            carsIdCarmId: new FormControl({
+            carSeries_seat: new FormControl(this.carSeries.carsPassenger),
+            carsCarm_id: new FormControl({
               value: this.carSeries.carsCarmId,
               disabled: false,
             }),
@@ -65,9 +66,16 @@ export class UpdateCarSeriesComponent implements OnInit {
 
     const carsId: number = this.f.carSeries_id?.value;
     const carsName: string = this.f.carSeries_name?.value;
+    const carsPassenger: number = this.f.carSeries_seat?.value;
+    const carsCarmId: number = this.f.carsCarm_id?.value;
 
     this.carSeriesService
-      .updateCarSeries({ carsId, carsName } as CarSeries)
+      .updateCarSeries({
+        carsId,
+        carsName,
+        carsPassenger,
+        carsCarmId,
+      } as CarSeries)
       .subscribe(() => this.router.navigate(['master/car']));
   }
 

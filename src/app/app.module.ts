@@ -49,16 +49,19 @@ import { UpdateRegionPlateComponent } from './components/master/region/region-pl
 import { AreaworkgroupComponent } from './components/master/region/areaworkgroup/areaworkgroup.component';
 import { AddAreaworkgroupComponent } from './components/master/region/areaworkgroup/add-areaworkgroup.component';
 import { UpdateAreaworkgroupComponent } from './components/master/region/areaworkgroup/update-areaworkgroup.component';
+//so component
 import { ServicefeasibilityComponent } from './components/so/servicefeasibility/servicefeasibility.component';
-import { FormInputComponent } from './components/master/car/car-component/form-input/form-input.component';
 
 @NgModule({
   declarations: [
+    //layout
     AppComponent,
     NavbarComponent,
     ContentWrapperComponent,
     FooterComponent,
     SidebarComponent,
+    DashboardLayoutComponent,
+    //master
     CarComponent,
     CarBrandComponent,
     AddCarBrandComponent,
@@ -67,12 +70,8 @@ import { FormInputComponent } from './components/master/car/car-component/form-i
     AddCarModelComponent,
     UpdateCarModelComponent,
     CarSeriesComponent,
-    LoginComponent,
-    BlankComponent,
-    LoginLayoutComponent,
-    DashboardLayoutComponent,
-    UpdateCarSeriesComponent,
     AddCarSeriesComponent,
+    UpdateCarSeriesComponent,
     CategoryComponent,
     AddCategoryComponent,
     UpdateCategoryComponent,
@@ -82,6 +81,7 @@ import { FormInputComponent } from './components/master/car/car-component/form-i
     ZoneComponent,
     AddZoneComponent,
     UpdateZoneComponent,
+    RegionComponent,
     ProvinceComponent,
     AddProvinceComponent,
     UpdateProvinceComponent,
@@ -94,8 +94,10 @@ import { FormInputComponent } from './components/master/car/car-component/form-i
     AreaworkgroupComponent,
     AddAreaworkgroupComponent,
     UpdateAreaworkgroupComponent,
-    RegionComponent,
-    FormInputComponent,
+
+    LoginComponent,
+    BlankComponent,
+    LoginLayoutComponent,
   ],
   imports: [
     BrowserModule,
