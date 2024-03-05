@@ -1,0 +1,65 @@
+<div
+  class="modal fade"
+  id="{{ display }}"
+  tabindex="-1"
+  role="dialog"
+  [attr.aria-labelledby]="display"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="{{ display }}">User</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Role</label>
+            <div class="input-group mb-3">
+              <select
+                name="Address_type"
+                class="form-control"
+                name="usroRoleName"
+                [(ngModel)]="formUserRole.usroRoleName"
+                required
+              >
+                <option></option>
+                <ng-container *ngFor="let item of roles">
+                  <option [value]="item.roleName">
+                    {{ item.roleName }} || {{ item.roleDescription }}
+                  </option>
+                </ng-container>
+              </select>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="onSubmit()"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

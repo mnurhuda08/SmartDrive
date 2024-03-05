@@ -1,0 +1,95 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Data Role</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Data Role</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Default box -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="d-flex justify-content-between">
+                <button
+                  class="btn btn-warning"
+                  type="button"
+                  data-toggle="modal"
+                  [attr.data-target]="'#' + displayAddModal"
+                >
+                  <i class="fa fa-plus"></i>
+                  Add
+                </button>
+              </div>
+            </div>
+
+            <div class="card-body table-responsive p-0">
+              <table
+                class="table table-hover text-nowrap"
+                aria-describedby="table-addr"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Role</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let item of roles; index as i">
+                  <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.roleName }}</td>
+                    <td>{{ item.roleDescription }}</td>
+                    <td>
+                      <button
+                        class="btn btn-primary mr-2"
+                        type="button"
+                        data-toggle="modal"
+                        [attr.data-target]="'#' + displayEditModal"
+                        (click)="onPopModalEdit(item)"
+                      >
+                        <i class="fa fa-edit"></i>
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card -->
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- modal -->
+<app-add-role-popup
+  [display]="displayAddModal"
+  (confirm)="onConfirmAdd($event)"
+></app-add-role-popup>
+<app-edit-role-popup
+  [role]="selectedRole"
+  [display]="displayEditModal"
+  (confirm)="onConfirmEdit($event)"
+></app-edit-role-popup>

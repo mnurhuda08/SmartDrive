@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardLayoutComponent } from './components/layout/dashboard-layout/dashboard-layout.component';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
+import { UnauthorizedComponent } from './components/error/unauthorized/unauthorized.component';
+import { RegisterComponent } from './components/users/register/register.component';
+import { ForgotPasswordComponent } from './components/users/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -38,6 +41,14 @@ const routes: Routes = [
           import('./modules/login/login.module').then((m) => m.LoginModule),
       },
     ],
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
   },
 ];
 
