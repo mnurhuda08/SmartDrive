@@ -1,5 +1,5 @@
 export interface IMenus {
-  path: string;
+  path?: string;
   title: string;
   roles: string[];
   exact: boolean;

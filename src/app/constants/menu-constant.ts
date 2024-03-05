@@ -2,7 +2,6 @@ import { IMenus } from '../interfaces/common/i-menus';
 
 export const MenuConstant: IMenus[] = [
   {
-    path: '/master',
     title: 'Master',
     roles: ['EM'],
     exact: false,
@@ -11,7 +10,7 @@ export const MenuConstant: IMenus[] = [
       {
         path: '/master/car',
         title: 'Car',
-        exact: true,
+        exact: false,
         icon: 'fas fa-car',
       },
       {
@@ -60,20 +59,6 @@ export const MenuConstant: IMenus[] = [
     roles: ['AD'],
     exact: false,
     icon: 'fas fa-user-secret',
-  },
-  {
-    path: '/master',
-    title: 'Master',
-    roles: ['EM'],
-    exact: false,
-    icon: 'fas fa-home',
-  },
-  {
-    path: '/master/carbrand',
-    title: 'Car Brand',
-    roles: ['EM'],
-    exact: false,
-    icon: 'fas fa-car',
   },
   {
     path: '/customer',

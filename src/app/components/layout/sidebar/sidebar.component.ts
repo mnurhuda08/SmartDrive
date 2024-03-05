@@ -5,7 +5,7 @@ import { IClaims } from 'src/app/interfaces/users/i-login-claims';
 import { IUser } from 'src/app/interfaces/users/i-user';
 import { LoginService } from 'src/app/services/users/login.service';
 import { UserService } from 'src/app/services/users/user.service';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-  baseUrlResources = environment.resources;
+  baseUrlResources = environment;
   dateNow = Date.now();
   constructor(
     private loginService: LoginService,

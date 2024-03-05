@@ -51,6 +51,7 @@
       >
         <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
+
         <ng-container *ngFor="let item of filteredMenus">
           <li class="nav-item">
             <a
@@ -61,22 +62,24 @@
             >
               <i class="nav-icon {{ item.icon }}"></i>
               <p>{{ item.title }}</p>
+              <i
+                *ngIf="item.nested && item.nested.length > 0"
+                class="fas fa-angle-left right"
+              ></i>
             </a>
-            <ng-container *ngIf="item.nested">
-              <ul class="nav nav-treeview" *ngFor="let nested of item.nested">
-                <li class="nav-item">
-                  <a
-                    [routerLink]="nested.path"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: nested.exact }"
-                    class="nav-link"
-                  >
-                    <i class="nav-icon {{ nested.icon }}"></i>
-                    <p>{{ nested.title }}</p>
-                  </a>
-                </li>
-              </ul>
-            </ng-container>
+            <ul class="nav nav-treeview" style="display: block">
+              <li class="nav-item" *ngFor="let nested of item.nested">
+                <a
+                  [routerLink]="nested.path"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: nested.exact }"
+                  class="nav-link"
+                >
+                  <i class="far {{ nested.icon }} nav-icon"></i>
+                  <p>{{ nested.title }}</p>
+                </a>
+              </li>
+            </ul>
           </li>
         </ng-container>
       </ul>
