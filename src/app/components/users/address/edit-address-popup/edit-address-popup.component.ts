@@ -32,7 +32,7 @@ export class EditAddressPopupComponent {
 
   fetchCities() {
     this.userAddressService
-      .getCities(`${environment.baseUrl}/v1/City`)
+      .getCities(`${environment.baseUrl}/master/City`)
       .subscribe({
         next: (data) => {
           this.cities = data;

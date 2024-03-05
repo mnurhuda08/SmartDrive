@@ -1,6 +1,6 @@
 export interface IUserRole {
-  usroEntityid: number;
+  usroEntityid?: number;
   usroRoleName: string;
   usroStatus: string;
-  usroModifiedDate: string;
+  usroModifiedDate?: string;
 }

@@ -30,6 +30,7 @@ export class EditAccountNumberPopupComponent {
   onSelectType(event: Event) {
     const target = event.target as HTMLSelectElement;
     this.accountType = target.value as 'BANK' | 'FINTECH';
+    this.userAccount.usacType = this.accountType;
   }
 
   @Input() userAccount: IUserAccount = {
