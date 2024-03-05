@@ -15,7 +15,7 @@ export class PaymentTransactionComponent implements OnInit {
   count: number = 0;
   tableSize: number =3;
   tableSizes: any = [5, 10, 15, 25]
-  userId: number = 2
+  userId: number = 1241
   @ViewChild(MatSort) sort!: MatSort
   constructor(private paymentTrxService: PaymentTransactionService) {
     this.data = []

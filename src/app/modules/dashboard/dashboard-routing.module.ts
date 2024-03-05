@@ -1,17 +1,27 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, mapToCanActivate } from '@angular/router';
+import { MyProfileComponent } from 'src/app/components/users/my-profile/my-profile.component';
+import { AuthGuard } from 'src/app/guard/admin-guard.guard';
 import { DashboardComponent } from './dashboard.component';
-import { CarBrandComponent } from 'src/app/components/master/car-brand/car-brand.component';
-import { CarModelComponent } from 'src/app/components/master/car-model/car-model.component';
-import { BlankComponent } from 'src/app/components/users/blank/blank.component';
 import { PaymentPageComponentComponent } from 'src/app/components/payment/PaymentPage/payment.page.component/payment.page.component.component';
 import { PaymentBatchComponent } from 'src/app/components/payment/Payment/payment.batch/payment.batch.component';
 import { PaymentTransactionComponent } from 'src/app/components/payment/payment-transaction/payment-transaction.component';
+import { UnauthorizedComponent } from 'src/app/components/error/unauthorized/unauthorized.component';
+import { BlankComponent } from 'src/app/components/users/blank/blank.component';
+import { CarBrandComponent } from 'src/app/components/master/car-brand/car-brand.component';
+import { CarModelComponent } from 'src/app/components/master/car-model/car-model.component';
+import { ServiceordersComponent } from 'src/app/components/so/serviceorders/serviceorders.component';
+import { ServicefeasibilityComponent } from 'src/app/components/so/servicefeasibility/servicefeasibility.component';
+import { HttpClient } from '@angular/common/http';
+import { UserListComponent } from 'src/app/components/users/user-list/user-list.component';
+import { DataRoleComponent } from 'src/app/components/users/role/data-role/data-role.component';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
+    canActivate: mapToCanActivate([AuthGuard]),
+    data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
     children: [
       {
         path: '',
@@ -19,8 +29,11 @@ const routes: Routes = [
       },
       {
         path: 'my-profile',
-        component: BlankComponent,
+        component: MyProfileComponent,
+        canActivate: mapToCanActivate([AuthGuard]),
+        data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
       },
+      { path: 'unauthorized', component: UnauthorizedComponent },
       {
         path: 'master/carbrand',
         component: CarBrandComponent,
@@ -44,6 +57,27 @@ const routes: Routes = [
       {
         path: 'payment/payment-transaction',
         component: PaymentTransactionComponent,
+      },
+      {
+        path: 'so',
+        component: ServiceordersComponent,
+      },
+      {
+        path: 'so/:id',
+        component: ServicefeasibilityComponent,
+        providers: [HttpClient],
+      },
+      {
+        path: 'users',
+        component: UserListComponent,
+        canActivate: mapToCanActivate([AuthGuard]),
+        data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
+      },
+      {
+        path: 'roles',
+        component: DataRoleComponent,
+        canActivate: mapToCanActivate([AuthGuard]),
+        data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
       },
     ],
   },
