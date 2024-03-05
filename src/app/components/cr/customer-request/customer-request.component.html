@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="card-body">
-                            <table class="table table-bordered">
+                            <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>Customer Name</th>
@@ -59,40 +59,33 @@
                                         <th>Customer Type</th>
                                         <th>Status</th>
                                         <th>
-                                            <button type="button" class="btn btn-info mr-2" data-toggle="modal"
+                                            <button type="button" class="btn btn-primary mr-2" data-toggle="modal"
                                                 data-target="#createNewPolisModal">
                                                 <i class="fas fa-plus"></i> add
                                             </button>
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody
+                                    *ngFor="let item of customerRequest | paginate: { itemsPerPage: 10, currentPage: p }">
                                     <tr>
-                                        <td>Galih</td>
-                                        <td>12/11/2023</td>
-                                        <td>081645678</td>
-                                        <td>Create Polis</td>
-                                        <td>TLO</td>
-                                        <td>Potential</td>
-                                        <td>Waiting</td>
+                                        <td>{{item.creqCustEntity.userFullName}}</td>
+                                        <td>{{(item.creqCreateDate?getDate(item.creqCreateDate):"")}}</td>
+                                        <td>{{item.creqCustEntity.userPhones[0].usphPhoneNumber}}</td>
+                                        <td>{{item.creqType}}</td>
+                                        <td>{{item.customerInscAsset.ciasIntyName}}</td>
+                                        <td>{{(item.creqCustEntity.userRoles[0].usroRoleName ==
+                                            'CU'?'Customer':'Potential')}}</td>
+                                        <td>{{item.creqStatus}}</td>
                                         <td>
-                                            <button type="button" class="btn btn-info mr-2" data-toggle="modal"
-                                                data-target="#createNewClaimModal">
+                                            <button type="button" class="btn btn-outline-info mr-2"
+                                                (click)="createClosePolis(item.creqEntityid)"
+                                                *ngIf="item.creqType == 'CLAIM'">
                                                 Review
                                             </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Agus</td>
-                                        <td>12/11/2023</td>
-                                        <td>081645678</td>
-                                        <td>Close Polis</td>
-                                        <td>TLO</td>
-                                        <td>Potential</td>
-                                        <td>Waiting</td>
-                                        <td>
-                                            <button type="button" class="btn btn-info mr-2" data-toggle="modal"
-                                                data-target="#createClosePolisModal">
+                                            <button type="button" class="btn btn-outline-info mr-2"
+                                                (click)="createClaimPolis(item.creqEntityid)"
+                                                *ngIf="item.creqType == 'POLIS' && item.creqStatus == 'OPEN'">
                                                 Review
                                             </button>
                                         </td>
@@ -101,14 +94,8 @@
                             </table>
                         </div>
 
-                        <div class="card-footer clearfix">
-                            <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">»</a></li>
-                            </ul>
+                        <div class="card-footer d-flex justify-content-center">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
                         </div>
                     </div>
                 </div>
@@ -118,7 +105,5 @@
     </section>
     <!-- /.content -->
     <app-create-new-polis></app-create-new-polis>
-    <app-create-new-claim></app-create-new-claim>
-    <app-create-close-polis></app-create-close-polis>
 </div>
 <!-- /.content-wrapper -->

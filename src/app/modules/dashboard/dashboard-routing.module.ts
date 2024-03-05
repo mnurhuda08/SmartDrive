@@ -5,6 +5,8 @@ import { BlankComponent } from 'src/app/components/users/blank/blank.component';
 import { CarBrandComponent } from 'src/app/components/master/car-brand/car-brand.component';
 import { CarModelComponent } from 'src/app/components/master/car-model/car-model.component';
 import { CustomerRequestComponent } from 'src/app/components/cr/customer-request/customer-request.component';
+import { CreateNewClaimComponent } from 'src/app/components/cr/create-new-claim/create-new-claim.component';
+import { CreateClosePolisComponent } from 'src/app/components/cr/create-close-polis/create-close-polis.component';
 
 const routes: Routes = [
   {
@@ -34,6 +36,14 @@ const routes: Routes = [
       {
         path: 'customer',
         component: CustomerRequestComponent,
+      },
+      {
+        path: 'customer/request/claim/:id',
+        component: CreateNewClaimComponent,
+      },
+      {
+        path: 'customer/request/close/:id',
+        component: CreateClosePolisComponent,
       },
     ],
   },

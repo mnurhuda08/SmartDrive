@@ -16,11 +16,10 @@ import { DashboardLayoutComponent } from './components/layout/dashboard-layout/d
 import { HttpClientModule } from '@angular/common/http';
 import { CustomerRequestComponent } from './components/cr/customer-request/customer-request.component';
 import { CreateNewPolisComponent } from './components/cr/create-new-polis/create-new-polis.component';
-import { CustomerInfoComponent } from './components/cr/customer-info/customer-info.component';
-import { VehicleInfoComponent } from './components/cr/vehicle-info/vehicle-info.component';
 import { CreateNewClaimComponent } from './components/cr/create-new-claim/create-new-claim.component';
-import { PolisInformationComponent } from './components/cr/polis-information/polis-information.component';
 import { CreateClosePolisComponent } from './components/cr/create-close-polis/create-close-polis.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -37,14 +36,18 @@ import { CreateClosePolisComponent } from './components/cr/create-close-polis/cr
     DashboardLayoutComponent,
     CustomerRequestComponent,
     CreateNewPolisComponent,
-    CustomerInfoComponent,
-    VehicleInfoComponent,
     CreateNewClaimComponent,
-    PolisInformationComponent,
     CreateClosePolisComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxPaginationModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
