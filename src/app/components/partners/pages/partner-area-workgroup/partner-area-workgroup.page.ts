@@ -8,9 +8,14 @@ import { ClaimAssetsSparepart } from 'src/app/interfaces/partners/claim-assets-s
 import { PaginationList } from 'src/app/interfaces/partners/pagination-list';
 import { PartnerUnion } from 'src/app/interfaces/partners/partner-page-union';
 import { PartnerWorkOrder } from 'src/app/interfaces/partners/partner-work-order';
+import { IClaims } from 'src/app/interfaces/users/i-login-claims';
 import { ClaimAssetEvidenceService } from 'src/app/services/partners/claim-asset-evidence.service';
 import { ClaimAssetSparepartService } from 'src/app/services/partners/claim-asset-sparepart.service';
+import { PartnerAreaWorkgroupService } from 'src/app/services/partners/partner-area-workgroup.service';
+import { PartnerContactService } from 'src/app/services/partners/partner-contact.service';
 import { PartnerWorkOrderService } from 'src/app/services/partners/partner-work-order.service';
+import { LoginService } from 'src/app/services/users/login.service';
+import { environment } from 'src/environments/environment.development';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -32,19 +37,24 @@ export class PartnerAreaWorkgroupPage implements OnInit {
   }
 
   actionStatus!: ActionStatus
+  currentUser!: IClaims;
+
   public enumAction = Action
   public enumEntity = PartnerEntity
 
   constructor(
     private _partnerWorkOrderService: PartnerWorkOrderService,
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
+    private _partnerContactService: PartnerContactService,
+    private _partnerAreaWorkgroupService: PartnerAreaWorkgroupService, 
     private _claimAssetSparepart: ClaimAssetSparepartService,
-    private _claimAssetEvidence: ClaimAssetEvidenceService
+    private _claimAssetEvidence: ClaimAssetEvidenceService,
+    private _loginService: LoginService
   ) {
     this.workOrdersPagingParameter = new PagingParameter('', 1, 1)
   }
 
-  getWorkOrder() {
+  getWorkOrder() {    
     this._partnerWorkOrderService.getWorkOrderPaging(this.seroPartId, this.seotArwgCode, this.workOrdersPagingParameter).subscribe({
       next: (v) => this.workOrdersPagination = v,
       error: (e) => Swal.fire('Error', 'Cannot Fetch Data', 'error')
@@ -123,18 +133,44 @@ export class PartnerAreaWorkgroupPage implements OnInit {
     }
   }
 
+  getMe() {
+    this._loginService.getMe(`${environment.baseUrl}/Auth/Me`).subscribe({
+      next: (data: IClaims) => {
+        this.currentUser = data;
+        this.getPartnerByUserId()
+      },
+    });
+  }
+
+  getPartnerByUserId(){
+    this._partnerContactService.getByPartnerId(Number(this.currentUser.sub)).subscribe({
+      next: (data) => {
+        console.log(data);
+        if (data.length > 0) {
+          this.seroPartId = data[0].pacoPatrnEntityid
+          this.getAreaWorkgroupByUserAndPartner()
+        }
+      }
+    })
+  }
+
+  getAreaWorkgroupByUserAndPartner() {
+    this._partnerAreaWorkgroupService.getByPartnerAndUserEntityId(this.seroPartId, Number(this.currentUser.sub)).subscribe({
+      next: (data) => {
+        if (data.length > 0) {
+          this.seotArwgCode = data[0].pawoArwgCode
+          this.getWorkOrder()
+        }
+      }
+    })
+  }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.seotArwgCode = params['seotArwgCode']
-      this.seroPartId = params['seroPartId']
-    })
+    this.getMe()
     this.actionStatus = {
       action: Action.CREATE,
       entity: PartnerEntity.CLAIM_ASSET_SPAREPARTS
     }
-
-    this.getWorkOrder()
   }
 
   onWorkOrderPaging(parameter: PagingParameter) {

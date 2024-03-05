@@ -30,6 +30,10 @@ export class PartnerContactService {
     return this.http.post<PartnerContact>(`${this.urlApi}`, partnerContact, this.httpOptions)
   }
 
+  getByPartnerId(partnerId: number): Observable<PartnerContact[]> {
+    return this.http.get<PartnerContact[]>(`${this.urlApi}/partner/${partnerId}`)
+  }
+
   update(
     partnerContact: PartnerContact,
     partnerContactId?: {

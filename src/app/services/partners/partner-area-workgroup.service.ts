@@ -28,6 +28,10 @@ export class PartnerAreaWorkgroupService {
     return this.http.get<PaginationList<PartnerAreaWorkgroupResponse>>(`${this.urlApi}/paging${parameter.toUrl()}`)
   }
 
+  getByPartnerAndUserEntityId(pawoPatrEntityid: number, pawoUserEntityid: number): Observable<PartnerAreaWorkgroup[]> {
+    return this.http.get<PartnerAreaWorkgroup[]>(`${this.urlApi}/${pawoPatrEntityid}/${pawoUserEntityid}`)
+  }
+
   create(partnerAreaWorkgroup: PartnerAreaWorkgroup): Observable<PartnerAreaWorkgroup> {
     return this.http.post<PartnerAreaWorkgroup>(`${this.urlApi}`, partnerAreaWorkgroup, this.httpOptions)
   }
