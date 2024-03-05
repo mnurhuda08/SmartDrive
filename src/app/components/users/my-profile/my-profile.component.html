@@ -1,0 +1,38 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Setting</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Setting</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Default box -->
+      <app-data-profile [currentUser]="currentUser"></app-data-profile>
+      <app-data-password [currentUser]="currentUser"></app-data-password>
+      <app-data-email [currentUser]="currentUser"></app-data-email>
+      <app-data-phone [currentUser]="currentUser"></app-data-phone>
+      <app-data-address [currentUser]="currentUser"></app-data-address>
+      <app-data-account-number
+        [currentUser]="currentUser"
+      ></app-data-account-number>
+      <!-- /.card -->
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-//layout component
+import { RouterModule, Routes, mapToCanActivate } from '@angular/router';
+import { MyProfileComponent } from 'src/app/components/users/my-profile/my-profile.component';
+import { AuthGuard } from 'src/app/guard/admin-guard.guard';
 import { DashboardComponent } from './dashboard.component';
-import { BlankComponent } from 'src/app/components/users/blank/blank.component';
+import { UnauthorizedComponent } from 'src/app/components/error/unauthorized/unauthorized.component';
 //master component
 import { CarComponent } from 'src/app/components/master/car/car.component';
 import { AddCarBrandComponent } from 'src/app/components/master/car/car-brand/add-car-brand.component';
@@ -41,6 +42,8 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
+    canActivate: mapToCanActivate([AuthGuard]),
+    data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
     children: [
       {
         path: '',
@@ -48,8 +51,11 @@ const routes: Routes = [
       },
       {
         path: 'my-profile',
-        component: BlankComponent,
+        component: MyProfileComponent,
+        canActivate: mapToCanActivate([AuthGuard]),
+        data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
       },
+      { path: 'unauthorized', component: UnauthorizedComponent },
       {
         path: 'master/car',
         component: CarComponent,

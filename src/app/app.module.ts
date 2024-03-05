@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-//Layout Component
-import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { ContentWrapperComponent } from './components/layout/content-wrapper/content-wrapper.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
+import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { SidebarComponent } from './components/layout/sidebar/sidebar.component';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { DashboardLayoutComponent } from './components/layout/dashboard-layout/dashboard-layout.component';
@@ -51,6 +53,10 @@ import { AddAreaworkgroupComponent } from './components/master/region/areaworkgr
 import { UpdateAreaworkgroupComponent } from './components/master/region/areaworkgroup/update-areaworkgroup.component';
 //so component
 import { ServicefeasibilityComponent } from './components/so/servicefeasibility/servicefeasibility.component';
+
+import { AuthInterceptorInterceptor } from './services/interceptors/auth-interceptor.interceptor';
+import { UnauthorizedComponent } from './components/error/unauthorized/unauthorized.component';
+import { RegisterComponent } from './components/users/register/register.component';
 
 @NgModule({
   declarations: [
@@ -98,15 +104,29 @@ import { ServicefeasibilityComponent } from './components/so/servicefeasibility/
     LoginComponent,
     BlankComponent,
     LoginLayoutComponent,
+    UnauthorizedComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorInterceptor,
+      multi: true,
+    },
+    // {
+    //   provide: ErrorHandler,
+    //   useClass: CustomErrorHandler,
+    // },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
