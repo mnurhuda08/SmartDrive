@@ -93,18 +93,28 @@ export class PartnerAreaWorkgroupPage implements OnInit {
         break;
       case PartnerEntity.CLAIM_ASSET_EVIDENCE:
         Swal.fire({
-          title: 'Are you sure want to submit?',
+          title: 'Are you sure want to claim evidence?',
           text: "You won't be able to revert this!",
           showCancelButton: true,
           confirmButtonText: `Yes`,
           denyButtonText: `No`,
         }).then((result) => {
           if (result.isConfirmed) {
-            this._claimAssetEvidence.create(data as FormData).subscribe({
-              next: () => this.getWorkOrder(),
-              error: (e) => Swal.fire('Error', e.error.message, 'error'),
-              complete: () => Swal.fire('Success', 'Claim Asset Evidence has been submitted', 'success') 
-            }) 
+            let isValid: boolean = true
+            data.forEach((value, key) => {
+              if (key === 'photo' && typeof value === 'string') {
+                Swal.fire('Error', 'Please upload photo evidence', 'error')    
+                isValid = false         
+                return
+              }
+            })
+            if(isValid){
+              this._claimAssetEvidence.create(data as FormData).subscribe({
+                next: () => this.getWorkOrder(),
+                error: (e) => Swal.fire('Error', e.error.message, 'error'),
+                complete: () => Swal.fire('Success', 'Claim Asset Evidence has been submitted', 'success') 
+              }) 
+            }
           }
         })
         break;

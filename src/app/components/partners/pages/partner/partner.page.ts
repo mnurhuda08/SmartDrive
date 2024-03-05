@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { PagingParameter } from 'src/app/constants/PagingParameter';
 import { Action } from 'src/app/constants/action';
 import { PartnerEntity } from 'src/app/constants/partner-entity';
@@ -20,7 +20,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./partner.page.scss']
 })
 
-export class PartnerPage implements OnInit {
+export class PartnerPage implements OnInit, OnChanges {
   partnerContact ?: PartnerContact | null
   paginationPartner: PaginationList<Partner> = { currentPages: 1, data: [], totalPages: 1 }
   partnerPagingParameter !: PagingParameter
@@ -195,7 +195,7 @@ export class PartnerPage implements OnInit {
           }
           this.getPartnerAreaWorkgroup()
         },
-        error: (e) => console.log(e),
+        error: (e) => Swal.fire('Error!', `${e.error.Message} ?? Error Occured`, 'error'),
         complete: () => {
           if (result.value) {
             this.swalDelete(null)
@@ -268,17 +268,16 @@ export class PartnerPage implements OnInit {
             this.swalSuccess('created')
           },
           error: (e) => this.swalError(e),
-          complete: () => console.log("complete")          
+          complete: () => this.swalSuccess('created')          
         })
         break;
       case this.enumAction.UPDATE:
         this._partnerAreaWorkgroup.update(data, this.partnerAreaWorkgroupId).subscribe({
           next: (v) => {
             this.getPartnerAreaWorkgroup()
-            this.swalSuccess('updated')
           },
           error: (e) => this.swalError(e),
-          complete: () => console.log("complete")
+          complete: () => this.swalSuccess('created')
         })
         break;
       default:
@@ -292,33 +291,38 @@ export class PartnerPage implements OnInit {
         this.paginationPartner = v;
         this.partner = this.paginationPartner.data[0] ?? null;
       },
-      error: (e) => console.log(e),
-      complete: () => console.log("completed"),
+      error: (e) => Swal.fire('Error!', `${e.error.Message} ?? Error Occured`, 'error')
     })
   }
 
   getPartnerContact(): void{
     this._partnerContactService.getPartnerContactPaging(this.partnerContactPagingParameter).subscribe({
       next: (v) => {
-        this.partnerContactPagination = v;
+        this.partnerContactPagination = v
       },
-      error: (e) => console.log(e),
-      complete: () => console.log("completed"),
+      error: (e) => Swal.fire('Error!', `${e.error.Message} ?? Error Occured`, 'error'),
     })
   }
 
   getPartnerAreaWorkgroup(): void{
     this._partnerAreaWorkgroup.getPartnerAreaWorkgroupPaging(this.partnerAreaWorkgroupPagingParameter).subscribe({
       next: (v) => {
-        this.partnerAreaWorkgroupPagination = v;
+        this.partnerAreaWorkgroupPagination = v
       },
-      error: (e) => console.log(e),
-      complete: () => console.log("completed"),
+      error: (e) => Swal.fire('Error!', `${e.error.Message} ?? Error Occured`, 'error'),
     })
   }
 
   onSearchPartner() {
     this.getPartner()
+  }
+
+  onSearchPartnerContact() {
+    this.getPartnerContact()
+  }
+
+  onSearchPartnerAreaWorkgroup(){
+    this.getPartnerAreaWorkgroup()
   }
 
   onPartnerPaging(pagingParameter: PagingParameter) {
@@ -336,10 +340,17 @@ export class PartnerPage implements OnInit {
     this.getPartnerAreaWorkgroup()
   }
 
-  ngOnInit(): void {
-    this.getPartner()
-    this.getPartnerContact()
+  onResetPartnerContact(event: any){    
+    this.partnerContactPagingParameter.search = ''
+    this.getPartnerContact()    
+  }
+  onResetPartnerAreaWorkgroup(event: any){
+    this.partnerAreaWorkgroupPagingParameter.search = ''
     this.getPartnerAreaWorkgroup()
+  }
+  onResetPartner(event: any){
+    this.partnerPagingParameter.search = ''
+    this.getPartner()
   }
 
   swalError(e: any){
@@ -365,6 +376,17 @@ export class PartnerPage implements OnInit {
       'success'
     )
   }
+
+
+  ngOnChanges(changes: SimpleChanges){
+  }
+
+  ngOnInit(): void {
+    this.getPartner()
+    this.getPartnerContact()
+    this.getPartnerAreaWorkgroup()
+  }
+
 
 
 }

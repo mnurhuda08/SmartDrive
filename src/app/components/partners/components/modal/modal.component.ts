@@ -40,9 +40,7 @@ export class ModalComponent implements OnInit {
     // Check if the click target is the modal backdrop
     if ((event.target as HTMLElement).classList.contains('modal')) {
       // Prevent the click event from propagating to the modal
-      event.stopPropagation();
-      console.log(event);
-      
+      event.stopPropagation();      
     }
   }
 

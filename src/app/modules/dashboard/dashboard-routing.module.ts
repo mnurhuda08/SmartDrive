@@ -17,8 +17,8 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    canActivate: mapToCanActivate([AuthGuard]),
-    data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
+    // canActivate: mapToCanActivate([AuthGuard]),
+    // data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
     children: [
       {
         path: '',

@@ -10,6 +10,7 @@ import { PartnerContact } from 'src/app/interfaces/partners/partner-contact';
 import { PartnerAreaWorkgroupService } from 'src/app/services/partners/partner-area-workgroup.service';
 import { PartnerContactService } from 'src/app/services/partners/partner-contact.service';
 import { PartnerService } from 'src/app/services/partners/partner.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'partner-area-workgroup-forms',
@@ -82,12 +83,12 @@ export class PartnerAreaWorkgroupFormsComponent {
 
     this._partnerAreaWorkgroup.getAreaWorkgroup().subscribe({
       next: (v) => this.areaWorkgroups = v,
-      error: (e) => console.log(e),
+      error: (e) => Swal.fire('Error', `Error: ${e.message}`, 'error'),
     })
 
     this._partnerContact.getPartnerContact().subscribe({
       next: (v) => this.partnerContacts = v,
-      error: (e) => console.log(e),
+      error: (e) => Swal.fire('Error', `Error: ${e.message} ?? Error Occured`, 'error'),
     })
 
   }

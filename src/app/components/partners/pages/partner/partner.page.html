@@ -27,10 +27,10 @@
             <div class="card-header d-flex align-items-center justify-content-between overflow-auto">
               <h2 class="card-title font-weight-bold">Data Partner</h2>
               <div>
-                <!-- <form action="simple-results.html" class="d-inline-block"> -->
                 <div class="input-group">
-                  <input type="search" class="form-control form-control" placeholder="name, npwp"
-                    [(ngModel)]="partnerPagingParameter.search">
+                  <input type="search" class="form-control" placeholder="name, npwp"
+                    [(ngModel)]="partnerPagingParameter.search" (keyup.enter)="onSearchPartner()"
+                    (click)="onResetPartner($event)">
                   <div class="input-group-append">
                     <button type="submit" class="btn btn btn-default" (click)="onSearchPartner()">
                       <i class="fa fa-search"></i>
@@ -47,87 +47,100 @@
             </div>
 
             <div class="card-body text-center">
-              <div class="row mb-2">
-                <div class="row col-12 col-md-12 col-sm-12">
-                  <div class="col-3 col-md-3 col-sm-3">
-                    Name
-                  </div>
-                  <div class="col-7 col-md-7 col-sm-7">
-                    {{ partner?.partName }}
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-2">
-                <div class="row col-12 col-md-12 col-sm-12">
-                  <div class="col-3 col-md-3 col-sm-3">
-                    Alamat
-                  </div>
-                  <div class="col-7 col-md-7 col-sm-7">
-                    {{ partner?.partAddress }}
+              <ng-container *ngIf="partner">
+                <div class="row mb-2">
+                  <div class="row col-12 col-md-12 col-sm-12">
+                    <div class="col-3 col-md-3 col-sm-3 text-right">
+                      Name
+                    </div>
+                    <div class="col-7 col-md-7 col-sm-7">
+                      {{ partner.partName }}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="row mb-2">
-                <div class="row col-12 col-md-12 col-sm-12">
-                  <div class="col-3 col-md-3 col-sm-3">
-                    NPWP
-                  </div>
-                  <div class="col-7 col-md-7 col-sm-7">
-                    {{ partner?.partNpwp }}
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-2">
-                <div class="row col-12 col-md-12 col-sm-12">
-                  <div class="col-3 col-md-3 col-sm-3">
-                    Join Date
-                  </div>
-                  <div class="col-7 col-md-7 col-sm-7">
-                    {{ partner?.partJoinDate }}
+                <div class="row mb-2">
+                  <div class="row col-12 col-md-12 col-sm-12">
+                    <div class="col-3 col-md-3 col-sm-3 text-right">
+                      Alamat
+                    </div>
+                    <div class="col-7 col-md-7 col-sm-7">
+                      {{ partner.partAddress }}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="row mb-2">
-                <div class="row col-12 col-md-12 col-sm-12">
-                  <div class="col-3 col-md-3 col-sm-3">
-                    Status Partner
-                  </div>
-                  <div class="col-7 col-md-7 col-sm-7">
-                    {{ partner?.partStatus }}
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-2">
-                <div class="row col-12 col-md-12 col-sm-12">
-                  <div class="col-3 col-md-3 col-sm-3">
-                    Kota/Kabupaten
-                  </div>
-                  <div class="col-7 col-md-7 col-sm-7">
-                    {{ partner?.cityName }}
+                <div class="row mb-2">
+                  <div class="row col-12 col-md-12 col-sm-12">
+                    <div class="col-3 col-md-3 col-sm-3 text-right">
+                      NPWP
+                    </div>
+                    <div class="col-7 col-md-7 col-sm-7">
+                      {{ partner.partNpwp }}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="row mb-2">
-                <div class="row col-12 col-md-12 col-sm-12">
-                  <div class="col-3 col-md-3 col-sm-3">
-                    Acount Number
-                  </div>
-                  <div class="col-7 col-md-7 col-sm-7">
-                    {{ partner?.partAccountNo }}
-                  </div>
-                  <div class="col-2 col-md-2 col-sm-2 text-center">
-                    <button type="button" class="btn" (click)="openModal(enumPartnerEntity.PARTNER, enumAction.UPDATE)"
-                      data-toggle="modal" data-target="#modal-partner">
-                      <i class="far fa-edit" style="color: #007bff"></i>
-                      edit
-                    </button>
-                    <button type="button" class="btn" (click)="onDeletePartner(partner!.partEntityid)">
-                      <i class="fa fa-times" style="color: #dc3545;"></i>
-                      delete
-                    </button>
+                <div class="row mb-2">
+                  <div class="row col-12 col-md-12 col-sm-12">
+                    <div class="col-3 col-md-3 col-sm-3 text-right">
+                      Join Date
+                    </div>
+                    <div class="col-7 col-md-7 col-sm-7">
+                      {{ partner.partJoinDate }}
+                    </div>
                   </div>
                 </div>
-              </div>
+                <div class="row mb-2">
+                  <div class="row col-12 col-md-12 col-sm-12">
+                    <div class="col-3 col-md-3 col-sm-3 text-right">
+                      Status Partner
+                    </div>
+                    <div class="col-7 col-md-7 col-sm-7">
+                      {{ partner.partStatus }}
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="row col-12 col-md-12 col-sm-12">
+                    <div class="col-3 col-md-3 col-sm-3 text-right">
+                      Kota/Kabupaten
+                    </div>
+                    <div class="col-7 col-md-7 col-sm-7">
+                      {{ partner.cityName }}
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="row col-12 col-md-12 col-sm-12">
+                    <div class="col-3 col-md-3 col-sm-3 text-right">
+                      Acount Number
+                    </div>
+                    <div class="col-7 col-md-7 col-sm-7">
+                      {{ partner.partAccountNo }}
+                    </div>
+                    <div class="col-2 col-md-2 col-sm-2 text-center">
+                      <button type="button" class="btn"
+                        (click)="openModal(enumPartnerEntity.PARTNER, enumAction.UPDATE)" data-toggle="modal"
+                        data-target="#modal-partner">
+                        <i class="far fa-edit" style="color: #007bff"></i>
+                        edit
+                      </button>
+                      <button type="button" class="btn" (click)="onDeletePartner(partner!.partEntityid)">
+                        <i class="fa fa-times" style="color: #dc3545;"></i>
+                        delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </ng-container>
+              <ng-container *ngIf="!partner">
+                <div class="row mb-2">
+                  <div class="row col-12 col-md-12 col-sm-12 justify-content-center">
+                    <div class="col-3 col-md-3 col-sm-3">
+                      <p class="text-muted h4 text-center">No Data Found</p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
             </div>
             <partner-pagination [currentPage]="paginationPartner!.currentPages"
               [totalPage]="paginationPartner!.totalPages" [pagesToShow]="3" [pagingParameter]="partnerPagingParameter"
@@ -149,6 +162,18 @@
           <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between overflow-auto">
               <h2 class="card-title font-weight-bold">Data Partner Contact</h2>
+              <div>
+                <div class="input-group">
+                  <input type="search" class="form-control" placeholder="name, partner"
+                    [(ngModel)]="partnerContactPagingParameter.search" (keyup.enter)="onSearchPartnerContact()"
+                    (click)="onResetPartnerContact($event)">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn btn-default" (click)="onSearchPartnerContact()">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
               <button class="btn" type="button" data-toggle="modal" data-target="#modal-partner"
                 (click)="openModal(enumPartnerEntity.PARTNER_CONTACT,enumAction.CREATE)">
                 <i class="fa fa-plus" style="color: #28a745;"></i>
@@ -168,27 +193,39 @@
                   </tr>
                 </thead>
                 <tbody class="text-center">
-                  <tr *ngFor="let contact of partnerContactPagination.data ">
-                    <td class="align-middle">{{ contact.fullName }}</td>
-                    <td class="align-middle">{{ contact.phoneNumber }}</td>
-                    <td class="align-middle">{{ contact.pacoPatrnEntityName }}</td>
-                    <td class="align-middle">{{ contact.pacoStatus }}</td>
-                    <td class="text-center">
-                      <button type="button" class="btn" (click)="openModal(
-                          enumPartnerEntity.PARTNER_CONTACT, 
-                          enumAction.UPDATE, 
-                          { pacoPatrnEntityid: contact.pacoPatrnEntityid, pacoUserEntityid:  contact.pacoUserEntityid }
-                        )" data-toggle="modal" data-target="#modal-partner">
-                        <i class="far fa-edit text-primary"></i>
-                        edit
-                      </button>
-                      <button type="button" class="btn"
-                        (click)="onDeletePartnerContact(contact.pacoPatrnEntityid, contact.pacoUserEntityid)">
-                        <i class="fa fa-times text-danger"></i>
-                        delete
-                      </button>
-                    </td>
-                  </tr>
+                  <ng-container *ngIf="partnerContactPagination.data">
+                    <tr *ngFor="let contact of partnerContactPagination.data ">
+                      <td class="align-middle">{{ contact.fullName }}</td>
+                      <td class="align-middle">{{ contact.phoneNumber }}</td>
+                      <td class="align-middle">{{ contact.pacoPatrnEntityName }}</td>
+                      <td class="align-middle">{{ contact.pacoStatus }}</td>
+                      <td class="text-center">
+                        <button type="button" class="btn" (click)="openModal(
+                            enumPartnerEntity.PARTNER_CONTACT, 
+                            enumAction.UPDATE, 
+                            { pacoPatrnEntityid: contact.pacoPatrnEntityid, pacoUserEntityid:  contact.pacoUserEntityid }
+                          )" data-toggle="modal" data-target="#modal-partner">
+                          <i class="far fa-edit text-primary"></i>
+                          edit
+                        </button>
+                        <button type="button" class="btn"
+                          (click)="onDeletePartnerContact(contact.pacoPatrnEntityid, contact.pacoUserEntityid)">
+                          <i class="fa fa-times text-danger"></i>
+                          delete
+                        </button>
+                      </td>
+                    </tr>
+
+                  </ng-container>
+                  <ng-container *ngIf="partnerContactPagination.data.length == 0">
+                    <tr>
+                      <td colspan="5">
+                        <div>
+                          <p class="text-muted h5">No Data Found</p>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
                 </tbody>
               </table>
               <partner-pagination [currentPage]="partnerContactPagination!.currentPages"
@@ -210,6 +247,18 @@
           <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between overflow-auto">
               <h2 class="card-title font-weight-bold">Area Workgroup Assignment</h2>
+              <div>
+                <div class="input-group">
+                  <input type="search" class="form-control" placeholder="city, partner"
+                    [(ngModel)]="partnerAreaWorkgroupPagingParameter.search"
+                    (keyup.enter)="onSearchPartnerAreaWorkgroup()" (click)="onResetPartnerAreaWorkgroup($event)">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn btn-default" (click)="onSearchPartnerAreaWorkgroup()">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
               <button class="btn" type="button" data-toggle="modal" data-target="#modal-partner"
                 (click)="openModal(enumPartnerEntity.PARTNER_AREA_WORKGROUP, enumAction.CREATE)">
                 <i class="fa fa-plus" style="color: #28a745;"></i>
@@ -231,34 +280,45 @@
                   </tr>
                 </thead>
                 <tbody class="text-center">
-                  <tr *ngFor="let assignment of partnerAreaWorkgroupPagination.data">
-                    <td class="align-middle">{{ assignment.zonesName }}</td>
-                    <td class="align-middle">{{ assignment.provName }}</td>
-                    <td class="align-middle">{{ assignment.cityName }}</td>
-                    <td class="align-middle">{{ assignment.arwgDesc }}</td>
-                    <td class="align-middle">{{ assignment.userName }}</td>
-                    <td class="align-middle">{{ assignment.partName }}</td>
-                    <td class="text-center align-middle">
-                      <button type="button" class="btn" data-toggle="modal" data-target="#modal-partner"
-                      (click)="openModal(
-                        enumPartnerEntity.PARTNER_AREA_WORKGROUP, 
-                        enumAction.UPDATE,
-                        undefined,
-                        {       
-                          pawoPatrEntityid: assignment.pawoPatrEntityid,
-                          pawoArwgCode: assignment.pawoArwgCode,
-                          pawoUserEntityid: assignment.pawoUserEntityid, 
-                        } 
-                        )">
-                        <i class="far fa-edit text-primary"></i>
-                        edit
-                      </button>
-                      <button type="button" class="btn" (click)="onDeletePartnerAreaWorkgroup(assignment.pawoPatrEntityid, assignment.pawoUserEntityid, assignment.pawoArwgCode )">
-                        <i class="fa fa-times text-danger"></i>
-                        delete
-                      </button>
-                    </td>
-                  </tr>
+                  <ng-container *ngIf="partnerAreaWorkgroupPagination.data">
+                    <tr *ngFor="let assignment of partnerAreaWorkgroupPagination.data">
+                      <td class="align-middle">{{ assignment.zonesName }}</td>
+                      <td class="align-middle">{{ assignment.provName }}</td>
+                      <td class="align-middle">{{ assignment.cityName }}</td>
+                      <td class="align-middle">{{ assignment.arwgDesc }}</td>
+                      <td class="align-middle">{{ assignment.userName }}</td>
+                      <td class="align-middle">{{ assignment.partName }}</td>
+                      <td class="text-center align-middle">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#modal-partner" (click)="openModal(
+                          enumPartnerEntity.PARTNER_AREA_WORKGROUP, 
+                          enumAction.UPDATE,
+                          undefined,
+                          {       
+                            pawoPatrEntityid: assignment.pawoPatrEntityid,
+                            pawoArwgCode: assignment.pawoArwgCode,
+                            pawoUserEntityid: assignment.pawoUserEntityid, 
+                          } 
+                          )">
+                          <i class="far fa-edit text-primary"></i>
+                          edit
+                        </button>
+                        <button type="button" class="btn"
+                          (click)="onDeletePartnerAreaWorkgroup(assignment.pawoPatrEntityid, assignment.pawoUserEntityid, assignment.pawoArwgCode )">
+                          <i class="fa fa-times text-danger"></i>
+                          delete
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <ng-container *ngIf="partnerAreaWorkgroupPagination.data.length == 0">
+                    <tr>
+                      <td colspan="7">
+                        <div>
+                          <p class="text-muted h5">No Data Found</p>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
                 </tbody>
               </table>
               <partner-pagination [currentPage]="partnerAreaWorkgroupPagination!.currentPages"
@@ -275,15 +335,8 @@
   <!-- /.content -->
 </div>
 
-<partner-modal 
-  (submitData)="submit($event)"
-  (closeModal)="closeModal($event)" 
-  [actionStatus]="actionStatus"
-
-  [isModalOpen]="isModalOpen" 
-  [partner]="partner" 
-  [partnerContact]="partnerContact" 
-  [partnerAreaWorkgroup]="partnerAreaWorkgroup"
-  >
+<partner-modal (submitData)="submit($event)" (closeModal)="closeModal($event)" [actionStatus]="actionStatus"
+  [isModalOpen]="isModalOpen" [partner]="partner" [partnerContact]="partnerContact"
+  [partnerAreaWorkgroup]="partnerAreaWorkgroup">
 </partner-modal>
 <!-- /.content-wrapper -->

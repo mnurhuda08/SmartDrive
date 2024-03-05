@@ -4,6 +4,7 @@ import { Action } from 'src/app/constants/action';
 import { ActionStatus } from 'src/app/interfaces/common/actionStatus';
 import { ClaimAssetEvidence } from 'src/app/interfaces/partners/claim-assets-evidence';
 import { ClaimAssetEvidenceService } from 'src/app/services/partners/claim-asset-evidence.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-claim-evidence-forms',
@@ -38,8 +39,8 @@ export class ClaimEvidenceFormsComponent implements OnInit {
   createRow(): FormGroup {
     return this.fb.group({
       caevNote: ['', Validators.required],
-      caevFee: [null, Validators.required],
-      photo: [null, Validators.required],
+      caevFee: ['', Validators.required],
+      photo: [File, Validators.required],
       caevPartEntityid: this.workOrderId?.seroPartId,
       caevSeroId: this.workOrderId?.seroId,
     })
@@ -63,7 +64,7 @@ export class ClaimEvidenceFormsComponent implements OnInit {
   }
 
   getFileInputLabel(index: number) {
-    const control = this.rows.at(index).get('photo');
+    const control = this.getFileInputControls(index);
     const name = control?.value?.name || 'No file selected';
     return name;
   }
@@ -87,18 +88,18 @@ export class ClaimEvidenceFormsComponent implements OnInit {
     const control = this.rows.at(index).get("photo");
     const file = event.target.files[0];
     if (file instanceof File) {
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (!allowedTypes.includes(file.type)) {
+        Swal.fire('Error', 'Only images are allowed', 'error');
+        return
+      }
       control?.setValue(file);
-      console.log("control?.value", control?.value);
       this.emitFormDataValue()
-    } else {
-      console.error("Invalid file selected");
     }
 
   }
 
-  getFormData(): FormData {
-    console.log("getFormData", this.form.value);
-    
+  getFormData(): FormData {    
     const formData = new FormData();
     const formArray = this.form.get('rows') as FormArray;
     formArray.controls.forEach((controlGroup) => {
@@ -124,6 +125,12 @@ export class ClaimEvidenceFormsComponent implements OnInit {
     })
   }
 
+  resetForm() {
+    this.form = this.fb.group({
+      rows: this.fb.array([])
+    })
+    this.addRow()
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['actionStatus'] && changes['actionStatus'].currentValue.action === Action.VIEW) {
@@ -133,13 +140,6 @@ export class ClaimEvidenceFormsComponent implements OnInit {
     if (changes['actionStatus'] && changes['actionStatus'].currentValue.action === Action.CREATE) {
       // this.resetForm()
     }
-  }
-
-  resetForm() {
-    this.form = this.fb.group({
-      rows: this.fb.array([])
-    })
-    this.addRow()
   }
 
   ngOnInit(): void {
