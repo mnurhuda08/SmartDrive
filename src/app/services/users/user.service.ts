@@ -24,7 +24,7 @@ export class UserService {
   getUsersPaging = (
     url: string,
     params: PaginationParams
-  ): Observable<IUser[]> => {
+  ): Observable<any[]> => {
     return this.apiService.get(url, {
       params,
       responseType: 'json',

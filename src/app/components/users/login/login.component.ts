@@ -37,7 +37,7 @@ export class LoginComponent {
           this.router.navigateByUrl('/');
         },
         error: (error) => {
-          if (error.status === 400) {
+          if (error.status === 400 && !error.error.Message) {
             this.toaster.error('Username and password is required');
           } else {
             this.toaster.error(error.error.Message);

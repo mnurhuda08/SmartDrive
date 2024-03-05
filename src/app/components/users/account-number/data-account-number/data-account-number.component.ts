@@ -50,7 +50,9 @@ export class DataAccountNumberComponent {
 
   getuserAccounts(userId: string) {
     this.service
-      .getUserAccount(`${environment.baseUrl}/UserAccounts`)
+      .getUserAccount(
+        `${environment.baseUrl}/UserAccounts/GetAllByUserId/${userId}`
+      )
       .subscribe({
         next: (data) => {
           this.userAccounts = data;

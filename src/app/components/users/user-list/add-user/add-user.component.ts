@@ -1,22 +1,32 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { IRole } from 'src/app/interfaces/users/i-role';
 import { IRegisterUser } from 'src/app/interfaces/users/i-user';
+import { RoleService } from 'src/app/services/users/role.service';
 import { UserService } from 'src/app/services/users/user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  selector: 'app-add-user',
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.css'],
+  imports: [FormsModule, CommonModule],
+  standalone: true,
 })
-export class RegisterComponent {
+export class AddUserComponent {
   constructor(
     private userService: UserService,
+    private roleService: RoleService,
     private router: Router,
     private toaster: ToastrService
   ) {}
+
+  @Input() display!: string;
+
+  roles: IRole[] = [];
 
   registerForm: IRegisterUser = {
     userName: '',
@@ -27,7 +37,7 @@ export class RegisterComponent {
     userBirthDate: '',
     userNationalId: '',
     userNpwp: '',
-    roleName: 'PC',
+    roleName: '',
     isRoleActive: true,
   };
 
@@ -41,7 +51,6 @@ export class RegisterComponent {
       .subscribe({
         next: (res) => {
           this.toaster.success('Register Success');
-          this.router.navigateByUrl('/login');
         },
         error: (error) => {
           console.log(error);
@@ -52,5 +61,22 @@ export class RegisterComponent {
           }
         },
       });
+  }
+
+  fetchRoles() {
+    this.roleService.getRoles(`${environment.baseUrl}/Role`).subscribe({
+      next: (data) => {
+        this.roles = data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.fetchRoles();
   }
 }

@@ -37,6 +37,8 @@ import { UpdateAreaworkgroupComponent } from 'src/app/components/master/region/a
 import { RegionComponent } from 'src/app/components/master/region/region.component';
 import { ServiceordersComponent } from 'src/app/components/so/serviceorders/serviceorders.component';
 import { ServicefeasibilityComponent } from 'src/app/components/so/servicefeasibility/servicefeasibility.component';
+import { UserListComponent } from 'src/app/components/users/user-list/user-list.component';
+import { DataRoleComponent } from 'src/app/components/users/role/data-role/data-role.component';
 
 const routes: Routes = [
   {
@@ -180,6 +182,18 @@ const routes: Routes = [
         path: 'so/:id',
         component: ServicefeasibilityComponent,
         providers: [HttpClient],
+      },
+      {
+        path: 'users',
+        component: UserListComponent,
+        canActivate: mapToCanActivate([AuthGuard]),
+        data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
+      },
+      {
+        path: 'roles',
+        component: DataRoleComponent,
+        canActivate: mapToCanActivate([AuthGuard]),
+        data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
       },
     ],
   },

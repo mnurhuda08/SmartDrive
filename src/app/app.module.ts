@@ -57,6 +57,7 @@ import { ServicefeasibilityComponent } from './components/so/servicefeasibility/
 import { AuthInterceptorInterceptor } from './services/interceptors/auth-interceptor.interceptor';
 import { UnauthorizedComponent } from './components/error/unauthorized/unauthorized.component';
 import { RegisterComponent } from './components/users/register/register.component';
+import { ForgotPasswordComponent } from './components/users/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { RegisterComponent } from './components/users/register/register.componen
     LoginLayoutComponent,
     UnauthorizedComponent,
     RegisterComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

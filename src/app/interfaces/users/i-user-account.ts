@@ -7,6 +7,8 @@ export interface IUserAccount {
   usacBankEntityid: number | null;
   usacFintEntityid: number | null;
   usacUserEntityid: number;
+  usacBankEntity?: IUserAccountBank;
+  usacFintEntity?: IUserAccountFintech;
 }
 
 export interface IUserAccountFintech {
