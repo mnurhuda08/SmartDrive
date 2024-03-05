@@ -18,14 +18,14 @@ export const MenuConstant: IMenus[] = [
   {
     path: '/users',
     title: 'Users',
-    roles: ['EM', 'AD'],
+    roles: ['AD'],
     exact: false,
     icon: 'fas fa-users',
   },
   {
     path: '/roles',
     title: 'Roles',
-    roles: ['EM', 'AD'],
+    roles: ['AD'],
     exact: false,
     icon: 'fas fa-user-secret',
   },
