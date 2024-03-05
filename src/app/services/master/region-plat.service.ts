@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class RegionPlatService {
-  private apiUrl: string = environment.baseUrl + 'master/regionplat';
+  private apiUrl: string = environment.baseUrl + '/master/regionplat';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

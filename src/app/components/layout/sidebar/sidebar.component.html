@@ -67,7 +67,7 @@
                   <a
                     [routerLink]="nested.path"
                     routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: item.exact }"
+                    [routerLinkActiveOptions]="{ exact: nested.exact }"
                     class="nav-link"
                   >
                     <i class="nav-icon {{ nested.icon }}"></i>

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class CategoryService {
-  private apiUrl: string = environment.baseUrl + 'master/category';
+  private apiUrl: string = environment.baseUrl + '/master/category';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

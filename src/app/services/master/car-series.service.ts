@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class CarSeriesService {
-  private apiUrl: string = environment.baseUrl + 'master/carseries';
+  private apiUrl: string = environment.baseUrl + '/master/carseries';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

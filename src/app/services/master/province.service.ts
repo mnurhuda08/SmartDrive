@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 import { Province } from 'src/app/interfaces/master/province';
@@ -8,16 +8,26 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class ProvinceService {
-  private apiUrl: string = environment.baseUrl + 'master/provinsi';
+  private apiUrl: string = environment.baseUrl + '/master/provinsi';
   private apiUrlPaginate: string =
-    environment.baseUrl +
-    'master/provinsi//paginate?SearchBy=D&PageNumber=5&PageSize=10';
+    environment.baseUrl + `/master/provinsi/paginate`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
   constructor(private http: HttpClient) {}
+
+  getPaginatedProvinsi(
+    pageNumber: number,
+    pageSize: number
+  ): Observable<Province[]> {
+    let params = new HttpParams()
+      .set('PageNumber', pageNumber.toString())
+      .set('PageSize', pageSize.toString());
+
+    return this.http.get<Province[]>(`${this.apiUrlPaginate}`, { params });
+  }
 
   getProvinces(): Observable<Province[]> {
     return this.http.get<Province[]>(this.apiUrl);

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class AreaWorkgroupService {
-  private apiUrl: string = environment.baseUrl + 'master/areaworkgroup';
+  private apiUrl: string = environment.baseUrl + '/master/areaworkgroup';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

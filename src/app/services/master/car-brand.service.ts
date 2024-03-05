@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class CarBrandService {
-  private apiUrl: string = environment.baseUrl + 'master/carbrand';
+  private apiUrl: string = environment.baseUrl + '/master/carbrand';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

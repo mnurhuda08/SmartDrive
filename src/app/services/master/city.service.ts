@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class CityService {
-  private apiUrl: string = environment.baseUrl + 'master/city';
+  private apiUrl: string = environment.baseUrl + '/master/city';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

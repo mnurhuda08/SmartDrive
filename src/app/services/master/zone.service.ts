@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class ZoneService {
-  private apiUrl: string = environment.baseUrl + 'master/zone';
+  private apiUrl: string = environment.baseUrl + '/master/zone';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

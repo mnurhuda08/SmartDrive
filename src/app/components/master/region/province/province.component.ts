@@ -10,11 +10,22 @@ import { ProvinceService } from 'src/app/services/master/province.service';
 })
 export class ProvinceComponent implements OnInit {
   provinces: Province[] = [];
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalItems = 0;
 
   constructor(
     private provinceService: ProvinceService,
     private router: Router
   ) {}
+
+  getProvincesPaging() {
+    this.provinceService
+      .getPaginatedProvinsi(this.currentPage, this.pageSize)
+      .subscribe((response) => {
+        this.provinces = response;
+      });
+  }
 
   getProvinces() {
     this.provinceService.getProvinces().subscribe({
@@ -25,6 +36,17 @@ export class ProvinceComponent implements OnInit {
         console.error(error);
       },
     });
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.getProvincesPaging();
+  }
+  onPageSizeChange(event: Event): void {
+    const target = (event.target as HTMLSelectElement).value!;
+    const pageSize = parseInt(target, 10);
+    this.pageSize = pageSize;
+    this.getProvincesPaging();
   }
 
   updateProvince(id: number) {
