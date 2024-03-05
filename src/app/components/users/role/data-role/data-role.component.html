@@ -5,12 +5,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Data User</h1>
+          <h1>Data Role</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Data User</li>
+            <li class="breadcrumb-item active">Data Role</li>
           </ol>
         </div>
       </div>
@@ -47,47 +47,31 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Username</th>
-                    <th>Fullname</th>
                     <th>Role</th>
+                    <th>Description</th>
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody
-                  *ngFor="
-                    let item of users
-                      | paginate : { itemsPerPage: 10, currentPage: p };
-                    index as i
-                  "
-                >
+                <tbody *ngFor="let item of roles; index as i">
                   <tr>
                     <td>{{ i + 1 }}</td>
-                    <td>{{ item.userName }}</td>
-                    <td>{{ item.userFullName }}</td>
+                    <td>{{ item.roleName }}</td>
+                    <td>{{ item.roleDescription }}</td>
                     <td>
-                      <ng-container *ngFor="let roles of item.userRoles">
-                        {{ roles.usroRoleName }}
-                      </ng-container>
+                      <button
+                        class="btn btn-primary mr-2"
+                        type="button"
+                        data-toggle="modal"
+                        [attr.data-target]="'#' + displayEditModal"
+                        (click)="onPopModalEdit(item)"
+                      >
+                        <i class="fa fa-edit"></i>
+                        Edit
+                      </button>
                     </td>
-                    <button
-                      class="btn btn-primary mr-2"
-                      type="button"
-                      data-toggle="modal"
-                      [attr.data-target]="'#' + displayManageRoleModal"
-                      (click)="onPopModalEdit(item)"
-                    >
-                      <i class="fa fa-edit"></i>
-                      Manage Role
-                    </button>
                   </tr>
                 </tbody>
               </table>
-              <div class="mt-2 mb-2">
-                <pagination-controls
-                  class="custom-pagination"
-                  (pageChange)="p = $event"
-                ></pagination-controls>
-              </div>
             </div>
           </div>
         </div>
@@ -99,14 +83,13 @@
 </div>
 <!-- /.content-wrapper -->
 
-<app-add-user [display]="displayAddModal"></app-add-user>
-<app-manage-roles
-  [display]="displayManageRoleModal"
-  [user]="selectedUser"
-  [displayAddRole]="displayAddUserRoleModal"
-></app-manage-roles>
-
-<app-add-role
-  [display]="displayAddUserRoleModal"
-  [user]="selectedUser"
-></app-add-role>
+<!-- modal -->
+<app-add-role-popup
+  [display]="displayAddModal"
+  (confirm)="onConfirmAdd($event)"
+></app-add-role-popup>
+<app-edit-role-popup
+  [role]="selectedRole"
+  [display]="displayEditModal"
+  (confirm)="onConfirmEdit($event)"
+></app-edit-role-popup>

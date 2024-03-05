@@ -11,6 +11,8 @@ import { CarModelComponent } from 'src/app/components/master/car-model/car-model
 import { ServiceordersComponent } from 'src/app/components/so/serviceorders/serviceorders.component';
 import { ServicefeasibilityComponent } from 'src/app/components/so/servicefeasibility/servicefeasibility.component';
 import { HttpClient } from '@angular/common/http';
+import { UserListComponent } from 'src/app/components/users/user-list/user-list.component';
+import { DataRoleComponent } from 'src/app/components/users/role/data-role/data-role.component';
 import { PartnerAreaWorkgroupPage } from 'src/app/components/partners/pages/partner-area-workgroup/partner-area-workgroup.page';
 
 const routes: Routes = [
@@ -59,6 +61,18 @@ const routes: Routes = [
         path: 'so/:id',
         component: ServicefeasibilityComponent,
         providers: [HttpClient],
+      },
+      {
+        path: 'users',
+        component: UserListComponent,
+        canActivate: mapToCanActivate([AuthGuard]),
+        data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
+      },
+      {
+        path: 'roles',
+        component: DataRoleComponent,
+        canActivate: mapToCanActivate([AuthGuard]),
+        data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
       },
     ],
   },

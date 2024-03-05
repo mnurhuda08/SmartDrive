@@ -20,6 +20,7 @@ import { RegisterComponent } from './components/users/register/register.componen
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { DashboardLayoutComponent } from './components/layout/dashboard-layout/dashboard-layout.component';
 import { ServicefeasibilityComponent } from './components/so/servicefeasibility/servicefeasibility.component';
+import { ForgotPasswordComponent } from './components/users/forgot-password/forgot-password.component';
 import { PartnerPage } from './components/partners/pages/partner/partner.page';
 import { TableComponent } from './components/partners/components/table/table.component';
 import { ModalComponent } from './components/partners/components/modal/modal.component';
@@ -48,6 +49,7 @@ import { ClaimEvidenceFormsComponent } from './components/partners/components/cl
     DashboardLayoutComponent,
     UnauthorizedComponent,
     RegisterComponent,
+    ForgotPasswordComponent,
     TableComponent,
     ModalComponent,
     PartnerFormsComponent,
