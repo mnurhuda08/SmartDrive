@@ -16,7 +16,11 @@ export class ClaimAssetSparepartService {
     return this.http.get<ClaimAssetsSparepart[]>(`${this.urlApi}/${caspPartEntityid}/${caspSeroId}`)
   }
 
-  createSparePart(claimSparePart: ClaimAssetsSparepart[]): Observable<ClaimAssetsSparepart[]> {
-    return this.http.post<ClaimAssetsSparepart[]>(`${this.urlApi}/batch`, claimSparePart)
+  createSparePart(claimSparePart: ClaimAssetsSparepart[], sowoId: number): Observable<ClaimAssetsSparepart[]> {
+    var body = {
+      sowoId,
+      data: claimSparePart
+    }
+    return this.http.post<ClaimAssetsSparepart[]>(`${this.urlApi}/batch`, body)
   }
 }

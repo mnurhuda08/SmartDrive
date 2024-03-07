@@ -51,7 +51,7 @@ export const MenuConstant: IMenus[] = [
     icon: 'fas fa-users',
   },
   {
-    path: '#',
+    path: '/partner',
     title: 'Partner',
     roles: ['PR', 'AD'],
     exact: false,

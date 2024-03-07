@@ -26,6 +26,7 @@ import Swal from 'sweetalert2';
 export class PartnerAreaWorkgroupPage implements OnInit {
   seotArwgCode: string = ''
   seroPartId: number = 0
+  SowoId: number = 0
   workOrdersPagination ?: PaginationList<PartnerWorkOrder> = { currentPages: 1, data: [], totalPages: 5 }
   workOrdersPagingParameter !: PagingParameter 
   claimAssetSpareparts : ClaimAssetsSparepart[] | null = null
@@ -63,6 +64,7 @@ export class PartnerAreaWorkgroupPage implements OnInit {
   
   openModal(
     action: Action,
+    sowoId: number,
     workOrderId?: {
       seroId: string,
       seroPartId: number,
@@ -70,6 +72,7 @@ export class PartnerAreaWorkgroupPage implements OnInit {
     }
   ) {
     this.workOrderId = workOrderId
+    this.SowoId = sowoId
     const workOrder = this.workOrdersPagination!.data.find(x =>
       x.seroId === workOrderId?.seroId &&
       x.seroPartId === workOrderId.seroPartId &&
@@ -92,7 +95,7 @@ export class PartnerAreaWorkgroupPage implements OnInit {
           denyButtonText: `No`,
         }).then((result) => {
           if (result.isConfirmed) {
-            this._claimAssetSparepart.createSparePart(data as ClaimAssetsSparepart[]).subscribe({
+            this._claimAssetSparepart.createSparePart(data as ClaimAssetsSparepart[], this.SowoId).subscribe({
               next: () => this.getWorkOrder(),
               error: (e) => Swal.fire('Error', e.error.message, 'error'),
               complete: () => Swal.fire('Success', 'Claim Asset Sparepart has been submitted', 'success') 
@@ -119,7 +122,7 @@ export class PartnerAreaWorkgroupPage implements OnInit {
               }
             })
             if(isValid){
-              this._claimAssetEvidence.create(data as FormData).subscribe({
+              this._claimAssetEvidence.create(data as FormData, this.SowoId).subscribe({
                 next: () => this.getWorkOrder(),
                 error: (e) => Swal.fire('Error', e.error.message, 'error'),
                 complete: () => Swal.fire('Success', 'Claim Asset Evidence has been submitted', 'success') 

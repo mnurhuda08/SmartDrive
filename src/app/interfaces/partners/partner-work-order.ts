@@ -1,4 +1,6 @@
 export interface PartnerWorkOrder {
+    sowoId: number;
+    sowoStatus: string;
     customerName: string;
     policeNumber: string;
     servInsuranceNo: string;

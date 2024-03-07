@@ -11,8 +11,8 @@ export class ClaimAssetEvidenceService {
   urlApi : string = `${environment.baseUrl}/PartnerClaimAssetEvidence`
   constructor(private http: HttpClient) { }
 
-  create(data: FormData): Observable<ClaimAssetEvidence>{    
-    return this.http.post<ClaimAssetEvidence>(`${this.urlApi}/batch`, data)
+  create(data: FormData, sowoId: number): Observable<ClaimAssetEvidence>{    
+    return this.http.post<ClaimAssetEvidence>(`${this.urlApi}/batch/${sowoId}`, data)
   }
 
   getEvidence(caspPartEntityid : number, caspSeroId: string): Observable<ClaimAssetEvidence[]> {

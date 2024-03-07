@@ -56,14 +56,15 @@ export class PartnerPage implements OnInit, OnChanges {
     private _partnerContactService: PartnerContactService,
     private _partnerAreaWorkgroup: PartnerAreaWorkgroupService
     ) {
-    this.partnerPagingParameter = new PagingParameter('', 1, 1)
+    this.partnerPagingParameter = new PagingParameter('', 5, 1)
     this.partnerContactPagingParameter = new PagingParameter('', 5, 1)
     this.partnerAreaWorkgroupPagingParameter = new PagingParameter('', 5, 1)
   }
 
   openModal(
     entity: string, 
-    action: Action, 
+    action: Action,
+    partnerId ?: number, 
     partnerContactId ?: { 
       pacoPatrnEntityid: number,
       pacoUserEntityid: number 
@@ -77,6 +78,9 @@ export class PartnerPage implements OnInit, OnChanges {
     {
     this.actionStatus = { action: action, entity: entity }
     this.isModalOpen = true
+    if(entity === this.enumPartnerEntity.PARTNER) {
+      this.partner = this.paginationPartner.data.find(x => x.partEntityid === partnerId)
+    }
     if(entity === this.enumPartnerEntity.PARTNER_CONTACT) {
       this.partnerContact = this.partnerContactPagination.data.find(x => x.pacoPatrnEntityid === partnerContactId?.pacoPatrnEntityid && x.pacoUserEntityid === partnerContactId?.pacoUserEntityid )
     }
@@ -210,14 +214,14 @@ export class PartnerPage implements OnInit, OnChanges {
     switch (action) {
       case this.enumAction.CREATE:
         this._partnerService.createPartner(data).subscribe({
-          next: (v) => this.partner = v,
+          next: (v) => this.getPartner(),
           error: (e) => this.swalDelete(e),
           complete: () => this.swalSuccess('created')
         })
         break;
       case this.enumAction.UPDATE:
         this._partnerService.updatePartner(data).subscribe({
-          next: (v) => this.partner = v,
+          next: (v) => this.getPartner(),
           error: (e) => this.swalDelete(e),
           complete: () => this.swalSuccess('updated')
         })
@@ -289,7 +293,6 @@ export class PartnerPage implements OnInit, OnChanges {
     this._partnerService.getPartnersPaging(this.partnerPagingParameter).subscribe({
       next: (v) => {
         this.paginationPartner = v;
-        this.partner = this.paginationPartner.data[0] ?? null;
       },
       error: (e) => Swal.fire('Error!', `${e.error.Message} ?? Error Occured`, 'error')
     })
