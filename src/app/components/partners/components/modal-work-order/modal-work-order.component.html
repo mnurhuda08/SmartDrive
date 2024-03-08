@@ -1,0 +1,31 @@
+<div class="modal fade show" id="modal-partner-work-order" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ actionStatus.entity }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-claims-sparepart-forms *ngIf="actionStatus.entity === enumEntity.CLAIM_ASSET_SPAREPARTS"
+                    [actionStatus]="actionStatus" 
+                    [workOrderId]="workOrderId"
+                    (formDataValueChange)="handleFormSparepartValueChange($event)"
+                    (formValidityChange)="handleFormValidityChange($event)"/>
+                <app-claim-evidence-forms
+                    *ngIf="actionStatus.entity === enumEntity.CLAIM_ASSET_EVIDENCE"
+                    [actionStatus]="actionStatus"
+                    [workOrderId]="workOrderId"
+                    (formValidityChange)="handleFormValidityChange($event)"
+                    (formDataValueChange)="handleFormEvidenceValueChange($event)"
+                >   
+                </app-claim-evidence-forms>
+            </div>
+            <div class="modal-footer justify-content-between" *ngIf="actionStatus.action !== enumAction.VIEW">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onSubmit()" [disabled]="!isFormValid">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

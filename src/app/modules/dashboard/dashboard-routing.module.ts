@@ -39,13 +39,15 @@ import { ServiceordersComponent } from 'src/app/components/so/serviceorders/serv
 import { ServicefeasibilityComponent } from 'src/app/components/so/servicefeasibility/servicefeasibility.component';
 import { UserListComponent } from 'src/app/components/users/user-list/user-list.component';
 import { DataRoleComponent } from 'src/app/components/users/role/data-role/data-role.component';
+import { PartnerAreaWorkgroupPage } from 'src/app/components/partners/pages/partner-area-workgroup/partner-area-workgroup.page';
+import { PartnerPage } from 'src/app/components/partners/pages/partner/partner.page';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    canActivate: mapToCanActivate([AuthGuard]),
-    data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
+    // canActivate: mapToCanActivate([AuthGuard]),
+    // data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
     children: [
       {
         path: '',
@@ -173,6 +175,14 @@ const routes: Routes = [
       {
         path: 'master/region/areaworkgroup/edit/:id',
         component: UpdateAreaworkgroupComponent,
+      },
+      {
+        path: 'partner/partner',
+        component: PartnerPage,
+      },
+      {
+        path: 'partner/workorder',
+        component: PartnerAreaWorkgroupPage,
       },
       {
         path: 'so',

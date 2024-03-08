@@ -58,6 +58,17 @@ import { AuthInterceptorInterceptor } from './services/interceptors/auth-interce
 import { UnauthorizedComponent } from './components/error/unauthorized/unauthorized.component';
 import { RegisterComponent } from './components/users/register/register.component';
 import { ForgotPasswordComponent } from './components/users/forgot-password/forgot-password.component';
+import { PartnerPage } from './components/partners/pages/partner/partner.page';
+import { TableComponent } from './components/partners/components/table/table.component';
+import { ModalComponent } from './components/partners/components/modal/modal.component';
+import { PartnerFormsComponent } from './components/partners/components/partner-forms/partner-forms.component';
+import { PaginationComponent } from './components/partners/components/pagination/pagination.component';
+import { PartnerContactFormsComponent } from './components/partners/components/partner-contact-forms/partner-contact-forms.component';
+import { PartnerAreaWorkgroupFormsComponent } from './components/partners/components/partner-area-workgroup-forms/partner-area-workgroup-forms.component';
+import { PartnerAreaWorkgroupPage } from './components/partners/pages/partner-area-workgroup/partner-area-workgroup.page';
+import { ModalWorkOrderComponent } from './components/partners/components/modal-work-order/modal-work-order.component';
+import { ClaimsSparepartFormsComponent } from './components/partners/components/claims-sparepart-forms/claims-sparepart-forms.component';
+import { ClaimEvidenceFormsComponent } from './components/partners/components/claim-evidence-forms/claim-evidence-forms.component';
 
 @NgModule({
   declarations: [
@@ -103,11 +114,23 @@ import { ForgotPasswordComponent } from './components/users/forgot-password/forg
     UpdateAreaworkgroupComponent,
 
     LoginComponent,
+    LoginComponent, 
     BlankComponent,
     LoginLayoutComponent,
     UnauthorizedComponent,
     RegisterComponent,
     ForgotPasswordComponent,
+    TableComponent,
+    ModalComponent,
+    PartnerFormsComponent,
+    PaginationComponent,
+    PartnerContactFormsComponent,
+    PartnerAreaWorkgroupFormsComponent,
+    PartnerAreaWorkgroupPage,
+    PartnerPage,
+    ModalWorkOrderComponent,
+    ClaimsSparepartFormsComponent,
+    ClaimEvidenceFormsComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,10 +147,6 @@ import { ForgotPasswordComponent } from './components/users/forgot-password/forg
       useClass: AuthInterceptorInterceptor,
       multi: true,
     },
-    // {
-    //   provide: ErrorHandler,
-    //   useClass: CustomErrorHandler,
-    // },
   ],
   bootstrap: [AppComponent],
 })

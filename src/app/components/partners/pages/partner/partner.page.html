@@ -1,0 +1,301 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Partner</h1>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Partner</li>
+            </ol>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between overflow-auto">
+              <h2 class="card-title font-weight-bold">Data Partner</h2>
+              <div>
+                <div class="input-group">
+                  <input type="search" class="form-control" placeholder="name, npwp"
+                    [(ngModel)]="partnerPagingParameter.search" (keyup.enter)="onSearchPartner()"
+                    (click)="onResetPartner($event)">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn btn-default" (click)="onSearchPartner()">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- </form> -->
+              </div>
+              <button class="btn" type="button" data-toggle="modal" data-target="#modal-partner"
+                (click)="openModal(enumPartnerEntity.PARTNER, enumAction.CREATE)">
+                <i class="fa fa-plus" style="color: #28a745;"></i>
+                Add
+              </button>
+            </div>
+
+            <div class="card-body text-center">
+              <table class="table table-striped table-bordered table-hover">
+                <thead class="text-center">
+                  <tr>
+                    <th>No</th>
+                    <th>Partner Name</th>
+                    <th>NPWP</th>
+                    <th>Address</th>
+                    <th>Account Number</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  <ng-container *ngIf="paginationPartner.data">
+                    <tr *ngFor="let item of paginationPartner.data; let i = index">
+                      <td class="align-middle">{{ ((partnerPagingParameter.pageNumber - 1) * partnerPagingParameter.pageSize)  + i + 1 }}</td>
+                      <td class="align-middle">{{ item.partName }}</td>
+                      <td class="align-middle">{{ item.partNpwp }}</td>
+                      <td class="align-middle">{{ item.partAddress }}</td>
+                      <td class="align-middle">{{ item.partAccountNo }}</td>
+                      <td class="align-middle">{{ item.partStatus }}</td>
+                      <td class="text-center">
+                        <button type="button" class="btn" (click)="openModal(
+                            enumPartnerEntity.PARTNER, 
+                            enumAction.UPDATE,
+                            item.partEntityid 
+                          )" data-toggle="modal" data-target="#modal-partner">
+                          <i class="far fa-edit text-primary"></i>
+                          edit
+                        </button>
+                        <button type="button" class="btn" (click)="onDeletePartner(item.partEntityid)">
+                          <i class="fa fa-times text-danger"></i>
+                          delete
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <ng-container *ngIf="paginationPartner.data.length == 0">
+                    <tr>
+                      <td colspan="6">
+                        <div>
+                          <p class="text-muted h5">No Data Found</p>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <partner-pagination [currentPage]="paginationPartner!.currentPages"
+              [totalPage]="paginationPartner!.totalPages" [pagesToShow]="3" [pagingParameter]="partnerPagingParameter"
+              (onPaging)="onPartnerPaging($event)"></partner-pagination>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.card -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between overflow-auto">
+              <h2 class="card-title font-weight-bold">Data Partner Contact</h2>
+              <div>
+                <div class="input-group">
+                  <input type="search" class="form-control" placeholder="name, partner"
+                    [(ngModel)]="partnerContactPagingParameter.search" (keyup.enter)="onSearchPartnerContact()"
+                    (click)="onResetPartnerContact($event)">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn btn-default" (click)="onSearchPartnerContact()">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button class="btn" type="button" data-toggle="modal" data-target="#modal-partner"
+                (click)="openModal(enumPartnerEntity.PARTNER_CONTACT,enumAction.CREATE)">
+                <i class="fa fa-plus" style="color: #28a745;"></i>
+                Add
+              </button>
+            </div>
+
+            <div class="card-body">
+              <table class="table table-striped table-bordered table-hover">
+                <thead class="text-center">
+                  <tr>
+                    <th>No.</th>
+                    <th>Contact Name</th>
+                    <th>Phone Number</th>
+                    <th>Partner</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  <ng-container *ngIf="partnerContactPagination.data">
+                    <tr *ngFor="let contact of partnerContactPagination.data; let i = index">
+                      <td class="align-middle">{{ ((partnerContactPagingParameter.pageNumber - 1) * partnerContactPagingParameter.pageSize)  + i + 1 }}</td>
+                      <td class="align-middle">{{ contact.fullName }}</td>
+                      <td class="align-middle">{{ contact.phoneNumber }}</td>
+                      <td class="align-middle">{{ contact.pacoPatrnEntityName }}</td>
+                      <td class="align-middle">{{ contact.pacoStatus }}</td>
+                      <td class="text-center">
+                        <button type="button" class="btn" (click)="openModal(
+                            enumPartnerEntity.PARTNER_CONTACT, 
+                            enumAction.UPDATE, 
+                            undefined,
+                            { pacoPatrnEntityid: contact.pacoPatrnEntityid, pacoUserEntityid:  contact.pacoUserEntityid }
+                          )" data-toggle="modal" data-target="#modal-partner">
+                          <i class="far fa-edit text-primary"></i>
+                          edit
+                        </button>
+                        <button type="button" class="btn"
+                          (click)="onDeletePartnerContact(contact.pacoPatrnEntityid, contact.pacoUserEntityid)">
+                          <i class="fa fa-times text-danger"></i>
+                          delete
+                        </button>
+                      </td>
+                    </tr>
+
+                  </ng-container>
+                  <ng-container *ngIf="partnerContactPagination.data.length == 0">
+                    <tr>
+                      <td colspan="5">
+                        <div>
+                          <p class="text-muted h5">No Data Found</p>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              <partner-pagination [currentPage]="partnerContactPagination!.currentPages"
+                [totalPage]="partnerContactPagination!.totalPages" [pagesToShow]="3"
+                [pagingParameter]="partnerContactPagingParameter"
+                (onPaging)="onPartnerContactPaging($event)"></partner-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.card -->
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between overflow-auto">
+              <h2 class="card-title font-weight-bold">Area Workgroup Assignment</h2>
+              <div>
+                <div class="input-group">
+                  <input type="search" class="form-control" placeholder="city, partner"
+                    [(ngModel)]="partnerAreaWorkgroupPagingParameter.search"
+                    (keyup.enter)="onSearchPartnerAreaWorkgroup()" (click)="onResetPartnerAreaWorkgroup($event)">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn btn-default" (click)="onSearchPartnerAreaWorkgroup()">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button class="btn" type="button" data-toggle="modal" data-target="#modal-partner"
+                (click)="openModal(enumPartnerEntity.PARTNER_AREA_WORKGROUP, enumAction.CREATE)">
+                <i class="fa fa-plus" style="color: #28a745;"></i>
+                Add
+              </button>
+            </div>
+
+            <div class="card-body">
+              <table class="table table-striped table-bordered table-hover">
+                <thead class="text-center">
+                  <tr>
+                    <th>No.</th>
+                    <th>Zone</th>
+                    <th>Province</th>
+                    <th>City</th>
+                    <th>Workgroup</th>
+                    <th>Contact</th>
+                    <th>Partner</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  <ng-container *ngIf="partnerAreaWorkgroupPagination.data">
+                    <tr *ngFor="let assignment of partnerAreaWorkgroupPagination.data; let i = index">
+                      <td class="align-middle">{{ ((partnerAreaWorkgroupPagingParameter.pageNumber - 1) * partnerAreaWorkgroupPagingParameter.pageSize)  + i + 1 }}</td>
+                      <td class="align-middle">{{ assignment.zonesName }}</td>
+                      <td class="align-middle">{{ assignment.provName }}</td>
+                      <td class="align-middle">{{ assignment.cityName }}</td>
+                      <td class="align-middle">{{ assignment.arwgDesc }}</td>
+                      <td class="align-middle">{{ assignment.userName }}</td>
+                      <td class="align-middle">{{ assignment.partName }}</td>
+                      <td class="text-center align-middle">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#modal-partner" (click)="openModal(
+                          enumPartnerEntity.PARTNER_AREA_WORKGROUP, 
+                          enumAction.UPDATE,
+                          undefined,
+                          undefined,
+                          {       
+                            pawoPatrEntityid: assignment.pawoPatrEntityid,
+                            pawoArwgCode: assignment.pawoArwgCode,
+                            pawoUserEntityid: assignment.pawoUserEntityid, 
+                          } 
+                          )">
+                          <i class="far fa-edit text-primary"></i>
+                          edit
+                        </button>
+                        <button type="button" class="btn"
+                          (click)="onDeletePartnerAreaWorkgroup(assignment.pawoPatrEntityid, assignment.pawoUserEntityid, assignment.pawoArwgCode )">
+                          <i class="fa fa-times text-danger"></i>
+                          delete
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <ng-container *ngIf="partnerAreaWorkgroupPagination.data.length == 0">
+                    <tr>
+                      <td colspan="7">
+                        <div>
+                          <p class="text-muted h5">No Data Found</p>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              <partner-pagination [currentPage]="partnerAreaWorkgroupPagination!.currentPages"
+                [totalPage]="partnerAreaWorkgroupPagination!.totalPages" [pagesToShow]="3"
+                [pagingParameter]="partnerAreaWorkgroupPagingParameter"
+                (onPaging)="onPartnerAreaWorkgroupPaging($event)"></partner-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.card -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<partner-modal (submitData)="submit($event)" (closeModal)="closeModal($event)" [actionStatus]="actionStatus"
+  [isModalOpen]="isModalOpen" [partner]="partner" [partnerContact]="partnerContact"
+  [partnerAreaWorkgroup]="partnerAreaWorkgroup">
+</partner-modal>
+<!-- /.content-wrapper -->

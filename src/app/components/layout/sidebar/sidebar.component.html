@@ -81,7 +81,7 @@
           </ul>
         </li>
         <ng-container *ngFor="let item of filteredMenus">
-          <ng-container *ngIf="!item.nested">
+          <ng-container *ngIf="!item.child">
             <li class="nav-item">
               <a
                 [routerLink]="item.path"
@@ -94,13 +94,13 @@
               </a>
             </li>
           </ng-container>
-          <ng-container *ngIf="item.nested">
+          <ng-container *ngIf="item.child">
             <li class="nav-item">
-              <a
-                [routerLink]="item.path"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: item.exact }"
-                class="nav-link"
+              <a 
+              [routerLink]="item.path"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: item.exact }"
+              class="nav-link"
               >
                 <i class="nav-icon {{ item.icon }}"></i>
                 <p>
@@ -109,19 +109,17 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <!-- <ng-container *ngFor="let nested of item.nested"> -->
-                <li class="nav-item" *ngFor="let nested of item.nested">
-                  <a
-                    [routerLink]="nested.path"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: nested.exact }"
-                    class="nav-link"
-                  >
-                    <i class="{{ nested.icon }} nav-icon"></i>
-                    <p>{{ nested.title }}</p>
-                  </a>
-                </li>
-                <!-- </ng-container> -->
+                <ng-container *ngFor="let child of item.child">
+                  <li class="nav-item">
+                    <a [routerLink]="child.path"
+                      routerLinkActive="active"
+                      [routerLinkActiveOptions]="{ exact: child.exact }" 
+                    class="nav-link">
+                      <i class="{{ child.icon }} nav-icon"></i>
+                      <p>{{ child.title }}</p>
+                    </a>
+                  </li>
+                </ng-container>
               </ul>
             </li>
           </ng-container>
