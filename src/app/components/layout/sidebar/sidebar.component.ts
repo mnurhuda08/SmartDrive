@@ -29,7 +29,7 @@ export class SidebarComponent {
 
   filterMenu(): void {
     MenuConstant.filter((menuItem) =>
-      menuItem.roles.some((role) => this.currentUser?.roles.includes(role))
+      menuItem.roles?.some((role) => this.currentUser?.roles.includes(role))
     ).map((item) => this.filteredMenus.push(item));
   }
 

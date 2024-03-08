@@ -51,36 +51,80 @@
       >
         <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
-
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Dashboard
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="assets/adminlte/index.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Dashboard v1</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="assets/adminlte/index2.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Dashboard v2</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="assets/adminlte/index3.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Dashboard v3</p>
+              </a>
+            </li>
+          </ul>
+        </li>
         <ng-container *ngFor="let item of filteredMenus">
-          <li class="nav-item">
-            <a
-              [routerLink]="item.path"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: item.exact }"
-              class="nav-link"
-            >
-              <i class="nav-icon {{ item.icon }}"></i>
-              <p>{{ item.title }}</p>
-              <i
-                *ngIf="item.nested && item.nested.length > 0"
-                class="fas fa-angle-left right"
-              ></i>
-            </a>
-            <ul class="nav nav-treeview" style="display: block">
-              <li class="nav-item" *ngFor="let nested of item.nested">
-                <a
-                  [routerLink]="nested.path"
-                  routerLinkActive="active"
-                  [routerLinkActiveOptions]="{ exact: nested.exact }"
-                  class="nav-link"
-                >
-                  <i class="far {{ nested.icon }} nav-icon"></i>
-                  <p>{{ nested.title }}</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          <ng-container *ngIf="!item.nested">
+            <li class="nav-item">
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: item.exact }"
+                class="nav-link"
+              >
+                <i class="nav-icon {{ item.icon }}"></i>
+                <p>{{ item.title }}</p>
+              </a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="item.nested">
+            <li class="nav-item">
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: item.exact }"
+                class="nav-link"
+              >
+                <i class="nav-icon {{ item.icon }}"></i>
+                <p>
+                  {{ item.title }}
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <!-- <ng-container *ngFor="let nested of item.nested"> -->
+                <li class="nav-item" *ngFor="let nested of item.nested">
+                  <a
+                    [routerLink]="nested.path"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: nested.exact }"
+                    class="nav-link"
+                  >
+                    <i class="{{ nested.icon }} nav-icon"></i>
+                    <p>{{ nested.title }}</p>
+                  </a>
+                </li>
+                <!-- </ng-container> -->
+              </ul>
+            </li>
+          </ng-container>
         </ng-container>
       </ul>
     </nav>

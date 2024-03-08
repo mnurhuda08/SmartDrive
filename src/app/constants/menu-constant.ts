@@ -2,42 +2,11 @@ import { IMenus } from '../interfaces/common/i-menus';
 
 export const MenuConstant: IMenus[] = [
   {
-    title: 'Master',
-    roles: ['EM'],
-    exact: false,
-    icon: 'fas fa-home',
-    nested: [
-      {
-        path: '/master/car',
-        title: 'Car',
-        exact: false,
-        icon: 'fas fa-car',
-      },
-      {
-        path: '/master/category',
-        title: 'Category',
-        exact: false,
-        icon: 'fas fa-folder',
-      },
-      {
-        path: '/master/insurance-type',
-        title: 'Insurance Type',
-        exact: false,
-        icon: 'fas fa-file',
-      },
-      {
-        path: '/master/zone',
-        title: 'Zone',
-        exact: false,
-        icon: 'fas fa-globe',
-      },
-      {
-        path: '/master/region',
-        title: 'Region',
-        exact: false,
-        icon: 'fas fa-map-marker',
-      },
-    ],
+    path: '/',
+    title: 'Dashboard',
+    roles: ['EM', 'PC', 'CU'],
+    exact: true,
+    icon: 'fas fa-tachometer-alt',
   },
   {
     path: '/my-profile',
@@ -61,6 +30,20 @@ export const MenuConstant: IMenus[] = [
     icon: 'fas fa-user-secret',
   },
   {
+    path: '/master',
+    title: 'Master',
+    roles: ['EM'],
+    exact: false,
+    icon: 'fas fa-home',
+  },
+  {
+    path: '/master/carbrand',
+    title: 'Car Brand',
+    roles: ['EM'],
+    exact: false,
+    icon: 'fas fa-car',
+  },
+  {
     path: '/customer',
     title: 'Customer',
     roles: ['CU'],
@@ -68,11 +51,27 @@ export const MenuConstant: IMenus[] = [
     icon: 'fas fa-users',
   },
   {
-    path: '/partner',
+    path: '/master',
     title: 'Partner',
-    roles: ['PR'],
+    roles: ['EM'],
     exact: false,
-    icon: 'fas fa-columns',
+    icon: 'fa fa-building',
+    nested: [
+      {
+        path: '/master/car',
+        title: 'Partner',
+        roles: ['PR', 'AD'],
+        exact: false,
+        icon: 'fa fa-car',
+      },
+      {
+        path: '/partner/workorder',
+        title: 'Partner Work Order',
+        roles: ['PR'],
+        exact: false,
+        icon: 'fa fa-briefcase',
+      },
+    ],
   },
   {
     path: '/so',
