@@ -1,0 +1,71 @@
+<div class="card-body">
+    <form [formGroup]="form">
+        <div class="d-flex">
+            <table class="table table-striped table-bordered table-hover table-responsive">
+                <thead class="text-center">
+                    <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                        <th *ngIf="actionStatus.action !== enumAction.VIEW">Action</th>
+                    </tr>
+                </thead>
+                <tbody formArrayName="rows" *ngIf="actionStatus.action === enumAction.CREATE">
+                    <tr *ngFor="let row of rows.controls; let i = index" [formGroupName]="i">
+                        <input type="hidden" formControlName="caspPartEntityid">
+                        <input type="hidden" formControlName="caspSeroId">
+                        <td class="align-middle">
+                            <input type="text" class="form-control" formControlName="caspItemName">
+                            <div *ngIf="row.get('caspItemName')?.errors && row.get('caspItemName')?.errors?.['required']">
+                                <small class="form-text text-danger">Item Name is required.</small>
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <input type="number" class="form-control text-right" formControlName="caspQuantity">
+                            <div *ngIf="row.get('caspQuantity')?.errors && row.get('caspQuantity')?.errors?.['required']">
+                                <small class="form-text text-danger">Item Quantity is required.</small>
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <input type="number" class="form-control text-right" formControlName="caspItemPrice">
+                            <div *ngIf="row.get('caspItemPrice')?.errors && row.get('caspItemPrice')?.errors?.['required']">
+                                <small class="form-text text-danger">Item Price is required.</small>
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <input type="number" class="form-control text-right" formControlName="caspSubtotal" readonly>
+                        </td>
+                        <td class="text-center align-middle">
+                            <button type="button" class="btn" (click)="removeRow(i)" [disabled]="rows.controls.length === 1">
+                                <i class="fa fa-minus-circle text-danger"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="actionStatus.action === enumAction.VIEW">
+                    <tr *ngFor="let row of claimAssetSpareparts;">
+                        <td class="align-middle">
+                            <input type="text" class="form-control" value="{{ row.caspItemName }}" disabled>
+                        </td>
+                        <td class="align-middle">
+                            <input type="number" class="form-control text-right" value="{{ row.caspQuantity }}" disabled>
+                        </td>
+                        <td class="align-middle">
+                            <input type="number" class="form-control text-right" value="{{ row.caspItemPrice }}" disabled>
+                        </td>
+                        <td class="align-middle">
+                            <input type="number" class="form-control text-right" value="{{ row.caspSubtotal }}" disabled>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <div class="text-center d-flex justify-content-end" *ngIf="actionStatus.action !== enumAction.VIEW">
+            <button type="button" class="btn btn-lg" (click)="addRow()">
+                <i class="fa fa-plus-circle fa-2x text-success"></i>
+            </button>
+        </div>
+    </form>
+</div>

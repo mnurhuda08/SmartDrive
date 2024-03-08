@@ -1,5 +1,8 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside
+  class="main-sidebar sidebar-dark-primary elevation-4"
+  *ngIf="currentUser"
+>
   <!-- Brand Logo -->
   <a href="assets/adminlte/index3.html" class="brand-link">
     <img
@@ -8,7 +11,7 @@
       class="brand-image img-circle elevation-3"
       style="opacity: 0.8"
     />
-    <span class="brand-text font-weight-light">Ngademin</span>
+    <span class="brand-text font-weight-light text-capitalize">SmartDrive</span>
   </a>
 
   <!-- Sidebar -->
@@ -17,13 +20,24 @@
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
         <img
-          src="assets/adminlte/dist/img/user2-160x160.jpg"
+          *ngIf="user"
+          src="{{
+            user.userPhoto
+              ? baseUrlResources +
+                '/Images/users/' +
+                user.userPhoto +
+                '?' +
+                dateNow
+              : 'assets/adminlte/dist/img/user2-160x160.jpg'
+          }}"
           class="img-circle elevation-2"
           alt="User Image"
         />
       </div>
       <div class="info">
-        <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="#" class="d-block text-capitalize">{{
+          user ? user.userFullName : ""
+        }}</a>
       </div>
     </div>
 
@@ -67,17 +81,48 @@
           </ul>
         </li>
         <ng-container *ngFor="let item of filteredMenus">
-          <li class="nav-item">
-            <a
+          <ng-container *ngIf="!item.child">
+            <li class="nav-item">
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: item.exact }"
+                class="nav-link"
+              >
+                <i class="nav-icon {{ item.icon }}"></i>
+                <p>{{ item.title }}</p>
+              </a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="item.child">
+            <li class="nav-item">
+              <a 
               [routerLink]="item.path"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: item.exact }"
               class="nav-link"
-            >
-              <i class="nav-icon {{ item.icon }}"></i>
-              <p>{{ item.title }}</p>
-            </a>
-          </li>
+              >
+                <i class="nav-icon {{ item.icon }}"></i>
+                <p>
+                  {{ item.title }}
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <ng-container *ngFor="let child of item.child">
+                  <li class="nav-item">
+                    <a [routerLink]="child.path"
+                      routerLinkActive="active"
+                      [routerLinkActiveOptions]="{ exact: child.exact }" 
+                    class="nav-link">
+                      <i class="{{ child.icon }} nav-icon"></i>
+                      <p>{{ child.title }}</p>
+                    </a>
+                  </li>
+                </ng-container>
+              </ul>
+            </li>
+          </ng-container>
         </ng-container>
       </ul>
     </nav>

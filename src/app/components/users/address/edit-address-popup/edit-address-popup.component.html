@@ -1,0 +1,71 @@
+<div
+  class="modal fade"
+  id="{{ display }}"
+  tabindex="-1"
+  role="dialog"
+  [attr.aria-labelledby]="display"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="{{ display }}">Address</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label class="col-form-label">Address 1:</label>
+            <textarea
+              class="form-control"
+              name="usdrAddress1"
+              [(ngModel)]="userAddress.usdrAddress1"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Address 2:</label>
+            <textarea
+              class="form-control"
+              name="usdrAddress2"
+              [(ngModel)]="userAddress.usdrAddress2"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">City:</label>
+            <select
+              name="Address_type"
+              class="form-control"
+              name="usdrCityId"
+              [(ngModel)]="userAddress.usdrCityId"
+              required
+            >
+              <ng-container *ngFor="let item of cities">
+                <option [value]="item.cityId">{{ item.cityName }}</option>
+              </ng-container>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="onConfirm()"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
