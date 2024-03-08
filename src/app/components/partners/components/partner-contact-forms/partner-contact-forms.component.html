@@ -1,0 +1,51 @@
+<div class="card-body">
+    <form [formGroup]="form"> 
+        <div class="col-12 col-md-12 col-sm-12">
+            <div class="form-group">
+                <input type="hidden" name="pacoUserEntityid" formControlName="pacoUserEntityid">
+                <label for="pacoPatrnEntityid">Partner</label>
+                <select name="pacoPatrnEntityid" id="pacoPatrnEntityid" class="form-control" formControlName="pacoPatrnEntityid">
+                    <option value="" disabled selected>Select Partner</option>
+                    <option *ngFor="let partner of partners" [value]="partner.partEntityid">{{ partner.partName }}</option>
+                </select>
+                <div *ngIf="form.get('pacoPatrnEntityid')?.errors !== null">
+                    <small *ngIf="form.get('pacoPatrnEntityid')?.errors?.['required']" class="form-text text-danger">Partner is required</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" class="form-control" id="fullName" name="fullName" formControlName="fullName" placeholder="Enter FullName">
+                <div *ngIf="form.get('fullName')?.errors !== null">
+                    <small *ngIf="form.get('fullName')?.errors?.['required']" class="form-text text-danger">Full Name is required</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" id="phoneNumber" formControlName="phoneNumber" name="phoneNumber" class="form-control" placeholder="Enter Phone Number">
+                <div class="text-danger" *ngIf="form.get('phoneNumber')?.errors !== null">
+                    <small *ngIf="form.get('phoneNumber')?.errors?.['required']" class="form-text text-danger">Phone Number is required.</small>
+                    <small *ngIf="form.get('phoneNumber')?.errors?.['pattern']" class="form-text text-danger">Phone Number must contain only numbers.</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pacoStatus">Partner Status</label>
+                <select name="pacoStatus" id="pacoStatus" formControlName="pacoStatus" class="form-control">
+                    <option value="" disabled selected>Select Status Contact</option>
+                    <option value="ACTIVE">ACTIVE</option>
+                    <option value="INACTIVE">INACTIVE</option>
+                </select>
+                <div  *ngIf="form.get('pacoStatus')?.errors !== null && form.get('pacoStatus')?.errors?.['required']">
+                    <small class="form-text text-danger">Partner Status is required.</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="false" id="isGranted" formControlName="isGranted">
+                    <label class="form-check-label" for="isGranted">
+                      Granted User
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

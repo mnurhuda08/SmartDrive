@@ -81,17 +81,48 @@
           </ul>
         </li>
         <ng-container *ngFor="let item of filteredMenus">
-          <li class="nav-item">
-            <a
+          <ng-container *ngIf="!item.child">
+            <li class="nav-item">
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: item.exact }"
+                class="nav-link"
+              >
+                <i class="nav-icon {{ item.icon }}"></i>
+                <p>{{ item.title }}</p>
+              </a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="item.child">
+            <li class="nav-item">
+              <a 
               [routerLink]="item.path"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: item.exact }"
               class="nav-link"
-            >
-              <i class="nav-icon {{ item.icon }}"></i>
-              <p>{{ item.title }}</p>
-            </a>
-          </li>
+              >
+                <i class="nav-icon {{ item.icon }}"></i>
+                <p>
+                  {{ item.title }}
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <ng-container *ngFor="let child of item.child">
+                  <li class="nav-item">
+                    <a [routerLink]="child.path"
+                      routerLinkActive="active"
+                      [routerLinkActiveOptions]="{ exact: child.exact }" 
+                    class="nav-link">
+                      <i class="{{ child.icon }} nav-icon"></i>
+                      <p>{{ child.title }}</p>
+                    </a>
+                  </li>
+                </ng-container>
+              </ul>
+            </li>
+          </ng-container>
         </ng-container>
       </ul>
     </nav>

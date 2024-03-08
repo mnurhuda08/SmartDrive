@@ -1,0 +1,70 @@
+<div class="card-body">
+    <form [formGroup]="form" enctype="multipart/form-data" *ngIf="actionStatus.action === enumAction.CREATE">
+        <div class="col-md-12 col-12 col-sm-12" formArrayName="rows">
+            <div class="row" *ngFor="let row of rows.controls; let i = index" [formGroupName]="i">
+                <input type="hidden" formControlName="caevPartEntityid">
+                <input type="hidden" formControlName="caevSeroId">
+                <div class="form-group col-md-3 col-3 col-sm-3">
+                    <label for="fee">Fee</label>
+                    <input id="fee" type="number" formControlName="caevFee" class="form-control text-right">
+                    <div *ngIf="row.get('caevFee')?.errors && row.get('caevFee')?.errors?.['required']">
+                        <small class="form-text text-danger">Fee is required.</small>
+                    </div>
+                </div>
+                <div class="form-group col-md-4 col-4 col-sm-4">
+                    <label for="caevNote">Note</label>
+                    <input type="text" id="" class="form-control" formControlName="caevNote">
+                    <div *ngIf="row.get('caevNote')?.errors && row.get('caevNote')?.errors?.['required']">
+                        <small class="form-text text-danger">Note is required.</small>
+                    </div>
+                </div>
+                <div class="form-group col-md-4 col-4 col-sm-4">
+                    <label for="photo">Evidence File</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" formControlName="photo"
+                            (change)="onFileSelected($event,i)" id="photo">
+                        <label class="custom-file-label" for="photo">{{getFileInputLabel(i)}}</label>
+                    </div>
+                    <div *ngIf="row.get('photo')?.errors && row.get('photo')?.errors?.['required']">
+                        <small class="form-text text-danger">Photo is required.</small>
+                    </div>
+                </div>
+                <div class="col-md-1 col-1 col-sm-1 d-flex justify-content-center align-items-center form-group">
+                    <div class="">
+                        <button type="button" class="btn" (click)="removeRow(i)"
+                            [disabled]="rows.controls.length === 1">
+                            <i class="fa fa-minus text-danger"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end mt-4">
+                <button type="button" class="btn btn-lg" (click)="addRow()">
+                    <i class="fa fa-plus fa-2x text-success"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="d-flex flex-column" *ngIf="actionStatus.action === enumAction.VIEW">
+        <ng-container *ngFor="let item of claimAssetEvidences">
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <a href="{{ item.caevUrl }}" data-toggle="lightbox" data-title="sample 2 - black"
+                            data-gallery="gallery">
+                            <img src="{{ item.caevUrl }}" class="img-fluid mb-2" alt="black sample">
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Photo Evidence</h5>
+                            <p class="card-text"><strong>Notes:</strong> {{ item.caevNote }}</p>
+                            <p class="card-text"><strong>Fee:</strong> {{ item.caevServiceFee }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <div *ngIf="claimAssetEvidences?.length === 0" class="text-center text-muted">No photo evidence available.</div>
+    </div>
+</div>
