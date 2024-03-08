@@ -1,7 +1,9 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, isFormArray } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CreateCustomerRequest } from 'src/app/interfaces/cr/create-customer-request';
+import { CreatePolisRequest } from 'src/app/interfaces/cr/create-polis-request';
+import { CustomerRequest } from 'src/app/interfaces/cr/customer-request';
 import { CustomerRequestService } from 'src/app/services/cr/customer-request.service';
 
 @Component({
@@ -11,116 +13,57 @@ import { CustomerRequestService } from 'src/app/services/cr/customer-request.ser
 })
 export class CreateNewPolisComponent implements OnInit {
   @ViewChild('createNewPolisModal') createNewPolisModal!: ElementRef;
-  newPolisForm: FormGroup;
+  newPolisForm!: FormGroup;
+  customerRequest!: CustomerRequest;
   message = '';
 
-  constructor(
-    private fb: FormBuilder,
-    private customerRequestService: CustomerRequestService,
-    private router: Router) {
-    this.newPolisForm = this.fb.group({
-      customerName: ['', Validators.required],
-      createPolisDate: ['',],
-      customerPhoneNumber: [''],
-      insurancePlan: [''],
-      cityId: [''],
-      areaCode: [''],
-      carYear: [''],
-      policeNumber: [''],
-      carSeries: [''],
-      polisStartDate: [''],
-      paidType: [''],
-      currentPrice: [''],
-      grantUser: false
+  constructor
+    (
+      private activatedRoute: ActivatedRoute,
+      private customerRequestService: CustomerRequestService,
+      private router: Router
+    ) {
+    this.activatedRoute.params.subscribe((params) => {
+      this.customerRequestService.getCustomerRequest(params['id'])
+        .subscribe((res: CustomerRequest) => {
+          this.customerRequest = res;
+          console.log(this.customerRequest)
+          this.newPolisForm = new FormGroup({
+            customerName: new FormControl({ value: this.customerRequest.creqCustEntity.userFullName, disabled: true }),
+            createPolisDate: new FormControl({ value: this.customerRequest.creqCreateDate, disabled: true }),
+            customerPhoneNumber: new FormControl({ value: this.customerRequest.creqCustEntity.userPhones[0].usphPhoneNumber, disabled: true }),
+            insurancePlan: new FormControl({ value: this.customerRequest.customerInscAsset.ciasIntyName, disabled: true }),
+            cityId: new FormControl({ value: this.customerRequest.customerInscAsset.ciasCityId, disabled: true }),
+            areaCode: new FormControl({ value: 'BCY-0001', disabled: true }),
+            carYear: new FormControl({ value: this.customerRequest.customerInscAsset.ciasYear, disabled: true }),
+            policeNumber: new FormControl({ value: this.customerRequest.customerInscAsset.ciasPoliceNumber, disabled: true }),
+            carSeries: new FormControl({ value: this.customerRequest.customerInscAsset.ciasCarsId, disabled: true }),
+            polisCreatedOn: new FormControl({ value: this.customerRequest.customerInscAsset.ciasStartdate, disabled: true }),
+            polisStartDate: new FormControl({ value: this.customerRequest.customerInscAsset.ciasStartdate, disabled: true }),
+            polisEndDate: new FormControl({ value: this.customerRequest.customerInscAsset.ciasEnddate, disabled: true }),
+            paidType: new FormControl({ value: this.customerRequest.customerInscAsset.ciasPaidType, disabled: true }),
+            currentPrice: new FormControl({ value: this.customerRequest.customerInscAsset.ciasCurrentPrice, disabled: true }),
+            insurancePrice: new FormControl({ value: this.customerRequest.customerInscAsset.ciasInsurancePrice, disabled: true }),
+            polisTotalPremi: new FormControl({ value: this.customerRequest.customerInscAsset.ciasTotalPremi, disabled: true }),
+          })
+        })
     })
   }
+
+  get f(): any { return this.newPolisForm.controls }
 
   ngOnInit(): void {
-    // this.CreatePolisDate.setValue(this.getCurrentDateString());
-    // this.PolisStartDate.setValue(this.getCurrentDateString());
   }
 
 
-  createNewPolis() {
-    let request: CreateCustomerRequest = {
-      empEntityid: 1040,
-      isGranted: this.Granted.value,
-      areaCode: this.AreaCode.value,
-      creqCreateDate: this.CreatePolisDate.value,
-      customerDto: {
-        customerName: this.CustomerName.value,
-        phoneNumber: this.CustomerPhoneNumber.value
-      },
-      customerInscAsset: {
-        ciasPoliceNumber: this.PoliceNumber.value,
-        ciasYear: this.CarYear.value,
-        ciasStartdate: this.PolisStartDate.value,
-        ciasEnddate: null,
-        ciasCurrentPrice: this.CurrentPrice.value,
-        ciasInsurancePrice: null,
-        ciasTotalPremi: null,
-        ciasPaidType: this.PaidType.value,
-        ciasIsNewChar: 'Y',
-        ciasCarsId: this.CarSeries.value,
-        ciasIntyName: this.InsurancePlan.value,
-        ciasCityId: this.CityId.value
-      }
-    };
+  onSubmit(): void {
 
-    this.customerRequestService.createCustomerRequest(request).subscribe((res: any) => {
-      this.message = res.toString();
-      this.router.navigate(['customer']);
-    })
+    const creqEntityid: number = this.customerRequest.creqEntityid;
 
-    if (this.createNewPolisModal) {
-      const modalElement: HTMLElement = this.createNewPolisModal.nativeElement;
-      modalElement.classList.remove('show');
-      modalElement.style.display = 'none';
-      document.body.classList.remove('modal-open');
-      const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
-      if (modalBackdrop) {
-        modalBackdrop.remove();
-      }
-    }
-  }
-
-  get CustomerName(): FormControl {
-    return this.newPolisForm.get('customerName') as FormControl;
-  }
-  get CreatePolisDate(): FormControl {
-    return this.newPolisForm.get('createPolisDate') as FormControl;
-  }
-  get CustomerPhoneNumber(): FormControl {
-    return this.newPolisForm.get('customerPhoneNumber') as FormControl;
-  }
-  get InsurancePlan(): FormControl {
-    return this.newPolisForm.get('insurancePlan') as FormControl;
-  }
-  get CityId(): FormControl {
-    return this.newPolisForm.get('cityId') as FormControl;
-  }
-  get AreaCode(): FormControl {
-    return this.newPolisForm.get('areaCode') as FormControl;
-  }
-  get CarYear(): FormControl {
-    return this.newPolisForm.get('carYear') as FormControl;
-  }
-  get PoliceNumber(): FormControl {
-    return this.newPolisForm.get('policeNumber') as FormControl;
-  }
-  get CarSeries(): FormControl {
-    return this.newPolisForm.get('carSeries') as FormControl;
-  }
-  get PolisStartDate(): FormControl {
-    return this.newPolisForm.get('polisStartDate') as FormControl;
-  }
-  get PaidType(): FormControl {
-    return this.newPolisForm.get('paidType') as FormControl;
-  }
-  get CurrentPrice(): FormControl {
-    return this.newPolisForm.get('currentPrice') as FormControl;
-  }
-  get Granted(): FormControl {
-    return this.newPolisForm.get('grantUser') as FormControl;
+    this.customerRequestService.createPolis({ creqEntityid } as CreatePolisRequest)
+      .subscribe(() => this.router.navigate(['customer']))
   }
 }
+
+
+

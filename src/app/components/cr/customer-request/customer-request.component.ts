@@ -29,6 +29,10 @@ export class CustomerRequestComponent implements OnInit {
     return `${newDate[2]}/${newDate[1]}/${newDate[0]}`
   }
 
+  createNewPolis(id: number) {
+    this.router.navigate(['customer/request/polis/', id])
+  }
+
   createClaimPolis(id: number) {
     this.router.navigate(['customer/request/claim/', id])
   }

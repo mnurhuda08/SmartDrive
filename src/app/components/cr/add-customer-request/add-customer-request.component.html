@@ -14,10 +14,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Create New Polis</h5>
+                            <h5 class="card-title">Request Polis</h5>
                         </div>
-                        <div class="card-body" *ngIf="customerRequest">
-                            <form [formGroup]="newPolisForm" (ngSubmit)="onSubmit()">
+                        <div class="card-body">
+                            <form [formGroup]="requestPolisForm" (ngSubmit)="onSubmit()">
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">Customer Info</h3>
@@ -28,13 +28,28 @@
                                                 <div class="form-group">
                                                     <label>Customer Name</label>
                                                     <input type="text" class="form-control" name="customerName"
-                                                        formControlName="customerName">
+                                                        formControlName="customerName"
+                                                        placeholder="Masukkan Nama Anda...">
+
+                                                    <!-- Errors -->
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="CustomerName.errors?.['required'] && (CustomerName.dirty || CustomerName.touched)">
+                                                        Customer Name is Required
+                                                    </div>
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="!!CustomerName.errors?.['minlength'] && (CustomerName.dirty || CustomerName.touched)">
+                                                        Customer Name is too Short. At least 2 characters.
+                                                    </div>
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="CustomerName.errors?.['pattern'] && (CustomerName.dirty || CustomerName.touched)">
+                                                        Name should start with an alphabet.
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Create Polis Date</label>
-                                                    <input type="text" class="form-control" name="createPolisDate"
+                                                    <input type="date" class="form-control" name="createPolisDate"
                                                         formControlName="createPolisDate">
                                                 </div>
                                             </div>
@@ -43,9 +58,20 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Phone Number</label>
-                                                    <input type="tel" class="form-control"
+                                                    <input type="text" class="form-control"
                                                         placeholder="Masukkan No Telepon ..." name="customerPhoneNumber"
                                                         formControlName="customerPhoneNumber">
+
+                                                    <!-- Errors -->
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="CustomerPhoneNumber.errors?.['required'] && (CustomerPhoneNumber.dirty || CustomerPhoneNumber.touched)">
+                                                        Phone Number is Required
+                                                    </div>
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="!!CustomerPhoneNumber.errors?.['pattern'] && (CustomerPhoneNumber.dirty || CustomerPhoneNumber.touched)">
+                                                        Phone numbers must consist of 10 to 12 digits number
+                                                    </div>
+
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
@@ -63,13 +89,9 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>City</label>
-                                                    <select class="form-control" name="paidType"
-                                                        formControlName="cityId">
-                                                        <option value=1>Bandung</option>
-                                                        <option value=2>Bogor</option>
-                                                        <option value=3>Cianjur</option>
-                                                        <option value=4>Cirebon</option>
-                                                        <option value=5>Bekasi</option>
+                                                    <select class="form-control" name="cityId" formControlName="cityId">
+                                                        <option value="1">Bandung</option>
+                                                        <option value="2">Bogor</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -86,14 +108,32 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Area Code</label>
-                                                    <input type="text" class="form-control" formControlName="areaCode">
+                                                    <input type="text" class="form-control" formControlName="areaCode"
+                                                        placeholder="Masukkan Area Code...">
+
+                                                    <!-- Errors -->
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="AreaCode.errors?.['required'] && (AreaCode.dirty || AreaCode.touched)">
+                                                        Area Code is Required
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Year</label>
                                                     <input type="text" class="form-control" name="carYear"
-                                                        formControlName="carYear">
+                                                        formControlName="carYear"
+                                                        placeholder="Masukkan Tahun Kendaraan...">
+
+                                                    <!-- Errors -->
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="CarYear.errors?.['required'] && (CarYear.dirty || CarYear.touched)">
+                                                        Year is Required
+                                                    </div>
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="CarYear.errors?.['maxlength'] && (CarYear.dirty || CarYear.touched)">
+                                                        Max 4 characters long
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,7 +142,14 @@
                                                 <div class="form-group">
                                                     <label>Police Number</label>
                                                     <input type="text" class="form-control"
-                                                        formControlName="policeNumber">
+                                                        formControlName="policeNumber"
+                                                        placeholder="Masukkan Nomor Kendaraan...">
+
+                                                    <!-- Errors -->
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="PoliceNumber.errors?.['required'] && (PoliceNumber.dirty || PoliceNumber.touched)">
+                                                        Police Number is Required
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,7 +159,7 @@
                                                     <label>Merek/Model/Seri</label>
                                                     <select class="form-control" name="carSeries"
                                                         formControlName="carSeries">
-                                                        <option value=1>HRV</option>
+                                                        <option value="1">HRV</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -128,15 +175,14 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Start Date</label>
-                                                    <input type="text" class="form-control" name="polisStartDate"
+                                                    <input type="date" class="form-control" name="polisStartDate"
                                                         formControlName="polisStartDate">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>End Date</label>
-                                                    <input type="text" class="form-control"
-                                                        formControlName="polisEndDate">
+                                                    <input type="date" class="form-control" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -161,6 +207,12 @@
                                                     <input type="number" class="form-control" name="currentPrice"
                                                         formControlName="currentPrice"
                                                         placeholder="Masukkan Harga Pasaran Kendaraan...">
+
+                                                    <!-- Errors -->
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="CurrentPrice.errors?.['required'] && (CurrentPrice.dirty || CurrentPrice.touched)">
+                                                        Current Price is Required
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -168,8 +220,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Insurance Price</label>
-                                                    <input type="number" class="form-control"
-                                                        formControlName="insurancePrice">
+                                                    <input type="number" class="form-control" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -177,8 +228,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Total Premi</label>
-                                                    <input type="number" class="form-control"
-                                                        formControlName="polisTotalPremi">
+                                                    <input type="number" class="form-control" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -186,9 +236,9 @@
                                 </div>
                                 <div class="card-footer d-flex justify-content-end">
                                     <button type="submit" class="btn btn-secondary mr-2"
-                                        routerLink="/customer">Back</button>
-                                    <!-- <button type="submit" class="btn btn-secondary mr-2">Cancel Polis</button> -->
-                                    <button type="submit" class="btn btn-primary">Create New Polis</button>
+                                        routerLink="/customer">Cancel</button>
+                                    <!-- <button type="button" class="btn btn-primary mr-2">Save</button> -->
+                                    <button type="submit" class="btn btn-primary">Request Polis</button>
                                 </div>
                             </form>
                         </div>

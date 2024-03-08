@@ -20,6 +20,8 @@ import { CreateNewClaimComponent } from './components/cr/create-new-claim/create
 import { CreateClosePolisComponent } from './components/cr/create-close-polis/create-close-polis.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AddCustomerRequestComponent } from './components/cr/add-customer-request/add-customer-request.component';
+import { AddAgenRequestComponentn } from './components/cr/add-agen-request/add-agen-request.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CreateNewPolisComponent,
     CreateNewClaimComponent,
     CreateClosePolisComponent,
+    AddCustomerRequestComponent,
+    AddAgenRequestComponentn
   ],
   imports: [
     BrowserModule,

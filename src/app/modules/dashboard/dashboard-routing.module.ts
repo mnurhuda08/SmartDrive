@@ -7,6 +7,9 @@ import { CarModelComponent } from 'src/app/components/master/car-model/car-model
 import { CustomerRequestComponent } from 'src/app/components/cr/customer-request/customer-request.component';
 import { CreateNewClaimComponent } from 'src/app/components/cr/create-new-claim/create-new-claim.component';
 import { CreateClosePolisComponent } from 'src/app/components/cr/create-close-polis/create-close-polis.component';
+import { AddCustomerRequestComponent } from 'src/app/components/cr/add-customer-request/add-customer-request.component';
+import { AddAgenRequestComponentn } from 'src/app/components/cr/add-agen-request/add-agen-request.component';
+import { CreateNewPolisComponent } from 'src/app/components/cr/create-new-polis/create-new-polis.component';
 
 const routes: Routes = [
   {
@@ -36,6 +39,18 @@ const routes: Routes = [
       {
         path: 'customer',
         component: CustomerRequestComponent,
+      },
+      {
+        path: 'customer/request/customer',
+        component: AddCustomerRequestComponent,
+      },
+      {
+        path: 'customer/request/agen',
+        component: AddAgenRequestComponentn,
+      },
+      {
+        path: 'customer/request/polis/:id',
+        component: CreateNewPolisComponent,
       },
       {
         path: 'customer/request/claim/:id',

@@ -59,8 +59,12 @@
                                         <th>Customer Type</th>
                                         <th>Status</th>
                                         <th>
-                                            <button type="button" class="btn btn-primary mr-2" data-toggle="modal"
-                                                data-target="#createNewPolisModal">
+                                            <button type="button" class="btn btn-secondary mr-2"
+                                                routerLink="request/agen">
+                                                <i class="fas fa-plus"></i> add
+                                            </button>
+                                            <button type="button" class="btn btn-secondary mr-2"
+                                                routerLink="request/customer">
                                                 <i class="fas fa-plus"></i> add
                                             </button>
                                         </th>
@@ -79,13 +83,18 @@
                                         <td>{{item.creqStatus}}</td>
                                         <td>
                                             <button type="button" class="btn btn-outline-info mr-2"
-                                                (click)="createClosePolis(item.creqEntityid)"
-                                                *ngIf="item.creqType == 'CLAIM'">
+                                                (click)="createNewPolis(item.creqEntityid)"
+                                                *ngIf="item.creqType == 'FEASIBILITY' && item.creqStatus == 'OPEN'">
                                                 Review
                                             </button>
                                             <button type="button" class="btn btn-outline-info mr-2"
                                                 (click)="createClaimPolis(item.creqEntityid)"
                                                 *ngIf="item.creqType == 'POLIS' && item.creqStatus == 'OPEN'">
+                                                Review
+                                            </button>
+                                            <button type="button" class="btn btn-outline-info mr-2"
+                                                (click)="createClosePolis(item.creqEntityid)"
+                                                *ngIf="item.creqType == 'CLAIM'">
                                                 Review
                                             </button>
                                         </td>
@@ -104,6 +113,5 @@
         <!-- /.card -->
     </section>
     <!-- /.content -->
-    <app-create-new-polis></app-create-new-polis>
 </div>
 <!-- /.content-wrapper -->

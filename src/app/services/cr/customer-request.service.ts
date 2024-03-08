@@ -3,10 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 import { PagingParameter } from 'src/app/constants/PagingParameter';
 import { CreateCustomerRequest } from 'src/app/interfaces/cr/create-customer-request';
+import { CreatePolisRequest } from 'src/app/interfaces/cr/create-polis-request';
 import { CustomerClaimRequest } from 'src/app/interfaces/cr/customer-claim-request';
 import { CustomerCloseRequest } from 'src/app/interfaces/cr/customer-close-request';
 import { CustomerRequest } from 'src/app/interfaces/cr/customer-request';
 import { PaginationList } from 'src/app/interfaces/cr/pagination-list';
+import { RequestPolisAgen } from 'src/app/interfaces/cr/request-polis-agen';
+import { RequestPolisCustomer } from 'src/app/interfaces/cr/request-polis-customer';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -31,6 +34,13 @@ export class CustomerRequestService {
     return this.http.get<CustomerRequest>(url);
   }
 
+  createPolis(request: CreatePolisRequest): any {
+    return this.http.put(`${environment.baseUrl}/${this.url}/request/polis`, request, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<CreatePolisRequest>('createPolis'))
+      )
+  }
+
   claimPolis(request: CustomerClaimRequest): any {
     return this.http.put(`${environment.baseUrl}/${this.url}/request/claim`, request, this.httpOptions)
       .pipe(
@@ -49,10 +59,17 @@ export class CustomerRequestService {
     return this.http.get<PaginationList<CustomerRequest>>(`${environment.baseUrl}/${this.url}/paging${parameter.toUrl()}`)
   }
 
-  createCustomerRequest(request: CreateCustomerRequest): Observable<CustomerRequest> {
-    return this.http.post<CreateCustomerRequest>(`${environment.baseUrl}/${this.url}/request`, JSON.stringify(request), this.httpOptions)
+  createRequestByAgen(request: RequestPolisAgen): Observable<CustomerRequest> {
+    return this.http.post<RequestPolisAgen>(`${environment.baseUrl}/${this.url}/request/create/agen`, JSON.stringify(request), this.httpOptions)
       .pipe(
-        catchError(this.handleError<CreateCustomerRequest>('createCustomerRequest'))
+        catchError(this.handleError<RequestPolisAgen>('createRequestByAgen'))
+      )
+  }
+
+  createRequestByCustomer(request: RequestPolisCustomer): Observable<CustomerRequest> {
+    return this.http.post<RequestPolisCustomer>(`${environment.baseUrl}/${this.url}/request/create/customer`, JSON.stringify(request), this.httpOptions)
+      .pipe(
+        catchError(this.handleError<RequestPolisCustomer>('createRequestByCustomer'))
       )
   }
 
