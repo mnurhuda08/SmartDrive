@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
+import { IClaims } from 'src/app/interfaces/users/i-login-claims';
 import { PaymentTransaction } from 'src/app/models/payment/PaymentTransaction';
 import { PaymentTransactionService } from 'src/app/services/payment/payment-transaction.service';
+import { LoginService } from 'src/app/services/users/login.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-payment-transaction',
@@ -13,46 +16,53 @@ export class PaymentTransactionComponent implements OnInit {
   title = "paging";
   page: number = 1;
   count: number = 0;
-  tableSize: number =3;
+  tableSize: number = 3;
   tableSizes: any = [5, 10, 15, 25]
-  userId: number = 1241
-  @ViewChild(MatSort) sort!: MatSort
-  constructor(private paymentTrxService: PaymentTransactionService) {
+
+  currentUser!: IClaims
+
+  constructor(private paymentTrxService: PaymentTransactionService, private loginService: LoginService) {
     this.data = []
- 
   }
   ngOnInit(): void {
-    // this.getAllPaymentTransaction();
-    this.paymentTrxService.getPaymentTransactionsCount(this.userId).subscribe(count => {
-      console.log("Received count from API:", count);
-      this.count = count;
-      console.log("Updated count:", this.count);
-    });
-    this.getAllPaymentTransactionByPage()
+    this.fetchMe();
   }
 
-  // getAllPaymentTransactionByPage() {
-  //   this.paymentService.getPaymentTransactionsPaging(2, this.page, this.tableSize)
-  //     .subscribe((result: PaymentTransaction[]) => (this.data = result))
-  // }
- 
-  getAllPaymentTransactionByPage() {
-    this.paymentTrxService.getPaymentTransactionsPaging(this.userId, this.page, this.tableSize)
+  fetchMe() {
+    this.loginService.getMe(`${environment.baseUrl}/Auth/Me`).subscribe({
+      next: (data) => {
+        this.currentUser = data;
+        this.getPaymentPagingCountByUserId(parseInt(data.sub));
+        this.getAllPaymentTransactionByPage(parseInt(data.sub))
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  getPaymentPagingCountByUserId(userId: number) {
+    this.paymentTrxService.getPaymentTransactionsCount(userId).subscribe(count => {
+      this.count = count;
+    });
+  }
+
+  getAllPaymentTransactionByPage(userId: number) {
+    this.paymentTrxService.getPaymentTransactionsPaging(userId, this.page, this.tableSize)
       .subscribe((result: { data: PaymentTransaction[], count: number }) => {
-        this.data = result; 
+        this.data = result;
       });
   }
 
   onTableDataChange(event: any) {
     this.page = event
-    this.getAllPaymentTransactionByPage()
-    // this.getAllPaymentTransaction();
+    this.getAllPaymentTransactionByPage(parseInt(this.currentUser.sub)) 
   }
 
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    this.getAllPaymentTransactionByPage()
+    this.getAllPaymentTransactionByPage(parseInt(this.currentUser.sub))
 
   }
 

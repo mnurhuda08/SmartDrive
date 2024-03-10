@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { PaymentTransaction } from 'src/app/models/payment/PaymentTransaction';
+import { PartnerBatchInvoiceResponse } from 'src/app/models/payment/bank';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -17,13 +18,13 @@ export class PaymentTransactionService {
     );
   }
 
-  public getPaymentTransactionsCount(userId: number): Observable<number> {
+  public getPaymentTransactionsCount(userId: null | number): Observable<number> {
     const countUrl = `${environment.baseUrl}/${this.url}/pagingCount?UserEntityId=${userId}`;
     return this.http.get<number>(countUrl);
   }
 
   public getPaymentTransactionsPaging(
-    userId: number,
+    userId: null | number,
     pageNumber: null | number = null,
     pageSize: null | number = null,
     accountNumber: null | string = null,

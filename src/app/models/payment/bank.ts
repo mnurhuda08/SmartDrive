@@ -5,3 +5,14 @@ export class Bank {
 }
 
 
+export interface PartnerBatchInvoiceResponse {
+  invoiceNo?: string;
+  createOn?: Date;
+  polisNumber?: string;
+  policeNumber?: string;
+  subtotal: number;
+  tax: number;
+  accountNumber?: string;
+  paidDate?: Date;
+  partnerName?: string;
+}

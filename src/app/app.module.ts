@@ -13,8 +13,7 @@ import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { SidebarComponent } from './components/layout/sidebar/sidebar.component';
 import { CarModelComponent } from './components/master/car-model/car-model.component';
 import { CarSeriesComponent } from './components/master/car-series/car-series.component';
-import { BankModifierComponent } from './components/payment/bank/crud/bank-modifier/bank-modifier.component';
-import { FintechComponent } from './components/payment/fintech/fintech.component';
+import { BankModifierComponent } from './components/payment/bank/crud/bank-modifier/bank-modifier.component'; 
 import { UserAccountComponent } from './components/payment/user-account/user-account.component';
 import { PaymentTransactionComponent } from './components/payment/payment-transaction/payment-transaction.component';
 import { FintechModifierComponent } from './components/payment/fintech/crud/fintech-modifier/fintech-modifier.component';
@@ -31,7 +30,7 @@ import { RegisterComponent } from './components/users/register/register.componen
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { DashboardLayoutComponent } from './components/layout/dashboard-layout/dashboard-layout.component';
 import { ServicefeasibilityComponent } from './components/so/servicefeasibility/servicefeasibility.component';
-import { ForgotPasswordComponent } from './components/users/forgot-password/forgot-password.component';
+import { ForgotPasswordComponent } from './components/users/forgot-password/forgot-password.component'; 
 
 @NgModule({
   declarations: [
@@ -45,8 +44,7 @@ import { ForgotPasswordComponent } from './components/users/forgot-password/forg
     LoginComponent,
     LoginLayoutComponent,
     DashboardLayoutComponent,
-    BankModifierComponent,
-    FintechComponent,
+    BankModifierComponent, 
     UserAccountComponent,
     PaymentTransactionComponent,
     BlankComponent,
@@ -54,7 +52,7 @@ import { ForgotPasswordComponent } from './components/users/forgot-password/forg
     PaymentPageComponentComponent,
     PaymentBatchComponent,
     RegisterComponent,
-    ForgotPasswordComponent,
+    ForgotPasswordComponent, 
   ],
   imports: [
     BrowserModule,
