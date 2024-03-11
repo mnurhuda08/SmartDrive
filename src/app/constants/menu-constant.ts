@@ -43,4 +43,19 @@ export const MenuConstant: IMenus[] = [
     exact: false,
     icon: 'fas fa-columns',
   },
+  {
+    path: '/hr',
+    title: 'Human Resource',
+    roles: ['EM'],
+    exact: false,
+    icon: 'fas fa-user-tie',
+  },
+  {
+    path: '/hr/employee',
+    title: 'Employee',
+    roles: ['EM'],
+    exact: false,
+    icon: 'fas fa-address-book',
+  },
+  
 ];

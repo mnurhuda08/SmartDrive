@@ -1,0 +1,112 @@
+
+<div class="modal fade" id="employeeeawg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Assignment Workgroup</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+           
+            <form (ngSubmit)="saveEawg()">
+                
+                    
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Employee Name</label>
+                            <select class="form-select" aria-label="Default select example" [(ngModel)]="eawgCreate1.eawgEntityid" name="eawgEntityId" placeholder="Select Graduate">
+                                <option *ngFor="let item of data" [value]="item.empEntityid">{{ item.empName }}</option>
+                            </select>
+                        </div>
+                 
+
+                   
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">City</label>
+                            <select class="form-select" aria-label="Default select example" [(ngModel)]="eawgCreate.arwgCityId" name="arwgCityId" placeholder="Select Graduate">
+                                <option value=1>Bandung</option>
+                                <option value=2>Bogor</option>
+                            </select>
+                            
+                        </div>
+                   
+                    
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Workgroup</label>
+                            <select class="form-select" aria-label="Default select example" [(ngModel)]="eawgCreate1.eawgArwgCode" name="eawgArwgCode" >
+                                <option value="BCI-0001">Bandung Cimahi</option>
+                                <option value="BCY-0001">Bandung Cileunyi</option>
+                                <option value="BOB-0001">Bogor</option>
+                                <option value="BPA-0001">Bandung Padalarang</option>
+                            </select>
+                           
+                        </div>
+                    
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" style="margin-left: 10px;" data-bs-dismiss="modal">Close</button>
+                </div>
+             </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Area Workgroup Assignment</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" style="margin-right: 10px;" data-bs-target="#employeeeawg">
+                <i class="bi bi-plus-circle"></i> Add Assignment Workgroup
+              </button>
+          </div>
+        </div>
+        <div class="card-body">
+            <table id="DataTables_Table_1" datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger"  class="table table-hover table-bordered">
+                <thead class="table table-secondary">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Area Work Group</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Province</th>
+                        <th scope="col">Zone</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr *ngFor="let emp of eawgData">
+                        <!-- <td>{{emp.eawgId}}</td> -->
+                        <td>{{emp.eawgEntity.empName}}</td>
+                        <td>{{emp.eawgArwgCodeNavigation.arwgCode}}</td>
+                        <td>{{emp.eawgArwgCodeNavigation.arwgCity.cityName}}</td>
+                        <td>{{emp.eawgArwgCodeNavigation.arwgCity.cityProv.provName}}</td>
+                        <td>{{emp.eawgArwgCodeNavigation.arwgCity.cityProv.provZones.zonesName}}</td>
+                        <td>
+                            <button type="button" name="btn-success" routerLink="/hr/employee/{{ emp.eawgId }}/edit-employee-area-workgroup" class="btn btn-primary" style="margin-right: 10px;" >
+                                <i class="fas fa-edit"></i>Edit
+                            </button>
+                            <button type="button" name="btn-success" class="btn btn-danger" (click)="deleteEmployee($event, emp.eawgId)" >
+                                <i class="bi bi-trash"></i>Delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer"></div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+    </section>
+    <!-- /.content -->
+

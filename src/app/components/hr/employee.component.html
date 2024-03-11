@@ -1,0 +1,259 @@
+
+     <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+                <form  (ngSubmit)="saveEmployee()">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Name</label>
+                        <input type="text" [(ngModel)]="createEmployee.empName" #empName="ngModel"
+                        class="form-control " name="empName" placeholder="Name" required/>
+                        <span *ngIf="!empName.valid && empName.touched" class="text-danger">The name field is required.</span>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                                <input type="email" [(ngModel)]="userComposite.userEmail"  #userEmail="ngModel"  class="form-control" name="userEmail" placeholder="example@email.com" required/>
+                                <span *ngIf="!userEmail.valid && userEmail.touched" class="text-danger">The email field is required.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
+                                <input type="text" [(ngModel)]="userPhoneCompositeDto.usphPhoneNumber" #usphPhoneNumber="ngModel" class="form-control" name="usphPhoneNumber" placeholder="081234xxx" required/>
+                                <span *ngIf="!usphPhoneNumber.valid && usphPhoneNumber.touched" class="text-danger">The phone number field is required.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Phone Type</label>
+                                <input type="text" [(ngModel)]="userPhoneCompositeDto.usphPhoneType" #usphPhoneType="ngModel"  class="form-control" name="usphPhoneType" placeholder="Phone Type" required />
+                                <span *ngIf="!usphPhoneType.valid && usphPhoneType.touched" class="text-danger">The phone type field is required.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Join Date</label>
+                                <input type="date" [(ngModel)]="createEmployee.empJoinDate" #empJoinDate="ngModel" class="form-control" name="empJoinDate" empJoinDate>
+                                <span *ngIf="!empJoinDate.valid && empJoinDate.touched" class="text-danger">The join date field is required.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Graduate</label>
+                                <select class="form-select" aria-label="Default select example" [(ngModel)]="createEmployee.empGraduate" #empGraduate="ngModel" name="empGraduate" placeholder="Select Graduate" required>
+                                    <option value="SMA">SMA</option>
+                                    <option value="D1">D1</option>
+                                    <option value="D3">D3</option>
+                                    <option value="S1">S1</option>
+                                    <option value="S2">S2</option>
+                                </select>
+                                <span *ngIf="!empGraduate.valid && empGraduate.touched" class="text-danger">The graduate field is required.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Role</label>
+                                <select class="form-select" aria-label="Default select example" [(ngModel)]="createEmployee.empJobCode" #empJobCode="ngModel" name="empJobCode" required (change)="onChangeSalary($event)" >
+                                    <option value="FAJ">Financial Advisor Junior</option>
+                                    <ng-container  *ngFor="let item of jobTypeData">
+                                        <option [value]=" item.jobCode ">{{ item.jobDesc }}</option>
+                                    </ng-container>
+                                </select>
+                                <span *ngIf="!empJobCode.valid && empJobCode.touched" class="text-danger">The role field is required.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Status</label>
+                                <select class="form-select" aria-label="Default select example" [(ngModel)]="createEmployee.empStatus" #empStatus="ngModel" name="empStatus" required >
+                                    <option value="ACTIVE">ACTIVE</option>
+                                    <option value="INACTIVE">INACTIVE</option>
+                                </select>
+                                <span *ngIf="!empStatus.valid && empStatus.touched" class="text-danger">The status field is required.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Type</label>
+                                <select class="form-select" aria-label="Default select example" [(ngModel)]="createEmployee.empType"  #empType="ngModel" name="empType" required >
+                                    <option value="CONTRACT">CONTRACT</option>
+                                    <option value="PERMANENT">PERMANENT</option>
+                                    
+                                </select>
+                                <span *ngIf="!empType.valid && empType.touched" class="text-danger">The type field is required.</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Net Salary</label>
+                                <select class="form-select" aria-label="Default select example" [(ngModel)]="createEmployee.empNetSalary" #empNetSalary="ngModel" name="empNetSalary" required (change)="onChangeSalary($event)" >
+                                    <option></option>
+                                    <ng-container  *ngFor="let data of salaryJobType">
+                                        <option [value]=" data.jobRateMin ">Min Salary || {{ data.jobRateMin | currency }}</option>
+                                        <option [value]=" data.jobRateMax ">Max Salary || {{ data.jobRateMax | currency:"RP" }}</option>
+                                    </ng-container>
+                                </select>
+                                <span *ngIf="!empNetSalary.valid && empNetSalary.touched" class="text-danger">The net salary field is required.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Account Number </label>
+                                    <input type="text" [(ngModel)]="createEmployee.empAccountNumber" #empAccountNumber="ngModel" class="form-control" name="empAccountNumber" placeholder="Account Number" required>
+                                    <span *ngIf="!empAccountNumber.valid && empAccountNumber.touched" class="text-danger">The account number field is required.</span>
+                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">National Id</label>
+                                <input type="text" [(ngModel)]="userComposite.userNationalId" #userNationalId="ngModel" class="form-control" name="userNationalId" placeholder="KTP" required>
+                                <span *ngIf="!userNationalId.valid && userNationalId.touched" class="text-danger">The national id field is required.</span>
+                            </div> 
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">NPWP</label>
+                                <input type="text" [(ngModel)]="userComposite.userNpwp" #userNpwp="ngModel" class="form-control" name="userNpwp" placeholder="NPWP" required>
+                                <span *ngIf="!userNpwp.valid && userNpwp.touched" class="text-danger">The NPWP field is required.</span>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">City</label>
+                            <select class="form-select" aria-label="Default select example" [(ngModel)]="userAddressCompositeDto.usdrCityId" #usdrCityId="ngModel" name="usdrCityId" required >
+                                <option value=1>Bandung</option>
+                                <option value=5>Bekasi</option>
+                                <option value=2>Bogor</option>
+                                <option value=3>Cianjur</option>
+                                <option value=4>Cirebon</option>
+                            </select>
+                            <span *ngIf="!usdrCityId.valid && usdrCityId.touched" class="text-danger">The city field is required.</span>
+                        </div>
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label"> Address 1</label>
+                        <textarea type="text" [(ngModel)]="userAddressCompositeDto.usdrAddress1" #usdrAddress1="ngModel" class="form-control" name="usdrAddress1" placeholder="Address 1" required></textarea>
+                        <span *ngIf="!usdrAddress1.valid && usdrAddress1.touched" class="text-danger">The Address 1 field is required.</span>
+                    </div> 
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Address 2</label>
+                        <textarea type="text" [(ngModel)]="userAddressCompositeDto.usdrAddress2" #usdrAddress2="ngModel" class="form-control" name="usdrAddress2" placeholder="Address 2" required></textarea>
+                        <span *ngIf="!usdrAddress2.valid && usdrAddress2.touched" class="text-danger">The Address 2 field is required.</span>
+                    </div>
+                
+                    
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="createEmployee.grantUser" value="true" name="flexCheckDefault" >
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Grant user access? 
+                            </label>
+                        </div>
+                    </div>
+    
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Save</button> 
+                        <button type="button" class="btn btn-secondary" style="margin-left: 10px;" data-bs-dismiss="modal">Close</button>
+                    </div>
+                 </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Employee</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Hr</li>
+              <li class="breadcrumb-item active">Employee</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+  
+    <!-- Main content -->
+    <section class="content">
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Data Employee</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" style="margin-right: 30px;" data-bs-target="#exampleModal">
+                <i class="bi bi-plus-circle"></i> Add Employee
+              </button>
+          </div>
+        </div>
+        <div class="card-body">
+            <table  id="DataTables_Table_0" datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger" class="table table-hover table-bordered">
+                <thead class="table table-secondary">
+
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Join Date</th>
+                        <th scope="col">Graduate</th>
+                        <th scope="col">Net Salary</th>
+                        <th scope="col">Account Number</th>
+                        <th scope="col">Job Desc</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr *ngFor="let emp of employeeData">
+                        <td>{{emp.empName}}</td>
+                        <td>{{emp.empJoinDate | date:'dd/MM/yyyy'}}</td>
+                        <td>{{emp.empGraduate}}</td>
+                        <td>{{emp.empNetSalary}}</td>
+                        <td>{{emp.empAccountNumber}}</td>
+                        <td>{{emp.empJobCodeNavigation.jobDesc}}</td>
+                        <td>
+                            <button type="button" name="btn-success" routerLink="/hr/employee/{{ emp.empEntityid }}/edit" class="btn btn-primary" style="margin-right: 10px;" >
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button type="button" name="btn-success" class="btn btn-danger" (click)="deleteEmployee($event, emp.empEntityid)" >
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer"></div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+    <app-employee-area-work-group></app-employee-area-work-group>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

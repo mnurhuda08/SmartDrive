@@ -1,0 +1,205 @@
+ 
+                
+
+                     <div class="content-wrapper">
+                        <!-- Content Header (Page header) -->
+                        <section class="content-header">
+                          <div class="container-fluid">
+                            <div class="row mb-2">
+                              <div class="col-sm-6">
+                                <h1>Employee</h1>
+                              </div>
+                              <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                  <li class="breadcrumb-item active">Hr</li>
+                                  <li class="breadcrumb-item active">Employee</li>
+                                </ol>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- /.container-fluid -->
+                        </section>
+                      
+                        <!-- Main content -->
+                        <section class="content">
+                          <!-- Default box -->
+                          <div class="card">
+                            <div class="card-header">
+                              <h3 class="card-title">Data Employee</h3>
+                    
+                              <div class="card-tools">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Add
+                                  </button>
+                              </div>
+                            </div>
+                            
+                            <div class="card-body">
+                                <div *ngIf="isLoading; else elseForm">
+                                    <app-loader></app-loader>
+                                </div>
+                                <ng-template #elseForm>
+                                <form (ngSubmit)="updateEmployee() ">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Name</label>
+                                        <input type="text" [(ngModel)]="employee.empName" class="form-control" name="empName" placeholder="Name">
+                                        <span *ngIf="errors.empName"class="text-danger">{{ errors.empName }}</span>
+                                    </div>
+                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                                                <input type="email" [(ngModel)]="employee.empEntity.userEmail" class="form-control" name="userEmail" placeholder="userEmail" required/>
+                                                <span *ngIf="errors.userEmail" class="text-danger">{{ errors.userEmail }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
+                                                <input type="text" [(ngModel)]="employee.empEntity.userPhones[0].usphPhoneNumber" class="form-control" name="usphPhoneNumber" placeholder="0812234xxx"/>
+                                                <span *ngIf="errors.usphPhoneNumber" class="text-danger">{{ errors.usphPhoneNumber }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">Phone Type</label>
+                                                <input type="text" [(ngModel)]="employee.empEntity.userPhones[0].usphPhoneType" class="form-control" name="usphPhoneType" placeholder="Type"/>
+                                                <span *ngIf="errors.usphPhoneType" class="text-danger">{{ errors.usphPhoneType }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">Join Date</label>
+                                                <input type="date" [(ngModel)]="employee.empJoinDate" class="form-control" name="empJoinDate">
+                                                <span *ngIf="errors.empJoinDate" class="text-danger">{{ errors.empJoinDate }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">Graduate</label>
+                                                <select class="form-select" aria-label="Default select example" [(ngModel)]="employee.empGraduate" name="empGraduate" placeholder="Select Graduate">
+                                                    <option value="SMA">SMA</option>
+                                                    <option value="D1">D1</option>
+                                                    <option value="D3">D3</option>
+                                                    <option value="S1">S1</option>
+                                                    <option value="S2">S2</option>
+                                                </select>
+                                                <span *ngIf="errors.empGraduate" class="text-danger">{{ errors.empGraduate }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">Role</label>
+                                                <select class="form-select" aria-label="Default select example" [(ngModel)]="employee.empJobCode" name="empJobCode" >
+                                                    <option value="FAJ">Financial Advisor Junior</option>
+                                                    <option value="FAM">Financial Advisor Manager</option>
+                                                    <option value="FAS">Financial Advisor Senior</option>
+                                                </select>
+                                                <span *ngIf="errors.empJobCode" class="text-danger">{{ errors.empJobCode }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">Status</label>
+                                                <select class="form-select" aria-label="Default select example" [(ngModel)]="employee.empStatus" name="empStatus" required >
+                                                    <option value="ACTIVE">ACTIVE</option>
+                                                    <option value="INACTIVE">INACTIVE</option>
+                                                </select>
+                                                <span *ngIf="errors.empStatus" class="text-danger">{{ errors.empStatus }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">Type</label>
+                                                <select class="form-select" aria-label="Default select example" [(ngModel)]="employee.empType" name="empType" required >
+                                                    <option value="CONTRACT">CONTRACT</option>
+                                                    <option value="PERMANENT">PERMANENT</option>
+                                                    
+                                                </select>
+                                                <span *ngIf="errors.empType" class="text-danger">{{ errors.empType }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">Net Salary</label>
+                                                <input type="text" [(ngModel)]="employee.empNetSalary" class="form-control" name="empNetSalary" placeholder="Salary" required>
+                                                <span *ngIf="errors.empNetSalary" class="text-danger">{{ errors.empNetSalary }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlInput1" class="form-label">Account Number </label>
+                                                    <input type="text" [(ngModel)]="employee.empAccountNumber" class="form-control" name="empAccountNumber" placeholder="Account Number" required>
+                                                    <span *ngIf="errors.empAccountNumber" class="text-danger">{{ errors.empAccountNumber }}</span>
+                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">National Id</label>
+                                                <input type="text" [(ngModel)]="employee.empEntity.userNationalId" class="form-control" name="userNationalId" placeholder="KTP" required>
+                                                <span *ngIf="errors.userNationalId" class="text-danger">{{ errors.userNationalId }}</span>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">NPWP</label>
+                                                <input type="text" [(ngModel)]="employee.empEntity.userNpwp" class="form-control" name="userNpwp" placeholder="NPWP" required>
+                                                <span *ngIf="errors.userNpwp" class="text-danger">{{ errors.userNpwp }}</span>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">City</label>
+                                            <select class="form-select" aria-label="Default select example" [(ngModel)]="employee.empEntity.userAddresses[0].usdrCityId" name="usdrCityId" required >
+                                                <option value=1>Bandung</option>
+                                                <option value=5>Bekasi</option>
+                                                <option value=2>Bogor</option>
+                                                <option value=3>Cianjur</option>
+                                                <option value=4>Cirebon</option>
+                                            </select>
+                                            <span *ngIf="errors.usdrCityId" class="text-danger">{{ errors.usdrCityId }}</span>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">User Address 1</label>
+                                        <input type="text" [(ngModel)]="employee.empEntity.userAddresses[0].usdrAddress1" class="form-control" name="usdrAddress1" placeholder="Address 1" required>
+                                        <span *ngIf="errors.usdrAddress1" class="text-danger">{{ errors.usdrAddress1 }}</span>
+                                    </div> 
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">User address 2</label>
+                                        <input type="text" [(ngModel)]="employee.empEntity.userAddresses[0].usdrAddress2" class="form-control" name="usdrAddress2" placeholder="Address 2" required>
+                                        <span *ngIf="errors.usdrAddress2" class="text-danger">{{ errors.usdrAddress2 }}</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" [(ngModel)]="employee.grantUser" value="true" name="flexCheckDefault" >
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Grant user access? 
+                                            </label>
+                                        </div>
+                                    </div>
+                                
+                    
+                                    <div class="mb-3">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                 </form>
+                                </ng-template>
+                    
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">Pagination</div>
+                        
+                            <!-- /.card-footer-->
+                        </div>
+                        <!-- /.card -->
+                        </section>
+                        <!-- /.content -->
+                      </div>
