@@ -24,8 +24,8 @@ import { EditEmployeeComponent } from './components/hr/edit-employee/edit-employ
 import { LoaderComponent } from './components/hr/partial/loader/loader.component';
 import { EditEmployeeAreaWorkgroupComponent } from './components/hr/employee-area-work-group/edit-employee-area-workgroup.component';
 import { DataTablesModule } from 'angular-datatables'; 
-import { MaterialModule } from './material-module';
-import { NgxPaginationModule } from 'ngx-pagination';
+// import { MaterialModule } from './material-module';
+// import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -60,8 +60,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppRoutingModule,
     ReactiveFormsModule,
     DataTablesModule,
-    MaterialModule,
-    NgxPaginationModule,
+    //MaterialModule,
+    //NgxPaginationModule,
     BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
