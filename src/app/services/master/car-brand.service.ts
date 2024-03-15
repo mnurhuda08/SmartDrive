@@ -14,7 +14,7 @@ export class CarBrandService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getCarBrands(): Observable<CarBrand[]> {
     return this.http.get<CarBrand[]>(this.apiUrl);

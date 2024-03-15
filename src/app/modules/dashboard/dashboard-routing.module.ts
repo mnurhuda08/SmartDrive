@@ -14,6 +14,12 @@ import { HttpClient } from '@angular/common/http';
 import { UserListComponent } from 'src/app/components/users/user-list/user-list.component';
 import { DataRoleComponent } from 'src/app/components/users/role/data-role/data-role.component';
 import { PartnerAreaWorkgroupPage } from 'src/app/components/partners/pages/partner-area-workgroup/partner-area-workgroup.page';
+import { CustomerRequestComponent } from 'src/app/components/cr/customer-request/customer-request.component';
+import { CreateNewClaimComponent } from 'src/app/components/cr/create-new-claim/create-new-claim.component';
+import { CreateClosePolisComponent } from 'src/app/components/cr/create-close-polis/create-close-polis.component';
+import { AddCustomerRequestComponent } from 'src/app/components/cr/add-customer-request/add-customer-request.component';
+import { AddAgenRequestComponentn } from 'src/app/components/cr/add-agen-request/add-agen-request.component';
+import { CreateNewPolisComponent } from 'src/app/components/cr/create-new-polis/create-new-polis.component';
 
 const routes: Routes = [
   {
@@ -74,6 +80,30 @@ const routes: Routes = [
         canActivate: mapToCanActivate([AuthGuard]),
         data: { requiredRoles: ['AD', 'CU', 'EM', 'PC', 'PR'] },
       },
+      {
+        path: 'customer',
+        component: CustomerRequestComponent,
+      },
+      {
+        path: 'customer/request/customer',
+        component: AddCustomerRequestComponent,
+      },
+      {
+        path: 'customer/request/agen',
+        component: AddAgenRequestComponentn,
+      },
+      {
+        path: 'customer/request/polis/:id',
+        component: CreateNewPolisComponent,
+      },
+      {
+        path: 'customer/request/claim/:id',
+        component: CreateNewClaimComponent,
+      },
+      {
+        path: 'customer/request/close/:id',
+        component: CreateClosePolisComponent,
+      },
     ],
   },
 ];
@@ -82,4 +112,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule { }
