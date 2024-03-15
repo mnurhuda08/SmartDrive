@@ -1,17 +1,36 @@
 <div class="card">
-  <div class="card-header d-flex justify-content-between">
-    <div class="col-10">
-      <h4>Province</h4>
+  <div class="card-header">
+    <div class="row d-flex justify-content-between mb-2">
+      <div class="col-10">
+        <h4>Province</h4>
+      </div>
+      <div class="col-2 d-flex justify-content-end">
+        <button
+          type="button"
+          class="btn btn-info float-end"
+          [routerLink]="['/master/region/province/add']"
+        >
+          <i class="fa fa-plus-circle"></i> Tambah
+        </button>
+      </div>
     </div>
-    <div class="col-2 d-flex justify-content-end">
-      <button
-        type="button"
-        class="btn btn-info float-end"
-        [routerLink]="['/master/region/province/add']"
-      >
-        <i class="fa fa-plus-circle"></i> Tambah
-      </button>
-    </div>
+    <!-- <div class="row">
+      <div class="col-3">
+        <form action="">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="searchQuery"
+              placeholder="Search..."
+            />
+            <button class="btn btn-info" (click)="searchProvinsi()">
+              Search
+            </button>
+          </div>
+        </form>
+      </div>
+    </div> -->
   </div>
 
   <div class="card-body maxHeight">
@@ -22,8 +41,18 @@
           <th>Aksi</th>
         </tr>
       </thead>
-      <tbody *ngFor="let province of provinces">
-        <tr>
+      <tbody>
+        <tr
+          *ngFor="
+            let province of provinces
+              | paginate
+                : {
+                    itemsPerPage: pageSize,
+                    currentPage: currentPage,
+                    totalItems: totalItems
+                  }
+          "
+        >
           <td class="col-7">{{ province.provName }}</td>
           <td>
             <button
@@ -50,20 +79,12 @@
   <div class="card-footer clearfix">
     <div class="d-flex justify-content-between align-items-center">
       <div>
-        <button
-          class="btn btn-primary mr-2"
-          (click)="onPageChange(currentPage - 1)"
-          [disabled]="currentPage === 1"
-        >
-          Previous
-        </button>
-        <span>Page {{ currentPage }}</span>
-        <button
-          class="btn btn-primary ml-2"
-          (click)="onPageChange(currentPage + 1)"
-        >
-          Next
-        </button>
+        <pagination-controls
+          class="card-footer clearfix d-flex justify-content-center"
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="pageChanged($event)"
+        ></pagination-controls>
       </div>
       <div class="form-inline">
         <label for="pageSizeSelect" class="mr-2">Page Size:</label>

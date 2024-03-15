@@ -10,9 +10,10 @@ import { ProvinceService } from 'src/app/services/master/province.service';
 })
 export class ProvinceComponent implements OnInit {
   provinces: Province[] = [];
+  totalItems: number = 0;
   currentPage: number = 1;
-  pageSize: number = 10;
-  totalItems = 0;
+  pageSize: number = 5;
+  searchQuery: string = '';
 
   constructor(
     private provinceService: ProvinceService,
@@ -21,9 +22,9 @@ export class ProvinceComponent implements OnInit {
 
   getProvincesPaging() {
     this.provinceService
-      .getPaginatedProvinsi(this.currentPage, this.pageSize)
+      .getPaginatedProvinsi(this.searchQuery, this.currentPage, this.pageSize)
       .subscribe((response) => {
-        this.provinces = response;
+        this.provinces = response.provinces;
       });
   }
 
@@ -38,14 +39,17 @@ export class ProvinceComponent implements OnInit {
     });
   }
 
-  onPageChange(page: number): void {
-    this.currentPage = page;
-    this.getProvincesPaging();
+  pageChanged(event: any): void {
+    this.currentPage = event;
   }
-  onPageSizeChange(event: Event): void {
-    const target = (event.target as HTMLSelectElement).value!;
-    const pageSize = parseInt(target, 10);
-    this.pageSize = pageSize;
+
+  onPageSizeChange(event: any): void {
+    this.pageSize = event.target.value;
+    this.currentPage = 1;
+  }
+
+  searchProvinsi(): void {
+    this.currentPage = 1;
     this.getProvincesPaging();
   }
 
@@ -60,5 +64,6 @@ export class ProvinceComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProvinces();
+    this.getProvincesPaging();
   }
 }

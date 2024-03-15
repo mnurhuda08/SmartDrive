@@ -69,6 +69,7 @@ import { PartnerAreaWorkgroupPage } from './components/partners/pages/partner-ar
 import { ModalWorkOrderComponent } from './components/partners/components/modal-work-order/modal-work-order.component';
 import { ClaimsSparepartFormsComponent } from './components/partners/components/claims-sparepart-forms/claims-sparepart-forms.component';
 import { ClaimEvidenceFormsComponent } from './components/partners/components/claim-evidence-forms/claim-evidence-forms.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,7 @@ import { ClaimEvidenceFormsComponent } from './components/partners/components/cl
     UpdateAreaworkgroupComponent,
 
     LoginComponent,
-    LoginComponent, 
+    LoginComponent,
     BlankComponent,
     LoginLayoutComponent,
     UnauthorizedComponent,
@@ -139,6 +140,7 @@ import { ClaimEvidenceFormsComponent } from './components/partners/components/cl
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgxPaginationModule,
     ToastrModule.forRoot(),
   ],
   providers: [

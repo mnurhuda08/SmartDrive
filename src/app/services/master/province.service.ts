@@ -19,14 +19,16 @@ export class ProvinceService {
   constructor(private http: HttpClient) {}
 
   getPaginatedProvinsi(
+    searchBy: string,
     pageNumber: number,
     pageSize: number
-  ): Observable<Province[]> {
+  ): Observable<any> {
     let params = new HttpParams()
+      .set('SearchBy', searchBy)
       .set('PageNumber', pageNumber.toString())
       .set('PageSize', pageSize.toString());
 
-    return this.http.get<Province[]>(`${this.apiUrlPaginate}`, { params });
+    return this.http.get(this.apiUrl, { params });
   }
 
   getProvinces(): Observable<Province[]> {
