@@ -4,6 +4,8 @@ import { Observable, catchError, of } from 'rxjs';
 import { PagingParameter } from 'src/app/constants/PagingParameter';
 import { CreateCustomerRequest } from 'src/app/interfaces/cr/create-customer-request';
 import { CreatePolisRequest } from 'src/app/interfaces/cr/create-polis-request';
+import { CreateRequestAreaCode } from 'src/app/interfaces/cr/create-request-area-code';
+import { CreateRequestCities } from 'src/app/interfaces/cr/create-request-cities';
 import { CustomerClaimRequest } from 'src/app/interfaces/cr/customer-claim-request';
 import { CustomerCloseRequest } from 'src/app/interfaces/cr/customer-close-request';
 import { CustomerRequest } from 'src/app/interfaces/cr/customer-request';
@@ -71,6 +73,14 @@ export class CustomerRequestService {
       .pipe(
         catchError(this.handleError<RequestPolisCustomer>('createRequestByCustomer'))
       )
+  }
+
+  getCities(): Observable<CreateRequestCities[]> {
+    return this.http.get<CreateRequestCities[]>(`${environment.baseUrl}/master/City`)
+  };
+
+  getAreaCode(): Observable<CreateRequestAreaCode[]> {
+    return this.http.get<CreateRequestAreaCode[]>(`${environment.baseUrl}/master/AreaWorkgroup`)
   }
 
   private handleError<T>(operation = 'operation', result?: T): any {

@@ -46,7 +46,7 @@ export const MenuConstant: IMenus[] = [
   {
     path: '/customer',
     title: 'Customer Request',
-    roles: ['CU'],
+    roles: ['EM', 'PC', 'CU'],
     exact: false,
     icon: 'fas fa-users',
   },
@@ -57,7 +57,7 @@ export const MenuConstant: IMenus[] = [
     exact: false,
     icon: 'fa fa-building',
     child: [
-      {  
+      {
         path: '/partner/partner',
         title: 'Partner',
         roles: ['AD'],

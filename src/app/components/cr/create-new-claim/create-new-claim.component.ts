@@ -23,11 +23,11 @@ export class CreateNewClaimComponent implements OnInit {
       this.customerRequestService.getCustomerRequest(params['id'])
         .subscribe((res: CustomerRequest) => {
           this.customerRequest = res;
-          console.log(this.customerRequest)
+          // console.log(this.customerRequest)
           this.claimPolisForm = new FormGroup({
             creqModifiedDate: new FormControl(this.customerRequest.creqModifiedDate),
             customerName: new FormControl({ value: this.customerRequest.creqCustEntity.userFullName, disabled: true }),
-            createPolisDate: new FormControl({ value: this.customerRequest.creqCreateDate, disabled: true }),
+            createPolisDate: new FormControl({ value: this.convertStampToDate(this.customerRequest.creqCreateDate), disabled: true }),
             customerPhoneNumber: new FormControl({ value: this.customerRequest.creqCustEntity.userPhones[0].usphPhoneNumber, disabled: true }),
             insurancePlan: new FormControl({ value: this.customerRequest.customerInscAsset.ciasIntyName, disabled: true }),
             cityId: new FormControl({ value: this.customerRequest.customerInscAsset.ciasCityId, disabled: true }),
@@ -35,8 +35,9 @@ export class CreateNewClaimComponent implements OnInit {
             carYear: new FormControl({ value: this.customerRequest.customerInscAsset.ciasYear, disabled: true }),
             policeNumber: new FormControl({ value: this.customerRequest.customerInscAsset.ciasPoliceNumber, disabled: true }),
             carSeries: new FormControl({ value: this.customerRequest.customerInscAsset.ciasCarsId, disabled: true }),
-            polisCreatedOn: new FormControl({ value: this.customerRequest.customerInscAsset.ciasStartdate, disabled: true }),
-            polisStartDate: new FormControl({ value: this.customerRequest.customerInscAsset.ciasStartdate, disabled: true }),
+            polisNumber: new FormControl({ value: this.customerRequest.servs[1]?.servInsuranceNo, disabled: true }),
+            polisCreatedOn: new FormControl({ value: this.convertStampToDate(this.customerRequest.customerInscAsset.ciasStartdate), disabled: true }),
+            polisStartDate: new FormControl({ value: this.convertStampToDate(this.customerRequest.customerInscAsset.ciasStartdate), disabled: true }),
             polisEndDate: new FormControl({ value: this.customerRequest.customerInscAsset.ciasEnddate, disabled: true }),
             polisTotalPremi: new FormControl({ value: this.customerRequest.customerInscAsset.ciasTotalPremi, disabled: true }),
           })
@@ -53,6 +54,18 @@ export class CreateNewClaimComponent implements OnInit {
 
     this.customerRequestService.claimPolis({ creqEntityid, creqModifiedDate } as CustomerClaimRequest)
       .subscribe(() => this.router.navigate(['customer']))
+  }
+
+  convertStampToDate(str: string) {
+    const inputDate = new Date(str);
+
+    const year = inputDate.getFullYear();
+    const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = inputDate.getDate().toString().padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day}`;
+
+    return formattedDate;
   }
 
   ngOnInit(): void {

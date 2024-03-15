@@ -13,8 +13,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">Create Close Polis</h5>
+                        <div class="card-header bg-primary">
+                            <h5 class="card-title font-weight-bold">Create Close Polis</h5>
                         </div>
                         <div class="card-body" *ngIf="customerRequest">
                             <form [formGroup]="closePolisForm" (ngSubmit)="onSubmit()">
@@ -36,8 +36,8 @@
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Customer Info</h3>
+                                    <div class="card-header bg-secondary">
+                                        <h3 class="card-title font-weight-bold">Customer Info</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
@@ -94,8 +94,8 @@
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Vehicle Info</h3>
+                                    <div class="card-header bg-secondary">
+                                        <h3 class="card-title font-weight-bold">Vehicle Info</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
@@ -136,15 +136,16 @@
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Polis Information</h3>
+                                    <div class="card-header bg-secondary">
+                                        <h3 class="card-title font-weight-bold">Polis Information</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Polis Number</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control"
+                                                        formControlName="polisNumber">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
@@ -171,13 +172,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Status</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
+                                        <div class="row d-flex justify-content-end">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Total Premi</label>

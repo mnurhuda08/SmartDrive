@@ -29,7 +29,7 @@ export class CreateClosePolisComponent implements OnInit {
             cuclCreateDate: new FormControl(this.customerRequest.customerClaim.cuclCreateDate),
             cuclReason: new FormControl(this.customerRequest.customerClaim.cuclReason),
             customerName: new FormControl({ value: this.customerRequest.creqCustEntity.userFullName, disabled: true }),
-            createPolisDate: new FormControl({ value: this.customerRequest.creqCreateDate, disabled: true }),
+            createPolisDate: new FormControl({ value: this.convertStampToDate(this.customerRequest.creqCreateDate), disabled: true }),
             customerPhoneNumber: new FormControl({ value: this.customerRequest.creqCustEntity.userPhones[0].usphPhoneNumber, disabled: true }),
             insurancePlan: new FormControl({ value: this.customerRequest.customerInscAsset.ciasIntyName, disabled: true }),
             cityId: new FormControl({ value: this.customerRequest.customerInscAsset.ciasCityId, disabled: true }),
@@ -37,8 +37,9 @@ export class CreateClosePolisComponent implements OnInit {
             carYear: new FormControl({ value: this.customerRequest.customerInscAsset.ciasYear, disabled: true }),
             policeNumber: new FormControl({ value: this.customerRequest.customerInscAsset.ciasPoliceNumber, disabled: true }),
             carSeries: new FormControl({ value: this.customerRequest.customerInscAsset.ciasCarsId, disabled: true }),
-            polisCreatedOn: new FormControl({ value: this.customerRequest.customerInscAsset.ciasStartdate, disabled: true }),
-            polisStartDate: new FormControl({ value: this.customerRequest.customerInscAsset.ciasStartdate, disabled: true }),
+            polisNumber: new FormControl({ value: this.customerRequest.servs[1]?.servInsuranceNo, disabled: true }),
+            polisCreatedOn: new FormControl({ value: this.convertStampToDate(this.customerRequest.customerInscAsset.ciasStartdate), disabled: true }),
+            polisStartDate: new FormControl({ value: this.convertStampToDate(this.customerRequest.customerInscAsset.ciasStartdate), disabled: true }),
             polisEndDate: new FormControl({ value: this.customerRequest.customerInscAsset.ciasEnddate, disabled: true }),
             polisTotalPremi: new FormControl({ value: this.customerRequest.customerInscAsset.ciasTotalPremi, disabled: true }),
           })
@@ -55,6 +56,18 @@ export class CreateClosePolisComponent implements OnInit {
 
     this.customerRequestService.closePolis({ creqEntityid, cuclCreateDate, cuclReason } as CustomerCloseRequest)
       .subscribe(() => this.router.navigate(['customer']))
+  }
+
+  convertStampToDate(str: string) {
+    const inputDate = new Date(str);
+
+    const year = inputDate.getFullYear();
+    const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = inputDate.getDate().toString().padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day}`;
+
+    return formattedDate;
   }
 
   ngOnInit(): void {

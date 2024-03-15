@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateCustomerRequest } from 'src/app/interfaces/cr/create-customer-request';
+import { CreateRequestAreaCode } from 'src/app/interfaces/cr/create-request-area-code';
+import { CreateRequestCities } from 'src/app/interfaces/cr/create-request-cities';
 import { RequestPolisCustomer } from 'src/app/interfaces/cr/request-polis-customer';
 import { CustomerRequestService } from 'src/app/services/cr/customer-request.service';
 
@@ -13,6 +15,17 @@ import { CustomerRequestService } from 'src/app/services/cr/customer-request.ser
 export class AddCustomerRequestComponent implements OnInit {
   requestPolisForm!: FormGroup;
   message = '';
+  isSubmitted = false;
+
+  cities: CreateRequestCities[] = [];
+  cityId!: number;
+
+  areaCode: CreateRequestAreaCode[] = [];
+  filteredAreaCode: CreateRequestAreaCode[] = [];
+
+  years: number[];
+  currentYear: number = new Date().getFullYear();
+  startYear: number = 1990;
 
   constructor(
     private fb: FormBuilder,
@@ -27,38 +40,45 @@ export class AddCustomerRequestComponent implements OnInit {
           Validators.pattern('[a-zA-Z].*'),
         ]
       ],
-      createPolisDate: ['',],
+      createPolisDate: ['', Validators.required],
       customerPhoneNumber: ['',
         [
           Validators.required,
           Validators.pattern('^[0-9]{10,12}')
         ]],
-      insurancePlan: [''],
-      cityId: [''],
+      insurancePlan: ['', Validators.required],
+      cityId: ['', Validators.required],
       areaCode: ['',
         [
           Validators.required,
         ]],
       carYear: ['',
         [
-          Validators.required,
-          Validators.maxLength(4)
+          Validators.required
         ]],
       policeNumber: ['',
         [
           Validators.required,
         ]],
-      carSeries: [''],
-      polisStartDate: [''],
-      paidType: [''],
+      isNewCar: false,
+      carSeries: ['', Validators.required],
+      polisStartDate: ['', Validators.required],
+      paidType: ['', Validators.required],
       currentPrice: ['',
         [
           Validators.required,
         ]],
     })
+
+    this.years = Array.from({ length: this.currentYear - this.startYear + 1 }, (_, index) => this.currentYear - index);
   }
 
   onSubmit() {
+    this.isSubmitted = true;
+    if (this.requestPolisForm.invalid) {
+      return;
+    }
+
     let request: RequestPolisCustomer = {
       areaCode: this.AreaCode.value,
       creqCreateDate: this.CreatePolisDate.value,
@@ -75,7 +95,7 @@ export class AddCustomerRequestComponent implements OnInit {
         ciasInsurancePrice: null,
         ciasTotalPremi: null,
         ciasPaidType: this.PaidType.value,
-        ciasIsNewChar: 'Y',
+        ciasIsNewChar: this.IsNewCar.value ? 'Y' : 'N',
         ciasCarsId: this.CarSeries.value,
         ciasIntyName: this.InsurancePlan.value,
         ciasCityId: this.CityId.value
@@ -88,6 +108,30 @@ export class AddCustomerRequestComponent implements OnInit {
       this.message = res.toString();
       this.router.navigate(['customer']);
     })
+  }
+
+  fetchCities() {
+    this.customerRequestService.getCities().subscribe({
+      next: (data) => this.cities = data,
+      error: (err) => console.log(err),
+    });
+  }
+
+  fetchAreaCode() {
+    this.customerRequestService.getAreaCode().subscribe({
+      next: (data) => {
+        this.areaCode = data,
+          this.filteredAreaCode = data
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
+  onChangeCity(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    this.cityId = parseInt(target.value);
+
+    this.filteredAreaCode = this.areaCode.filter((item) => item.arwgCityId === this.cityId)
   }
 
 
@@ -115,6 +159,9 @@ export class AddCustomerRequestComponent implements OnInit {
   get PoliceNumber(): FormControl {
     return this.requestPolisForm.get('policeNumber') as FormControl;
   }
+  get IsNewCar(): FormControl {
+    return this.requestPolisForm.get('isNewCar') as FormControl;
+  }
   get CarSeries(): FormControl {
     return this.requestPolisForm.get('carSeries') as FormControl;
   }
@@ -129,6 +176,16 @@ export class AddCustomerRequestComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchCities();
+    this.fetchAreaCode();
+
+    this.requestPolisForm.valueChanges.subscribe(() => {
+      document.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+        }
+      });
+    });
   }
 
 }

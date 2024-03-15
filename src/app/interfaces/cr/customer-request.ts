@@ -1,3 +1,4 @@
+import { ServiceDto } from "../so/service-dto";
 import { CustomerClaimClosed } from "./customer-claim-closed";
 import { CustomerInscAsset } from "./customer-insc-asset";
 
@@ -12,6 +13,7 @@ export interface CustomerRequest {
     creqCustEntity: UserDto;
     customerInscAsset: CustomerInscAsset;
     customerClaim: CustomerClaimClosed;
+    servs: ServiceDto[]
 }
 
 export interface UserDto {
