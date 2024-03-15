@@ -1,0 +1,330 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Customer Request</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Request Polis</h5>
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="requestPolisForm" (ngSubmit)="onSubmit()">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Customer Info</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Customer Name</label>
+                                                    <input type="text" class="form-control" name="customerName"
+                                                        formControlName="customerName"
+                                                        placeholder="Masukkan Nama Anda...">
+
+                                                    <!-- Errors -->
+                                                    <div *ngIf="isSubmitted && CustomerName.errors" class="error">
+                                                        <div class="form-text text-danger"
+                                                            *ngIf="CustomerName.errors?.['required']">
+                                                            Customer Name is Required
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="!!CustomerName.errors?.['minlength'] && (CustomerName.dirty || CustomerName.touched)">
+                                                        Customer Name is too Short. At least 2 characters.
+                                                    </div>
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="CustomerName.errors?.['pattern'] && (CustomerName.dirty || CustomerName.touched)">
+                                                        Name should start with an alphabet.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Create Polis Date</label>
+                                                    <input type="date" class="form-control" name="createPolisDate"
+                                                        formControlName="createPolisDate">
+
+                                                    <!-- Errors -->
+                                                    <div *ngIf="isSubmitted && CreatePolisDate.errors" class="error">
+                                                        <div class="form-text text-danger"
+                                                            *ngIf="CreatePolisDate.errors?.['required']">
+                                                            Create Polis Date is Required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Phone Number</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Masukkan No Telepon ..." name="customerPhoneNumber"
+                                                        formControlName="customerPhoneNumber">
+
+                                                    <!-- Errors -->
+                                                    <div *ngIf="isSubmitted && CustomerPhoneNumber.errors"
+                                                        class="error">
+                                                        <div class="form-text text-danger"
+                                                            *ngIf="CustomerPhoneNumber.errors?.['required']">
+                                                            Phone Number is Required
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-text text-danger"
+                                                        *ngIf="!!CustomerPhoneNumber.errors?.['pattern'] && (CustomerPhoneNumber.dirty || CustomerPhoneNumber.touched)">
+                                                        Phone numbers must consist of 10 to 12 digits number
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Insurance Plan</label>
+                                                    <select class="form-control" name="insurancePlan"
+                                                        formControlName="insurancePlan">
+                                                        <option value="Total Loss Only">Total Loss Only</option>
+                                                        <option value="Comprehensive">Comprehensive</option>
+                                                    </select>
+
+                                                    <!-- Errors -->
+                                                    <div *ngIf="isSubmitted && InsurancePlan.errors" class="error">
+                                                        <div class="form-text text-danger"
+                                                            *ngIf="InsurancePlan.errors?.['required']">
+                                                            Insurance Plan is Required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    <select class="form-control" name="cityId" formControlName="cityId"
+                                                        (change)="onChangeCity($event)">
+                                                        <ng-container *ngFor="let item of cities">
+                                                            <option [value]="item.cityId">
+                                                                {{ item.cityName }}
+                                                            </option>
+                                                        </ng-container>
+                                                    </select>
+
+                                                    <!-- Errors -->
+                                                    <div *ngIf="isSubmitted && CityId.errors" class="error">
+                                                        <div class="form-text text-danger"
+                                                            *ngIf="CityId.errors?.['required']">
+                                                            City is Required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Vehicle Info</h3>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Area Code</label>
+                                                    <select class="form-control" name="areaCode"
+                                                        formControlName="areaCode">
+                                                        <ng-container *ngFor="let item of filteredAreaCode">
+                                                            <option [value]="item.arwgCode">
+                                                                {{item.arwgCode}}
+                                                            </option>
+                                                        </ng-container>
+                                                    </select>
+
+                                                    <!-- Errors -->
+                                                    <div *ngIf="isSubmitted && AreaCode.errors" class="error">
+                                                        <div class="form-text text-danger"
+                                                            *ngIf="AreaCode.errors?.['required']">
+                                                            Area Code is Required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Year</label>
+                                                    <select class="form-control" name="carYear"
+                                                        formControlName="carYear">
+                                                        <ng-container *ngFor="let item of years">
+                                                            <option [value]="item">
+                                                                {{item}}
+                                                            </option>
+                                                        </ng-container>
+                                                    </select>
+
+                                                    <!-- Errors -->
+                                                    <div *ngIf="isSubmitted && CarYear.errors" class="error">
+                                                        <div class="form-text text-danger"
+                                                            *ngIf="CarYear.errors?.['required']">
+                                                            Year is Required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Police Number</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="policeNumber"
+                                                        placeholder="Masukkan Nomor Kendaraan...">
+
+                                                    <!-- Errors -->
+                                                    <div *ngIf="isSubmitted && PoliceNumber.errors" class="error">
+                                                        <div class="form-text text-danger"
+                                                            *ngIf="PoliceNumber.errors?.['required']">
+                                                            Police Number is Required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        formControlName="isNewCar" name="isNewCar">
+                                                    <label class="form-check-label" for="isNewCar">Is New Car?</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Car Series</label>
+                                                    <select class="form-control" name="carSeries"
+                                                        formControlName="carSeries">
+                                                        <option value="1">HRV</option>
+                                                    </select>
+
+                                                    <!-- Errors -->
+                                                    <div *ngIf="isSubmitted && CarSeries.errors" class="error">
+                                                        <div class="form-text text-danger"
+                                                            *ngIf="CarSeries.errors?.['required']">
+                                                            Car Series is Required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Period Polis</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Start Date</label>
+                                                    <input type="date" class="form-control" name="polisStartDate"
+                                                        formControlName="polisStartDate">
+
+                                                    <!-- Errors -->
+                                                    <div *ngIf="isSubmitted && PolisStartDate.errors" class="error">
+                                                        <div class="form-text text-danger"
+                                                            *ngIf="PolisStartDate.errors?.['required']">
+                                                            Polis Start Date is Required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>End Date</label>
+                                                    <input type="date" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Paid Type</label>
+                                                    <select class="form-control" name="paidType"
+                                                        formControlName="paidType">
+                                                        <option value="CASH">CASH</option>
+                                                        <option value="CREDIT">CREDIT</option>
+                                                    </select>
+
+                                                    <!-- Errors -->
+                                                    <div *ngIf="isSubmitted && PaidType.errors" class="error">
+                                                        <div class="form-text text-danger"
+                                                            *ngIf="PaidType.errors?.['required']">
+                                                            Paid Type is Required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Current Price</label>
+                                                    <input type="number" class="form-control" name="currentPrice"
+                                                        formControlName="currentPrice"
+                                                        placeholder="Masukkan Harga Pasaran Kendaraan...">
+
+                                                    <!-- Errors -->
+                                                    <div *ngIf="isSubmitted && CurrentPrice.errors" class="error">
+                                                        <div class="form-text text-danger"
+                                                            *ngIf="CurrentPrice.errors?.['required']">
+                                                            Current Price is Required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-end">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Insurance Price</label>
+                                                    <input type="number" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-end">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Total Premi</label>
+                                                    <input type="number" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-secondary mr-2"
+                                        routerLink="/customer">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Request Polis</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

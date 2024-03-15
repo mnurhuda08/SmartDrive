@@ -1,0 +1,116 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Customer Request</h1>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="btn-group mr-2">
+                                <button type="button" class="btn btn-outline-primary btn-flat">Type</button>
+                                <button type="button" class="btn btn-primary btn-flat dropdown-toggle dropdown-icon"
+                                    data-toggle="dropdown">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a class="dropdown-item" href="#">All</a>
+                                    <a class="dropdown-item" href="#">Create Polis</a>
+                                    <a class="dropdown-item" href="#">Close</a>
+                                    <a class="dropdown-item" href="#">Claim Polis</a>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-primary btn-flat">Status</button>
+                                <button type="button" class="btn btn-primary btn-flat dropdown-toggle dropdown-icon"
+                                    data-toggle="dropdown">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a class="dropdown-item" href="#">OPEN</a>
+                                    <a class="dropdown-item" href="#">CLOSED</a>
+                                    <a class="dropdown-item" href="#">CANCELED</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead class="bg-primary">
+                                    <tr>
+                                        <th>Customer Name</th>
+                                        <th>Created On</th>
+                                        <th>Phone Number</th>
+                                        <th>Type Request</th>
+                                        <th>Insurance Plan</th>
+                                        <th>Customer Type</th>
+                                        <th>Status</th>
+                                        <th>
+                                            <button type="button" class="btn btn-light mr-2" routerLink="request/agen">
+                                                <i class="fas fa-plus"></i> by employee
+                                            </button>
+                                            <button type="button" class="btn btn-light mr-2"
+                                                routerLink="request/customer">
+                                                <i class="fas fa-plus"></i> by customer
+                                            </button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody
+                                    *ngFor="let item of customerRequest | paginate: { itemsPerPage: 10, currentPage: p }">
+                                    <tr>
+                                        <td>{{item.creqCustEntity.userFullName}}</td>
+                                        <td>{{(item.creqCreateDate?getDate(item.creqCreateDate):"")}}</td>
+                                        <td>{{item.creqCustEntity.userPhones[0].usphPhoneNumber}}</td>
+                                        <td>{{item.creqType}}</td>
+                                        <td>{{item.customerInscAsset.ciasIntyName}}</td>
+                                        <td>{{(item.creqCustEntity.userRoles[0].usroRoleName ==
+                                            'CU'?'Customer':'Potential')}}</td>
+                                        <td>{{item.creqStatus}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-info mr-2"
+                                                (click)="createNewPolis(item.creqEntityid)"
+                                                *ngIf="item.creqType == 'FEASIBILITY'">
+                                                Review
+                                            </button>
+                                            <button type="button" class="btn btn-info mr-2"
+                                                (click)="createClaimPolis(item.creqEntityid)"
+                                                *ngIf="item.creqType == 'POLIS'">
+                                                Review
+                                            </button>
+                                            <button type="button" class="btn btn-info mr-2"
+                                                (click)="createClosePolis(item.creqEntityid)"
+                                                *ngIf="item.creqType == 'CLAIM'">
+                                                Review
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-footer d-flex justify-content-center">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

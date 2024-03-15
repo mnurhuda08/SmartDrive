@@ -69,7 +69,13 @@ import { PartnerAreaWorkgroupPage } from './components/partners/pages/partner-ar
 import { ModalWorkOrderComponent } from './components/partners/components/modal-work-order/modal-work-order.component';
 import { ClaimsSparepartFormsComponent } from './components/partners/components/claims-sparepart-forms/claims-sparepart-forms.component';
 import { ClaimEvidenceFormsComponent } from './components/partners/components/claim-evidence-forms/claim-evidence-forms.component';
+import { CustomerRequestComponent } from './components/cr/customer-request/customer-request.component';
+import { CreateNewPolisComponent } from './components/cr/create-new-polis/create-new-polis.component';
+import { CreateNewClaimComponent } from './components/cr/create-new-claim/create-new-claim.component';
+import { CreateClosePolisComponent } from './components/cr/create-close-polis/create-close-polis.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AddCustomerRequestComponent } from './components/cr/add-customer-request/add-customer-request.component';
+import { AddAgenRequestComponentn } from './components/cr/add-agen-request/add-agen-request.component';
 
 @NgModule({
   declarations: [
@@ -132,16 +138,24 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ModalWorkOrderComponent,
     ClaimsSparepartFormsComponent,
     ClaimEvidenceFormsComponent,
+    CustomerRequestComponent,
+    CreateNewPolisComponent,
+    CreateNewClaimComponent,
+    CreateClosePolisComponent,
+    AddCustomerRequestComponent,
+    AddAgenRequestComponentn,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     NgxPaginationModule,
     ToastrModule.forRoot(),
+    NgxPaginationModule,
   ],
   providers: [
     {
