@@ -9,7 +9,7 @@
                 <div class="row align-items-center g-2">
                     <div class="col-auto">
                         <div class="form-group mb-3">
-                            <label for="floatingInputDisabled">Service Order Name</label>
+                            <label for="floatingInputDisabled">Service Order ID</label>
                             <input type="text" class="form-control" id="floatingInputDisabled" [value]="Sero.seroId"
                                 disabled>
                         </div>
@@ -97,16 +97,18 @@
                             <th scope="col">task_name</th>
                             <th scope="col">start_date</th>
                             <th scope="col">end_date</th>
+                            <th scope="col">group</th>
                             <th scope="col">status</th>
                             <th scope="col">workorder</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let seot of Sero.seots; let i = index">
+                        <tr *ngFor="let seot of Sero.seots; let i = index" >
                             <td>{{i+1}}</td>
                             <td>{{seot.seotName}}</td>
                             <td>{{seot.seotStartdate | date:'dd/MM/yyyy'}}</td>
                             <td>{{seot.seotEnddate| date:'dd/MM/yyyy'}}</td>
+                            <td>{{(testa.length>0?testa[i].testaGroup:"") }}</td>
                             <td>{{seot.seotStatus}}</td>
                             <td class="d-flex justify-content-center">
                                 <div class="">
@@ -175,7 +177,7 @@
                     <tfoot >
                     </tfoot>
                 </table>
-                <div *ngIf="service.servType==SERVTYPE.FEASIBILITY">
+                <!-- <div *ngIf="service.servType==SERVTYPE.FEASIBILITY">
                     <button class="btn btn-outline-secondary" type="button" (click)="generatePolis($event)"
                         [disabled]="isGenerateAvailable==false || isGeneratePermitted==false">Generate
                         Polis
@@ -183,7 +185,7 @@
                     <span class="ml-2 fw-light fw-italic" style="color: red;"
                     *ngIf="!isGenerateAvailable">Polis has already
                         generated</span>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

@@ -58,7 +58,7 @@ export const MenuConstant: IMenus[] = [
     icon: 'fas fa-columns',
   },
   {
-    path: '/so',
+    path: '/so/page/1',
     title: 'Service Order',
     roles: ['EM'],
     exact: false,

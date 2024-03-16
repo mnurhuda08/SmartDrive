@@ -13,5 +13,6 @@ export interface ServiceOrderDto {
     seroSeroId:string,
     seroAgentEntityid:string,
     seroPartId:string,
+    seroServ:ServiceDto | null,
     seots:TaskDto[],
 }

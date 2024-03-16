@@ -9,6 +9,7 @@ import { CreateServicePolisDto } from 'src/app/interfaces/so/create-service-poli
 import { ServiceDto } from 'src/app/interfaces/so/service-dto';
 import { ServiceOrderDto } from 'src/app/interfaces/so/service-order-dto';
 import { TaskDto } from 'src/app/interfaces/so/task-dto';
+import { TestaDto } from 'src/app/interfaces/so/testa-dto';
 import { WorkorderDto } from 'src/app/interfaces/so/workorder-dto';
 import { ServiceordersService } from 'src/app/services/so/serviceorders.service';
 
@@ -24,6 +25,9 @@ export class ServicefeasibilityComponent implements OnInit {
   // data
   service = {} as ServiceDto;
   Sero = {} as ServiceOrderDto;
+  
+  testa:TestaDto[]=[];
+
   isGenerateAvailable: boolean | null = false;
   isGeneratePermitted: boolean | null = false;
   // enum
@@ -37,18 +41,37 @@ export class ServicefeasibilityComponent implements OnInit {
     private router: Router) { }
   ngOnInit(): void {
     // get list of all service order
-    this.serviceOrder.getServiceBySeroId(`search?seroid=${this.activatedRouter.snapshot.params['id']}`)
-      .subscribe({
-        error: () => {
-          alert("Alamat URL tidak valid")
-          this.router.navigate(['/so'])
-        },
-        next: res => {
-          this.service = res.body!
-          this.Sero = this.service.seros[0]
+    this.serviceOrder.getServiceBySeroId(`${this.activatedRouter.snapshot.params['seroId']}`).subscribe(res=>{
+      if(!res.ok){
+        alert("Alamat URL tidak valid")
+        this.router.navigate(['/so'])
+      }else{
+        this.service = res.body!
+        this.Sero = this.service.seros[0]
+      }
+    // determine id for testa
+    var testaTetyId;
+    if(this.service.servType==SERVTYPE.FEASIBILITY) testaTetyId=1;
+    else if(this.service.servType==SERVTYPE.POLIS) testaTetyId=2;
+    else if(this.service.servType==SERVTYPE.CLAIM) testaTetyId=3;
+    
+    this.serviceOrder.getTestaByTetyId(testaTetyId!).subscribe({
+      error: () => {
+        console.log("ID for testa group not found")
+      },
+      next: res => {
+        // loop seots
+        for(var task of this.Sero.seots){
+          // loop res.body
+          for(var item of res.body!){
+            if(item.testaName==task.seotName){
+              this.testa.push(item)
+            }
+          }
         }
       }
-      )
+    })
+    });
     // check if this service type is feasibility and already has service polis
     if (this.service.servType == SERVTYPE.FEASIBILITY) {
       this.serviceOrder.getAvailablePolis(this.service.servId).subscribe((res) => {

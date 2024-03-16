@@ -28,7 +28,7 @@ export class LoginComponent {
 
   loginUser(data: ILogin) {
     this.loginService
-      .login(`https://localhost:7114/api/Auth/Login`, data)
+      .login(`http://localhost:5125/api/Auth/Login`, data)
       .subscribe({
         next: (res: ILoginClaims) => {
           this.toaster.success('Login success');
