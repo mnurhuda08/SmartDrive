@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ILogin } from 'src/app/interfaces/users/i-login';
 import { ILoginClaims } from 'src/app/interfaces/users/i-login-claims';
 import { LoginService } from 'src/app/services/users/login.service';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent {
     private loginService: LoginService,
     private router: Router,
     private toaster: ToastrService
-  ) {}
+  ) { }
 
   loginObj: ILogin = {
     userName: '',
@@ -34,7 +34,7 @@ export class LoginComponent {
         next: (res: ILoginClaims) => {
           this.toaster.success('Login success');
 
-          localStorage.setItem('accessToken', res.accessToken as string);
+          localStorage.setItem('accessToken', res.accessToken as string); console.log(res);
           this.router.navigateByUrl('/');
         },
         error: (error) => {

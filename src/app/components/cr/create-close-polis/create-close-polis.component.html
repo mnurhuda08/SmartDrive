@@ -1,0 +1,199 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Customer Request</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-primary">
+                            <h5 class="card-title font-weight-bold">Create Close Polis</h5>
+                        </div>
+                        <div class="card-body" *ngIf="customerRequest">
+                            <form [formGroup]="closePolisForm" (ngSubmit)="onSubmit()">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Created On</label>
+                                            <input type="date" class="form-control" formControlName="cuclCreateDate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            <label for="closePolisReason">Reason</label>
+                                            <textarea class="form-control" id="closePolisReason" rows="3"
+                                                formControlName="cuclReason"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header bg-secondary">
+                                        <h3 class="card-title font-weight-bold">Customer Info</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Customer Name</label>
+                                                    <input type="text" class="form-control" name="customerName"
+                                                        formControlName="customerName">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Create Polis Date</label>
+                                                    <input type="text" class="form-control" name="createPolisDate"
+                                                        formControlName="createPolisDate">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Phone Number</label>
+                                                    <input type="tel" class="form-control"
+                                                        placeholder="Masukkan No Telepon ..." name="customerPhoneNumber"
+                                                        formControlName="customerPhoneNumber">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Insurance Plan</label>
+                                                    <select class="form-control" name="insurancePlan"
+                                                        formControlName="insurancePlan">
+                                                        <option value="Total Loss Only">Total Loss Only</option>
+                                                        <option value="Comprehensive">Comprehensive</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    <select class="form-control" name="paidType"
+                                                        formControlName="cityId">
+                                                        <option value=1>Bandung</option>
+                                                        <option value=2>Bogor</option>
+                                                        <option value=3>Cianjur</option>
+                                                        <option value=4>Cirebon</option>
+                                                        <option value=5>Bekasi</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header bg-secondary">
+                                        <h3 class="card-title font-weight-bold">Vehicle Info</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Area Code</label>
+                                                    <input type="text" class="form-control" formControlName="areaCode">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Year</label>
+                                                    <input type="text" class="form-control" name="carYear"
+                                                        formControlName="carYear">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Police Number</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="policeNumber">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Merek/Model/Seri</label>
+                                                    <select class="form-control" name="carSeries"
+                                                        formControlName="carSeries">
+                                                        <option value=1>HRV</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header bg-secondary">
+                                        <h3 class="card-title font-weight-bold">Polis Information</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Polis Number</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="polisNumber">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Created On</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="polisCreatedOn">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Start Date</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="polisStartDate">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>End Date</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="polisEndDate">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex justify-content-end">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Total Premi</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="polisTotalPremi">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-secondary mr-2"
+                                        routerLink="/customer">Cancel</button>
+                                    <!-- <button type="button" class="btn btn-primary mr-2">Save</button> -->
+                                    <button type="submit" class="btn btn-primary">Create Service Close Polis</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

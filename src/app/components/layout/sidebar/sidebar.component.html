@@ -58,70 +58,50 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-home"></i>
-            <p>
-              Master
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
+        <ng-container *ngFor="let item of filteredMenus">
+          <ng-container *ngIf="!item.child">
             <li class="nav-item">
-              <a [routerLink]="['master/carbrand']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Car Brand</p>
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: item.exact }"
+                class="nav-link"
+              >
+                <i class="nav-icon {{ item.icon }}"></i>
+                <p>{{ item.title }}</p>
               </a>
             </li>
+          </ng-container>
+          <ng-container *ngIf="item.child">
             <li class="nav-item">
-              <a href="assets/adminlte/index2.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Car Model</p>
+              <a 
+              [routerLink]="item.path"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: item.exact }"
+              class="nav-link"
+              >
+                <i class="nav-icon {{ item.icon }}"></i>
+                <p>
+                  {{ item.title }}
+                  <i class="right fas fa-angle-left"></i>
+                </p>
               </a>
+              <ul class="nav nav-treeview">
+                <ng-container *ngFor="let child of item.child">
+                  <li class="nav-item">
+                    <a [routerLink]="child.path"
+                      routerLinkActive="active"
+                      [routerLinkActiveOptions]="{ exact: child.exact }" 
+                    class="nav-link">
+                      <i class="{{ child.icon }} nav-icon"></i>
+                      <p>{{ child.title }}</p>
+                    </a>
+                  </li>
+                </ng-container>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a href="assets/adminlte/index3.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Car Series</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <!-- <li class="nav-item"> -->
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-home"></i>
-            <p>
-              Payment
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <!-- <ul class="nav nav-treeview"> -->
-            <li class="nav-item">
-              <a [routerLink]="['payment/payment']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Payment Page</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['payment/payment-batch']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Payment Batch</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['payment/payment-transaction']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Payment Transaction</p>
-              </a>
-            </li>
-          <!-- </ul> -->
-        <!-- </li> -->
-        <li class="nav-item">
-          <a routerLink="/my-profile" routerLinkActive="active" class="nav-link">
-            <i class="nav-icon fas fa-user"></i>
-            <p>My Profile</p>
-          </a>
-        </li>
+          </ng-container>
+        </ng-container>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
