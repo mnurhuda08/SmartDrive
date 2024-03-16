@@ -49,14 +49,15 @@ export class PaymentTransactionComponent implements OnInit {
 
   getAllPaymentTransactionByPage(userId: number) {
     this.paymentTrxService.getPaymentTransactionsPaging(userId, this.page, this.tableSize)
-      .subscribe((result: { data: PaymentTransaction[], count: number }) => {
+      .subscribe((result: { data: PaymentTransaction[] }) => {
         this.data = result;
+        console.log(result);
       });
   }
 
   onTableDataChange(event: any) {
     this.page = event
-    this.getAllPaymentTransactionByPage(parseInt(this.currentUser.sub)) 
+    this.getAllPaymentTransactionByPage(parseInt(this.currentUser.sub))
   }
 
   onTableSizeChange(event: any): void {
