@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +21,25 @@ import { LoginLayoutComponent } from './components/layout/login-layout/login-lay
 import { DashboardLayoutComponent } from './components/layout/dashboard-layout/dashboard-layout.component';
 import { ServicefeasibilityComponent } from './components/so/servicefeasibility/servicefeasibility.component';
 import { ForgotPasswordComponent } from './components/users/forgot-password/forgot-password.component';
+import { PartnerPage } from './components/partners/pages/partner/partner.page';
+import { TableComponent } from './components/partners/components/table/table.component';
+import { ModalComponent } from './components/partners/components/modal/modal.component';
+import { PartnerFormsComponent } from './components/partners/components/partner-forms/partner-forms.component';
+import { PaginationComponent } from './components/partners/components/pagination/pagination.component';
+import { PartnerContactFormsComponent } from './components/partners/components/partner-contact-forms/partner-contact-forms.component';
+import { PartnerAreaWorkgroupFormsComponent } from './components/partners/components/partner-area-workgroup-forms/partner-area-workgroup-forms.component';
+import { PartnerAreaWorkgroupPage } from './components/partners/pages/partner-area-workgroup/partner-area-workgroup.page';
+import { ModalWorkOrderComponent } from './components/partners/components/modal-work-order/modal-work-order.component';
+import { ClaimsSparepartFormsComponent } from './components/partners/components/claims-sparepart-forms/claims-sparepart-forms.component';
+import { ClaimEvidenceFormsComponent } from './components/partners/components/claim-evidence-forms/claim-evidence-forms.component';
+import { CustomerRequestComponent } from './components/cr/customer-request/customer-request.component';
+import { CreateNewPolisComponent } from './components/cr/create-new-polis/create-new-polis.component';
+import { CreateNewClaimComponent } from './components/cr/create-new-claim/create-new-claim.component';
+import { CreateClosePolisComponent } from './components/cr/create-close-polis/create-close-polis.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AddCustomerRequestComponent } from './components/cr/add-customer-request/add-customer-request.component';
+import { AddAgenRequestComponentn } from './components/cr/add-agen-request/add-agen-request.component';
 
 @NgModule({
   declarations: [
@@ -39,14 +57,34 @@ import { ForgotPasswordComponent } from './components/users/forgot-password/forg
     UnauthorizedComponent,
     RegisterComponent,
     ForgotPasswordComponent,
+    TableComponent,
+    ModalComponent,
+    PartnerFormsComponent,
+    PaginationComponent,
+    PartnerContactFormsComponent,
+    PartnerAreaWorkgroupFormsComponent,
+    PartnerAreaWorkgroupPage,
+    PartnerPage,
+    ModalWorkOrderComponent,
+    ClaimsSparepartFormsComponent,
+    ClaimEvidenceFormsComponent,
+    CustomerRequestComponent,
+    CreateNewPolisComponent,
+    CreateNewClaimComponent,
+    CreateClosePolisComponent,
+    AddCustomerRequestComponent,
+    AddAgenRequestComponentn
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [
     {
@@ -54,11 +92,7 @@ import { ForgotPasswordComponent } from './components/users/forgot-password/forg
       useClass: AuthInterceptorInterceptor,
       multi: true,
     },
-    // {
-    //   provide: ErrorHandler,
-    //   useClass: CustomErrorHandler,
-    // },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ILogin } from 'src/app/interfaces/users/i-login';
 import { ILoginClaims } from 'src/app/interfaces/users/i-login-claims';
 import { LoginService } from 'src/app/services/users/login.service';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent {
 
   loginUser(data: ILogin) {
     this.loginService
-      .login(`http://localhost:5125/api/Auth/Login`, data)
+      .login(`${environment.baseUrl}/Auth/Login`, data)
       .subscribe({
         next: (res: ILoginClaims) => {
           this.toaster.success('Login success');

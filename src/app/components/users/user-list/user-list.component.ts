@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrService } from 'ngx-toastr';
-import { IUser, IUsers } from 'src/app/interfaces/users/i-user';
+import { IUser } from 'src/app/interfaces/users/i-user';
 import { UserService } from 'src/app/services/users/user.service';
 import { environment } from 'src/environments/environment';
 import { ManageRolesComponent } from './manage-roles/manage-roles.component';
