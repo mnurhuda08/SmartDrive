@@ -14,7 +14,7 @@ export interface ServiceDto{
     servServId:number,
     servCustEntityid:number,
     servCreqEntityid:number,
-    servCustEntity:UserDto,
-    servCreqEntity:CustomerRequestDto,
+    servCustEntity:UserDto | null,
+    servCreqEntity:CustomerRequestDto | null,
     seros:ServiceOrderDto[]
 }

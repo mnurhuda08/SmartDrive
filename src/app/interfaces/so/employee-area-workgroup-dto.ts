@@ -1,5 +1,5 @@
 import { EmployeeDto } from "./employee-dto";
 
 export interface EmployeeAreaWorkgroupDto {
-    eawgEntity:EmployeeDto,
+    eawgEntity:EmployeeDto | null,
 }

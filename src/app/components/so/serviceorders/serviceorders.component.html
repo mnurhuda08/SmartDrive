@@ -1,33 +1,91 @@
 <section class="content-wrapper">
-    <div class="card">
+    <section class="content">
+        <div class="container-fluid mb-3">
+            <h2 class="text-center display-4">Search</h2>
+            <div class="row">
+                <div class="col offset-md-2">
+                    <form action="" (submit)="searchServiceOrder($event)">
+                        <div class="row align-items-start g-2">
+                            <div class="col-auto">
+                                <label for="ServiceType">Type</label>
+                                <select id="ServiceType" class="form-control" aria-label="Default select example"
+                                    name="type">
+                                    <option value="" selected>All</option>
+                                    <option value="FEASIBILITY">FEASIBILITY</option>
+                                    <option value="POLIS">POLIS</option>
+                                    <option value="CLAIM">CLAIM</option>
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <label for="ServiceStatus">Status</label>
+                                <select id="ServiceStatus" class="form-control" aria-label="Default select example"
+                                    name="status">
+                                    <option value="" selected>All</option>
+                                    <option value="ACTIVE">ACTIVE</option>
+                                    <option value="INACTIVE">INACTIVE</option>
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <label for="ServiceDate">CreatedOn Start</label>
+                                <input type="date" id="ServiceDate" class="form-control" name="start_date">
+                            </div>
+                            <div class="col-auto">
+                                <label for="ServiceDate">CreatedOn End</label>
+                                <input type="date" id="ServiceDate" class="form-control" name="end_date">
+                            </div>
+                            <div class="col-auto">
+                                <label for="" style="color: transparent;">Search</label>
+                                <button id="Search" type="submit" class="btn btn-default form-control">
+                                    Search
+                                    <i class="fa fa-search"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title">All Service Order</h3>
         </div>
-    
+
         <div class="card-body">
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
                         <th>Service Orders</th>
+                        <th>Created On</th>
+                        <th>Type</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of serviceOrders; let i = index">
                         <td>{{i+1}}.</td>
                         <td><a [href]="'so/'+item.seroId">{{item.seroId}}</a></td>
+                        <td>{{item.seroServ?.servCreatedOn | date:'dd/MM/yyyy'}}</td>
+                        <td>{{item.seroServ?.servType}}</td>
+                        <td>{{item.seroServ?.servStatus}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    
+
         <div class="card-footer clearfix">
             <ul class="pagination pagination-sm m-0 float-right">
-                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">»</a></li>
+                <li class="page-item" *ngIf="hasPrevious"><a class="page-link" [href]="'so/page/'+(currentPage-1)">«</a>
+                </li>
+                <li *ngFor="let item of totalPages | range;let i=index" class="page-item">
+                    <span *ngIf="currentPage==(i+1)" class="page-link">{{i+1}}</span>
+                    <a [href]="(i+1)!=currentPage?'so/page/'+(i+1):''" class="page-link"
+                        *ngIf="currentPage!=(i+1)">{{i+1}}</a>
+                </li>
+                <li class="page-item" *ngIf="hasNext"><a class="page-link" [href]="'so/page/'+(currentPage+1)">»</a>
+                </li>
             </ul>
         </div>
     </div>

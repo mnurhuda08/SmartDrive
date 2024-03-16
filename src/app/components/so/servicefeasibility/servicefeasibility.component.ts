@@ -9,6 +9,7 @@ import { CreateServicePolisDto } from 'src/app/interfaces/so/create-service-poli
 import { ServiceDto } from 'src/app/interfaces/so/service-dto';
 import { ServiceOrderDto } from 'src/app/interfaces/so/service-order-dto';
 import { TaskDto } from 'src/app/interfaces/so/task-dto';
+import { TestaDto } from 'src/app/interfaces/so/testa-dto';
 import { WorkorderDto } from 'src/app/interfaces/so/workorder-dto';
 import { ServiceordersService } from 'src/app/services/so/serviceorders.service';
 
@@ -24,8 +25,11 @@ export class ServicefeasibilityComponent implements OnInit {
   // data
   service = {} as ServiceDto;
   Sero = {} as ServiceOrderDto;
-  isGenerateAvailable: boolean = false;
-  isGeneratePermitted: boolean = false;
+  
+  testa:TestaDto[]=[];
+
+  isGenerateAvailable: boolean | null = false;
+  isGeneratePermitted: boolean | null = false;
   // enum
   SOWOSTATUS = SOWOSTATUS;
   SEOTSTATUS = SEOTSTATUS;
@@ -37,18 +41,37 @@ export class ServicefeasibilityComponent implements OnInit {
     private router: Router) { }
   ngOnInit(): void {
     // get list of all service order
-    this.serviceOrder.getServiceBySeroId(`search?seroid=${this.activatedRouter.snapshot.params['id']}`)
-      .subscribe({
-        error: () => {
-          alert("Alamat URL tidak valid")
-          this.router.navigate(['/so'])
-        },
-        next: res => {
-          this.service = res.body!
-          this.Sero = this.service.seros[0]
+    this.serviceOrder.getServiceBySeroId(`${this.activatedRouter.snapshot.params['seroId']}`).subscribe(res=>{
+      if(!res.ok){
+        alert("Alamat URL tidak valid")
+        this.router.navigate(['/so'])
+      }else{
+        this.service = res.body!
+        this.Sero = this.service.seros[0]
+      }
+    // determine id for testa
+    var testaTetyId;
+    if(this.service.servType==SERVTYPE.FEASIBILITY) testaTetyId=1;
+    else if(this.service.servType==SERVTYPE.POLIS) testaTetyId=2;
+    else if(this.service.servType==SERVTYPE.CLAIM) testaTetyId=3;
+    
+    this.serviceOrder.getTestaByTetyId(testaTetyId!).subscribe({
+      error: () => {
+        console.log("ID for testa group not found")
+      },
+      next: res => {
+        // loop seots
+        for(var task of this.Sero.seots){
+          // loop res.body
+          for(var item of res.body!){
+            if(item.testaName==task.seotName){
+              this.testa.push(item)
+            }
+          }
         }
       }
-      )
+    })
+    });
     // check if this service type is feasibility and already has service polis
     if (this.service.servType == SERVTYPE.FEASIBILITY) {
       this.serviceOrder.getAvailablePolis(this.service.servId).subscribe((res) => {
@@ -61,11 +84,7 @@ export class ServicefeasibilityComponent implements OnInit {
     }
 
   }
-  getDate(date: string) {
-    let newDate = date?.split('T')[0]?.split('-')
-    return `${newDate[2]}/${newDate[1]}/${newDate[0]}`
-  }
-  workorderSubmit(e: SubmitEvent) {
+  workorderSubmit(e: SubmitEvent,sowoIndex:number) {
     e.preventDefault()
     if (confirm("Apakah anda yakin?")) {
       // search input tag inside target html
@@ -89,7 +108,9 @@ export class ServicefeasibilityComponent implements OnInit {
             (res) => {
               if (res.status.toString().startsWith('2')) {
                 alert("Berhasil")
-                location.reload()
+                this.Sero.seots[sowoIndex].sowos.forEach((element,index) => {
+                  if(element.sowoId==Number(id)) this.Sero.seots[sowoIndex].sowos[index].sowoStatus=body.sowoStatus
+                });
               }
             });
         }
@@ -110,7 +131,9 @@ export class ServicefeasibilityComponent implements OnInit {
       this.serviceOrder.updateTask(body).subscribe((res) => {
         if (res.status.toString().startsWith('2')) {
           alert("Berhasil")
-          location.reload()
+          this.Sero.seots.forEach((element,index) => {
+            if(element.seotId==Number(id)) this.Sero.seots[index].seotStatus=body.seotStatus
+          });
         }
       })
     }
@@ -120,7 +143,7 @@ export class ServicefeasibilityComponent implements OnInit {
     if (confirm("Apakah anda yakin?")) {
       let body = {
         servId: this.service.servId,
-        agentId: Number(this.service.seros[0].seroAgentEntityid),
+        agentId: Number(this.Sero.seroAgentEntityid),
         createPolisDate: this.service.servCreatedOn,
         polisStartDate: this.service.servStartdate,
         polisEndDate: this.service.servEnddate,
@@ -128,7 +151,6 @@ export class ServicefeasibilityComponent implements OnInit {
       this.serviceOrder.createServicePolis(body).subscribe((res) => {
         if (res.statusText == "OK") {
           alert("Berhasil")
-          location.reload()
         }
       })
     }
@@ -140,8 +162,5 @@ export class ServicefeasibilityComponent implements OnInit {
       }
     }
     return false;
-  }
-  getEmpName():string{
-    return this.service?.servCreqEntity?.creqAgenEntity?.eawgEntity?.empName;
   }
 }
