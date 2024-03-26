@@ -76,11 +76,11 @@ const routes: Routes = [
         component: PaymentTransactionComponent,
       },
       {
-        path: 'so',
+        path: 'so/page/:currentPage',
         component: ServiceordersComponent,
       },
       {
-        path: 'so/:id',
+        path: 'so/:seroId',
         component: ServicefeasibilityComponent,
         providers: [HttpClient],
       },

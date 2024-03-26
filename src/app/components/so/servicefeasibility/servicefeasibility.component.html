@@ -1,184 +1,192 @@
-<div class="container my-3 content-wrapper">
-    <h3>Service Order</h3>
-    <div class="card mb-3 card-primary">
-        <div class="card-header">
-            <h3 class="card-title">Service</h3>
-        </div>
-        <div class="card-body">
-            <div class="row align-items-center g-2">
-                <div class="col-auto">
-                    <div class="form-group mb-3">
-                        <label for="floatingInputDisabled">Service Order Name</label>
-                        <input type="text" class="form-control" id="floatingInputDisabled" [value]="Sero.seroId"
-                            disabled>
-                    </div>
-
-                </div>
-                <div class="col-auto ">
-                    <div class="form-group mb-3">
-                        <label for="floatingInputDisabled">Created On</label>
-                        <input type="text" class="form-control" id="floatingInputDisabled"
-                            [value]="service.servCreatedOn?getDate(service.servCreatedOn):''" disabled>
+<div class="content-wrapper">
+    <div class="container my-3">
+        <h3>Service Order</h3>
+        <div class="card mb-3 card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Service</h3>
+            </div>
+            <div class="card-body">
+                <div class="row align-items-center g-2">
+                    <div class="col-auto">
+                        <div class="form-group mb-3">
+                            <label for="floatingInputDisabled">Service Order ID</label>
+                            <input type="text" class="form-control" id="floatingInputDisabled" [value]="Sero.seroId"
+                                disabled>
+                        </div>
 
                     </div>
-                </div>
-                <div class="col-auto">
-                    <div class="form-floating mb-3">
-                        <label for="floatingInputDisabled">Service Type</label>
-                        <input type="text" class="form-control" id="floatingInputDisabled" [value]="service.servType"
-                            disabled>
-                        <select class="form-select" id="floatingSelectGrid" disabled hidden>
-                            <option value="FEASIBILITY" [selected]="service.servType=='FEASIBILITY'?true:false">
-                                FEASIBILITY POLIS</option>
-                            <option value="OPEN" [selected]="service.servType=='OPEN'?true:false">OPEN POLIS</option>
-                            <option value="CLAIM" [selected]="service.servType=='CLAIM'?true:false">CLAIM POLIS</option>
-                            <option value="CLOSE" [selected]="service.servType=='CLOSE'?true:false">CLOSE POLIS</option>
-                        </select>
-                        <!-- <label for="floatingSelectGrid">Service Type</label> -->
+                    <div class="col-auto ">
+                        <div class="form-group mb-3">
+                            <label for="floatingInputDisabled">Created On</label>
+                            <input type="text" class="form-control" id="floatingInputDisabled"
+                                [value]="service.servCreatedOn | date:'dd/MM/yyyy'" disabled>
+
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-floating mb-3">
+                            <label for="floatingInputDisabled">Service Type</label>
+                            <input type="text" class="form-control" id="floatingInputDisabled"
+                                [value]="service.servType" disabled>
+                            <select class="form-select" id="floatingSelectGrid" disabled hidden>
+                                <option value="FEASIBILITY" [selected]="service.servType=='FEASIBILITY'?true:false">
+                                    FEASIBILITY POLIS</option>
+                                <option value="OPEN" [selected]="service.servType=='OPEN'?true:false">OPEN POLIS
+                                </option>
+                                <option value="CLAIM" [selected]="service.servType=='CLAIM'?true:false">CLAIM POLIS
+                                </option>
+                                <option value="CLOSE" [selected]="service.servType=='CLOSE'?true:false">CLOSE POLIS
+                                </option>
+                            </select>
+                            <!-- <label for="floatingSelectGrid">Service Type</label> -->
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-floating mb-3">
+                            <label for="floatingInputDisabled">Status</label>
+                            <input type="text" class="form-control" id="floatingInputDisabled"
+                                [value]="service.servStatus" disabled>
+                            <select class="custom-select form-select" id="floatingSelectGrid" disabled hidden>
+                                <option value="OPEN" [selected]="service.servStatus">OPEN</option>
+                                <option value="CLOSE" [selected]="service.servStatus=='CLOSE'?true:false">CLOSE</option>
+                                <option value="CANCELLED" [selected]="service.servStatus=='CANCELLED'?true:false">
+                                    CANCELLED
+                                </option>
+                            </select>
+                            <!-- <label for="floatingSelectGrid">STATUS</label> -->
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating mb-3">
+                            <label for="floatingInputDisabled">Polis Number</label>
+                            <input type="text" class="form-control" id="floatingInputDisabled"
+                                [value]="service.servInsuranceNo" disabled>
+                        </div>
                     </div>
                 </div>
-                <div class="col-auto">
-                    <div class="form-floating mb-3">
-                        <label for="floatingInputDisabled">Status</label>
-                        <input type="text" class="form-control" id="floatingInputDisabled" [value]="service.servStatus"
-                            disabled>
-                        <select class="custom-select form-select" id="floatingSelectGrid" disabled hidden>
-                            <option value="OPEN" [selected]="service.servStatus">OPEN</option>
-                            <option value="CLOSE" [selected]="service.servStatus=='CLOSE'?true:false">CLOSE</option>
-                            <option value="CANCELLED" [selected]="service.servStatus=='CANCELLED'?true:false">CANCELLED
-                            </option>
-                        </select>
-                        <!-- <label for="floatingSelectGrid">STATUS</label> -->
+
+                <div class="row g-2 justify-content-start">
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <label for="floatingInputDisabled">Customer</label>
+                            <input type="text" class="form-control" id="floatingInputDisabled"
+                                [value]="service.servCustEntity?.userFullName | titlecase" disabled>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md">
-                    <div class="form-floating mb-3">
-                        <label for="floatingInputDisabled">Polis Number</label>
-                        <input type="text" class="form-control" id="floatingInputDisabled"
-                            [value]="service.servInsuranceNo" disabled>
+                    <div class="col-3">
+                        <div class="form-floating mb-3">
+                            <label for="floatingInputDisabled">Financial Advisor</label>
+                            <input type="text" class="form-control" id="floatingInputDisabled"
+                                [value]="service.servCreqEntity?.creqAgenEntity?.eawgEntity?.empName | titlecase"
+                                disabled>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row g-2 justify-content-start">
-                <div class="col-3">
-                    <div class="form-floating">
-                        <label for="floatingInputDisabled">Customer</label>
-                        <input type="text" class="form-control" id="floatingInputDisabled"
-                            [value]="service.servCustEntity?service.servCustEntity.userFullName:''" disabled>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="form-floating mb-3">
-                        <label for="floatingInputDisabled">Financial Advisor</label>
-                        <input type="text" class="form-control" id="floatingInputDisabled"
-                            [value]="getEmpName()" disabled>
-                    </div>
-                </div>
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Service Order Implementation</h3>
             </div>
-        </div>
-    </div>
-
-    <div class="card card-primary">
-        <div class="card-header">
-            <h3 class="card-title">Service Order Implementation</h3>
-        </div>
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">task_id</th>
-                        <th scope="col">task_name</th>
-                        <th scope="col">start_date</th>
-                        <th scope="col">end_date</th>
-                        <th scope="col">status</th>
-                        <th scope="col">workorder</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let seot of Sero.seots; let i = index">
-                        <td>{{i+1}}</td>
-                        <td>{{seot.seotName}}</td>
-                        <td>{{(seot.seotStartdate?getDate(seot.seotStartdate):"")}}</td>
-                        <td>{{(seot.seotEnddate?getDate(seot.seotEnddate):"")}}</td>
-                        <td>{{seot.seotStatus}}</td>
-                        <td>
-                            <div class="d-flex justify-content-between" *ngIf="seot.sowos.length==0">
-                                <input [id]="seot.seotId" class="form-check-input mt-0" type="checkbox"
-                                    [value]="seot.seotStatus" aria-label="Checkbox for following text input"
-                                    [checked]="seot.seotStatus==SEOTSTATUS.COMPLETED"
-                                    (click)="taskSubmit($event)">
-                            </div>
-                            <div class="d-flex justify-content-between" *ngIf="seot.sowos.length>0">
-                                <div class="d-flex justify-content-between">
-                                    <input [id]="seot.seotId" class="form-check-input mt-0" type="checkbox"
+            <div class="card-body table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">task_id</th>
+                            <th scope="col">task_name</th>
+                            <th scope="col">start_date</th>
+                            <th scope="col">end_date</th>
+                            <th scope="col">group</th>
+                            <th scope="col">status</th>
+                            <th scope="col">workorder</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let seot of Sero.seots; let i = index" >
+                            <td>{{i+1}}</td>
+                            <td>{{seot.seotName}}</td>
+                            <td>{{seot.seotStartdate | date:'dd/MM/yyyy'}}</td>
+                            <td>{{seot.seotEnddate| date:'dd/MM/yyyy'}}</td>
+                            <td>{{(testa.length>0?testa[i].testaGroup:"") }}</td>
+                            <td>{{seot.seotStatus}}</td>
+                            <td class="d-flex justify-content-center">
+                                <div class="">
+                                    <input [id]="seot.seotId" class="btn-check" autocomplete="off" type="checkbox"
                                         [value]="seot.seotStatus" aria-label="Checkbox for following text input"
-                                        [checked]="seot.seotStatus==SEOTSTATUS.COMPLETED"
-                                        (click)="taskSubmit($event)" [disabled]="checkAllSowoStatus(i)">
+                                        [checked]="seot.seotStatus==SEOTSTATUS.COMPLETED" (click)="taskSubmit($event)"
+                                        *ngIf="seot.sowos.length==0">
+                                    <!-- <label class="btn btn-outline-secondary" [for]="seot.seotId">Done</label> -->
                                 </div>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
-                                    [attr.data-target]="'#collapseExample-'+i"
-                                    [disabled]="seot.seotStatus==SEOTSTATUS.COMPLETED">
-                                    More
-                                </button>
-                                <!-- WORKORDER TABEL -->
-                                <div class="modal fade" [id]="'collapseExample-'+i" data-bs-backdrop="static"
-                                    data-bs-keyboard="false" tabindex="-1"
-                                    [attr.aria-labelledby]="'exampleModalLabel'+i+'Label'" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <form action="" (submit)="workorderSubmit($event)">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Work Order</th>
-                                                            <th scope="col">Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr *ngFor="let sowo of seot.sowos">
-                                                            <td scope="row">{{sowo.sowoName}}
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex justify-content-between form-check">
-                                                                    <label
-                                                                        [for]="sowo.sowoId"
-                                                                        class="form-check-label">{{sowo.sowoStatus}}</label>
-                                                                    <input [id]="sowo.sowoId"
-                                                                        class="form-check-input mt-0"
-                                                                        name="status" type="checkbox"
-                                                                        [value]="sowo.sowoStatus"
-                                                                        aria-label="Checkbox for following text input"
-                                                                        [checked]="sowo.sowoStatus.match(SOWOSTATUS.COMPLETED)"
-                                                                        [disabled]="sowo.sowoStatus.match(SOWOSTATUS.CANCELLED)">
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">Save
-                                                        changes</button>
-                                                    <button type="reset" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                </div>
-                                            </form>
+                                <div *ngIf="seot.sowos.length>0" class="">
+                                    <input [id]="seot.seotId" class="mr-1" type="checkbox" [value]="seot.seotStatus"
+                                        [checked]="seot.seotStatus==SEOTSTATUS.COMPLETED" (click)="taskSubmit($event)"
+                                        [disabled]="checkAllSowoStatus(i)">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                                        [attr.data-target]="'#collapseExample-'+i"
+                                        [disabled]="seot.seotStatus==SEOTSTATUS.COMPLETED">
+                                        More
+                                    </button>
+                                    <div class="modal fade" [id]="'collapseExample-'+i" data-bs-backdrop="static"
+                                        data-bs-keyboard="false" tabindex="-1"
+                                        [attr.aria-labelledby]="'exampleModalLabel'+i+'Label'" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form action="" (submit)="workorderSubmit($event,i)">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Work Order</th>
+                                                                <th scope="col">Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let sowo of seot.sowos">
+                                                                <td scope="row">{{sowo.sowoName}}
+                                                                </td>
+                                                                <td>
+                                                                    <div
+                                                                        class="d-flex justify-content-between form-check">
+                                                                        <label [for]="sowo.sowoId"
+                                                                            class="form-check-label">{{sowo.sowoStatus}}</label>
+                                                                        <input [id]="sowo.sowoId" name="status"
+                                                                            class="form-check-input mt-0" name="status"
+                                                                            type="checkbox" [value]="sowo.sowoStatus"
+                                                                            aria-label="Checkbox for following text input"
+                                                                            [checked]="sowo.sowoStatus.match(SOWOSTATUS.COMPLETED)"
+                                                                            [disabled]="sowo.sowoStatus.match(SOWOSTATUS.CANCELLED)">
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">Save
+                                                            changes</button>
+                                                        <button type="reset" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr *ngIf="service.servType==SERVTYPE.FEASIBILITY">
-                        <td>
-                            <button class="btn btn-outline-secondary" type="button" (click)="generatePolis($event)"
-                                [disabled]="isGenerateAvailable==false || isGeneratePermitted==false">Generate
-                                Polis</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot >
+                    </tfoot>
+                </table>
+                <!-- <div *ngIf="service.servType==SERVTYPE.FEASIBILITY">
+                    <button class="btn btn-outline-secondary" type="button" (click)="generatePolis($event)"
+                        [disabled]="isGenerateAvailable==false || isGeneratePermitted==false">Generate
+                        Polis
+                    </button>
+                    <span class="ml-2 fw-light fw-italic" style="color: red;"
+                    *ngIf="!isGenerateAvailable">Polis has already
+                        generated</span>
+                </div> -->
+            </div>
         </div>
     </div>
 </div>
