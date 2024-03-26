@@ -53,7 +53,7 @@ export const MenuConstant: IMenus[] = [
   {
     path: '/partner',
     title: 'Partner',
-    roles: ['PR', 'AD'],
+    roles: ['PR', 'AD', 'EM'],
     exact: false,
     icon: 'fa fa-building',
     child: [
@@ -81,27 +81,42 @@ export const MenuConstant: IMenus[] = [
     icon: 'fas fa-cogs',
   },
   {
-    path: '/payment/payment-transaction',
-    title: 'Payment Transaction',
+    path: '/payment',
+    title: 'Payment',
     roles: ['EM'],
     exact: false,
     icon: 'fas fa-money-check ',
-  },
-  {
-    path: `/payment/payment-page`,
-    title: 'Payment Page',
-    roles: ['EM'],
-    exact: false,
-    icon: 'fas fa-piggy-bank',
+    child: [
+      {
+        path: `/payment/payment-page`,
+        title: 'Payment Page',
+        roles: ['EM'],
+        exact: false,
+        icon: 'fas fa-piggy-bank',
+      },
+      {
+        path: '/payment/payment-transaction',
+        title: 'Payment Transaction',
+        roles: ['EM'],
+        exact: false,
+        icon: 'fas fa-money-check ',
+      },
+      {
+        path: `/payment/batch-page`,
+        title: 'Payment Batch',
+        roles: ['EM'],
+        exact: false,
+        icon: 'fas fa-funnel-dollar',
+      },
+      {
+        path: `/payment/send-money`,
+        title: 'Send Money',
+        roles: ['EM'],
+        exact: false,
+        icon: 'fas fa-funnel-dollar',
+      },]
   },
 
-  {
-    path: `/payment/batch-page`,
-    title: 'Payment Batch',
-    roles: ['EM'],
-    exact: false,
-    icon: 'fas fa-funnel-dollar',
-  },
 
 ];
 

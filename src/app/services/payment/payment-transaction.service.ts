@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PaymentTransaction } from 'src/app/models/payment/PaymentTransaction';
+import { PaymentTransactionCreateDto } from "src/app/models/payment/PaymentTransactionCreateDto";
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -34,7 +35,7 @@ export class PaymentTransactionService {
   }
 
   public createPaymentTransaction(
-    PaymentTransaction: PaymentTransaction
+    PaymentTransaction: PaymentTransactionCreateDto
   ): Observable<PaymentTransaction[]> {
     return this.http.post<PaymentTransaction[]>(
       `${environment.baseUrl}/${this.url}`,

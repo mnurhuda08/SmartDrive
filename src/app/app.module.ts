@@ -48,6 +48,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AddCustomerRequestComponent } from './components/cr/add-customer-request/add-customer-request.component';
 import { AddAgenRequestComponentn } from './components/cr/add-agen-request/add-agen-request.component';
+import { SendMoneyComponent } from './components/payment/send-money/send-money.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { AddAgenRequestComponentn } from './components/cr/add-agen-request/add-a
     CreateNewClaimComponent,
     CreateClosePolisComponent,
     AddCustomerRequestComponent,
-    AddAgenRequestComponentn
+    AddAgenRequestComponentn,
+    SendMoneyComponent
   ],
   imports: [
     BrowserModule,
