@@ -44,20 +44,23 @@ export class CategoryComponent implements OnInit {
     this.router.navigate(['master/category/edit', id]);
   }
 
-  deleteCategory(category: Category): void {
-    this.categories = this.categories.filter((f) => f !== category);
-    this.categoryService.deleteCategory(category).subscribe();
+  deleteCategory(event: any, category: Category): void {
+    if (confirm(`Delete this data ?`)) {
+      event.target.innerText = 'Deleting....';
+      this.categories = this.categories.filter((f) => f !== category);
+      this.categoryService.deleteCategory(category).subscribe();
+    }
   }
 
   openModal(): void {
-    const modalID = document.getElementById('carBrandAddModal');
+    const modalID = document.getElementById('categoryAddModal');
     if (modalID) {
       modalID.style.display = 'block';
     }
   }
 
   closeModal(): void {
-    const modalID = document.getElementById('carBrandAddModal');
+    const modalID = document.getElementById('categoryAddModal');
     if (modalID) {
       modalID.style.display = 'none';
     }

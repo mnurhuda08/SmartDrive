@@ -9,6 +9,7 @@ import { ProvinceService } from 'src/app/services/master/province.service';
   styleUrls: ['./province.component.css'],
 })
 export class ProvinceComponent implements OnInit {
+  title = 'Province';
   provinces: Province[] = [];
   totalItems: number = 0;
   currentPage: number = 1;
@@ -57,9 +58,12 @@ export class ProvinceComponent implements OnInit {
     this.router.navigate(['master/region/province/edit', id]);
   }
 
-  deleteProvince(provinces: Province) {
-    this.provinces.filter((f) => f !== provinces);
-    this.provinceService.deleteProvince(provinces).subscribe();
+  deleteProvince(event: any, provinces: Province) {
+    if (confirm('Delete this data ?')) {
+      event.target.innerText = 'Deleting...';
+      this.provinces.filter((f) => f !== provinces);
+      this.provinceService.deleteProvince(provinces).subscribe();
+    }
   }
 
   ngOnInit(): void {

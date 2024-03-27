@@ -21,7 +21,7 @@ export class CarBrandComponent implements OnInit {
     private router: Router
   ) {
     this.form = this.formBuilder.group({
-      cabr_name: ['', Validators.required],
+      cabrName: ['', Validators.required],
     });
   }
 
@@ -44,22 +44,40 @@ export class CarBrandComponent implements OnInit {
     this.router.navigate(['master/car/carbrand/edit', id]);
   }
 
-  deleteCarBrand(carBrand: CarBrand): void {
-    this.carBrands = this.carBrands.filter((f) => f !== carBrand);
-    this.carBrandService.deleteCarBrand(carBrand).subscribe();
-  }
-
-  openModal(): void {
+  openAddModal(): void {
     const modalID = document.getElementById('carBrandAddModal');
     if (modalID) {
       modalID.style.display = 'block';
     }
   }
 
-  closeModal(): void {
+  closeAddModal(): void {
     const modalID = document.getElementById('carBrandAddModal');
+    const modalBackdrop = document.getElementsByClassName('modal-backdrop');
     if (modalID) {
       modalID.style.display = 'none';
+    }
+  }
+
+  // openDeleteModal(carbrId: number): void {
+  //   const modalID = document.getElementById('deleteModal');
+  //   if (modalID) {
+  //     modalID.style.display = 'block';
+  //   }
+  // }
+
+  // closeDeleteModal(): void {
+  //   const modalID = document.getElementById('deleteModal');
+  //   if (modalID) {
+  //     modalID.style.display = 'none';
+  //   }
+  // }
+
+  deleteCarBrand(event: any, cabrId: number) {
+    if (confirm(`Delete this data ?`)) {
+      event.target.innerText = 'Deleting....';
+      this.carBrands = this.carBrands.filter((cb) => cb.cabrId !== cabrId);
+      this.carBrandService.deleteCarBrand(cabrId).subscribe();
     }
   }
 
@@ -73,10 +91,10 @@ export class CarBrandComponent implements OnInit {
       return;
     }
 
-    const cabrName: string = this.f.cabr_name?.value;
+    const cabrName: string = this.f.cabrName?.value;
 
     this.carBrandService
       .addCarBrand({ cabrName } as CarBrand)
-      .subscribe(() => this.closeModal());
+      .subscribe(() => this.closeAddModal());
   }
 }

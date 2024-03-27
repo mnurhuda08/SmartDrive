@@ -9,6 +9,7 @@ import { AreaWorkgroupService } from 'src/app/services/master/area-workgroup.ser
   styleUrls: ['./areaworkgroup.component.css'],
 })
 export class AreaworkgroupComponent implements OnInit {
+  title = 'Area Workgroup';
   areaWorkgroups: AreaWorkgroup[] = [];
 
   constructor(
@@ -31,9 +32,12 @@ export class AreaworkgroupComponent implements OnInit {
     this.router.navigate(['master/region/areaworkgroup/edit', name]);
   }
 
-  deleteAreaWorkgroup(areaWorkgroups: AreaWorkgroup) {
-    this.areaWorkgroups.filter((f) => f !== areaWorkgroups);
-    this.areaWorkgroupService.deleteAreaWorkgroup(areaWorkgroups).subscribe();
+  deleteAreaWorkgroup(event: any, areaWorkgroups: AreaWorkgroup) {
+    if (confirm('Delete this data ?')) {
+      event.target.innerText = 'Deleting...';
+      this.areaWorkgroups.filter((f) => f !== areaWorkgroups);
+      this.areaWorkgroupService.deleteAreaWorkgroup(areaWorkgroups).subscribe();
+    }
   }
 
   ngOnInit(): void {

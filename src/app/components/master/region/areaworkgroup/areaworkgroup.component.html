@@ -1,33 +1,33 @@
 <div class="card">
-  <div class="card-header d-flex justify-content-between">
-    <div class="col-10">
-      <h4>Area Workgroup</h4>
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <div class="col-6">
+      <h2 class="card-title font-weight-bold">{{ title }}</h2>
     </div>
-    <div class="col-2 d-flex justify-content-end">
+    <div class="col-6 d-flex justify-content-end">
       <button
         type="button"
         class="btn btn-info float-end"
         [routerLink]="['/master/region/areaworkgroup/add']"
       >
-        <i class="fa fa-plus-circle"></i> Tambah
+        <i class="fa fa-plus-circle"></i> Add
       </button>
     </div>
   </div>
 
   <div class="card-body maxHeight">
     <table class="table table-striped table-bordered table-hover">
-      <thead>
+      <thead class="text-center">
         <tr>
           <th>Code</th>
           <th>Description</th>
-          <th>Aksi</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody *ngFor="let areaWorkgroup of areaWorkgroups">
         <tr>
           <td class="col-3">{{ areaWorkgroup.arwgCode }}</td>
           <td class="col-4">{{ areaWorkgroup.arwgDesc }}</td>
-          <td>
+          <td class="text-center">
             <button
               type="button"
               class="btn btn-info mr-2"
@@ -39,7 +39,7 @@
               type="button"
               class="btn btn-danger"
               style="margin-right: 5px"
-              (click)="deleteAreaWorkgroup(areaWorkgroup)"
+              (click)="deleteAreaWorkgroup($event, areaWorkgroup)"
             >
               <i class="fas fa-trash"></i>
             </button>

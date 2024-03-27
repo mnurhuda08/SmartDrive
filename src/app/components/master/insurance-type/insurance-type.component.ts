@@ -10,6 +10,7 @@ import { InsuranceTypeService } from 'src/app/services/master/insurance-type.ser
 })
 export class InsuranceTypeComponent implements OnInit {
   insuranceTypes: InsuranceType[] = [];
+  title = 'Insurance Type';
 
   constructor(
     private insuranceTypeService: InsuranceTypeService,
@@ -30,9 +31,12 @@ export class InsuranceTypeComponent implements OnInit {
     this.router.navigate(['master/insurance-type/edit', name]);
   }
 
-  deleteInsuranceType(insuranceTypes: InsuranceType) {
-    this.insuranceTypes.filter((f) => f !== insuranceTypes);
-    this.insuranceTypeService.deleteInsuranceType(insuranceTypes).subscribe();
+  deleteInsuranceType(event: any, insuranceTypes: InsuranceType) {
+    if (confirm(`Delete this data ?`)) {
+      event.target.innerText = 'Deleting....';
+      this.insuranceTypes.filter((f) => f !== insuranceTypes);
+      this.insuranceTypeService.deleteInsuranceType(insuranceTypes).subscribe();
+    }
   }
 
   ngOnInit(): void {

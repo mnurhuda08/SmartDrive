@@ -9,6 +9,7 @@ import { CityService } from 'src/app/services/master/city.service';
   styleUrls: ['./city.component.css'],
 })
 export class CityComponent implements OnInit {
+  title = 'City';
   cities: City[] = [];
 
   constructor(private cityService: CityService, private router: Router) {}
@@ -28,9 +29,12 @@ export class CityComponent implements OnInit {
     this.router.navigate(['master/region/city/edit', id]);
   }
 
-  deleteCity(cities: City) {
-    this.cities.filter((f) => f !== cities);
-    this.cityService.deleteCity(cities).subscribe();
+  deleteCity(event: any, cities: City) {
+    if (confirm('Delete this data ?')) {
+      event.target.innerText = 'Deleting...';
+      this.cities.filter((f) => f !== cities);
+      this.cityService.deleteCity(cities).subscribe();
+    }
   }
 
   ngOnInit(): void {

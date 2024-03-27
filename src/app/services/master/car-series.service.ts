@@ -38,8 +38,8 @@ export class CarSeriesService {
       .pipe(catchError(this.handleError<CarSeries>('updateCarSeries')));
   }
 
-  deleteCarSeries(carSeries: CarSeries): Observable<CarSeries> {
-    const apiUrl = `${this.apiUrl}/${carSeries.carsId}`;
+  deleteCarSeries(carsId: number): Observable<CarSeries> {
+    const apiUrl = `${this.apiUrl}/${carsId}`;
 
     return this.http
       .delete<CarSeries>(apiUrl, this.httpOptions)

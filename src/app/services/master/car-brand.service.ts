@@ -15,7 +15,7 @@ export class CarBrandService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getCarBrands(): Observable<CarBrand[]> {
     return this.http.get<CarBrand[]>(this.apiUrl);
@@ -39,8 +39,8 @@ export class CarBrandService {
       .pipe(catchError(this.handleError<CarBrand>('updateCarBrand')));
   }
 
-  deleteCarBrand(carBrand: CarBrand): Observable<CarBrand> {
-    const apiUrl = `${this.apiUrl}/${carBrand.cabrId}`;
+  deleteCarBrand(cabrId: number): Observable<CarBrand> {
+    const apiUrl = `${this.apiUrl}/${cabrId}`;
 
     return this.http
       .delete<CarBrand>(apiUrl, this.httpOptions)

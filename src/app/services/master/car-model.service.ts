@@ -39,8 +39,8 @@ export class CarModelService {
       .pipe(catchError(this.handleError<CarModel>('updateCarModel')));
   }
 
-  deleteCarModel(carModel: CarModel): Observable<CarModel> {
-    const apiUrl = `${this.apiUrl}/${carModel.carmId}`;
+  deleteCarModel(carmId: number): Observable<CarModel> {
+    const apiUrl = `${this.apiUrl}/${carmId}`;
 
     return this.http
       .delete<CarModel>(apiUrl, this.httpOptions)

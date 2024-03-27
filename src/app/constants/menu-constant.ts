@@ -1,13 +1,13 @@
 import { IMenus } from '../interfaces/common/i-menus';
 
 export const MenuConstant: IMenus[] = [
-  {
-    path: '/',
-    title: 'Dashboard',
-    roles: ['EM', 'PC', 'CU'],
-    exact: true,
-    icon: 'fas fa-tachometer-alt',
-  },
+  // {
+  //   path: '/',
+  //   title: 'Dashboard',
+  //   roles: ['EM', 'PC', 'CU'],
+  //   exact: true,
+  //   icon: 'fas fa-tachometer-alt',
+  // },
   {
     path: '/my-profile',
     title: 'My Profile',

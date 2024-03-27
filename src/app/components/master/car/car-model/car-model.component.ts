@@ -30,6 +30,11 @@ export class CarModelComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    this.getCarModels();
+    this.getCarBrands();
+  }
+
   getCarBrands() {
     this.carBrandService.getCarBrands().subscribe({
       next: (response) => {
@@ -39,17 +44,6 @@ export class CarModelComponent implements OnInit {
         console.error(error);
       },
     });
-  }
-
-  ngOnInit(): void {
-    this.getCarModels();
-    this.getCarBrands(); 
-
-
-
-
-
-    
   }
 
   getCarModels(): void {
@@ -67,22 +61,25 @@ export class CarModelComponent implements OnInit {
     this.router.navigate(['master/car/carmodel/edit', id]);
   }
 
-  deleteCarModel(carModel: CarModel): void {
-    this.carModels = this.carModels.filter((f) => f !== carModel);
-    this.carModelService.deleteCarModel(carModel).subscribe();
-  }
-
-  openModal(): void {
+  openAddModal(): void {
     const modalID = document.getElementById('carModelAddModal');
     if (modalID) {
       modalID.style.display = 'block';
     }
   }
 
-  closeModal(): void {
+  closeAddModal(): void {
     const modalID = document.getElementById('carModelAddModal');
     if (modalID) {
       modalID.style.display = 'none';
+    }
+  }
+
+  deleteCarModel(event: any, carmId: number): void {
+    if (confirm(`Delete this data ?`)) {
+      event.target.innerText = 'Deleting....';
+      this.carModels = this.carModels.filter((cm) => cm.carmId !== carmId);
+      this.carModelService.deleteCarModel(carmId).subscribe();
     }
   }
 
@@ -101,6 +98,6 @@ export class CarModelComponent implements OnInit {
 
     this.carModelService
       .addCarModel({ carmName, carmCabrId } as CarModel)
-      .subscribe(() => this.closeModal());
+      .subscribe(() => this.closeAddModal());
   }
 }

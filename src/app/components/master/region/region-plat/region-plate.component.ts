@@ -9,6 +9,7 @@ import { RegionPlatService } from 'src/app/services/master/region-plat.service';
   styleUrls: ['./region-plate.component.css'],
 })
 export class RegionPlateComponent implements OnInit {
+  title = 'Region Plat';
   regionPlats: RegionPlat[] = [];
 
   constructor(
@@ -31,9 +32,12 @@ export class RegionPlateComponent implements OnInit {
     this.router.navigate(['master/region/region-plat/edit', name]);
   }
 
-  deleteRegionPlat(regionPlats: RegionPlat) {
-    this.regionPlats.filter((f) => f !== regionPlats);
-    this.regionPlatService.deleteRegionPlat(regionPlats).subscribe();
+  deleteRegionPlat(event: any, regionPlats: RegionPlat) {
+    if (confirm('Delete this data ?')) {
+      event.target.innerText = 'Deleting...';
+      this.regionPlats.filter((f) => f !== regionPlats);
+      this.regionPlatService.deleteRegionPlat(regionPlats).subscribe();
+    }
   }
 
   ngOnInit(): void {

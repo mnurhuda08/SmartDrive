@@ -1,25 +1,23 @@
-<div class="card">
-  <div class="card-header">
-    <div class="row d-flex justify-content-between">
-      <div>
-        <h3>{{ title }}</h3>
-      </div>
-      <div>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#carModelAddModal"
-        >
-          <i class="fa fa-plus-circle"></i> Tambah
-        </button>
-      </div>
+<div class="card pb-5">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <div class="col-6">
+      <h2 class="card-title font-weight-bold">{{ title }}</h2>
+    </div>
+    <div class="col-6 d-flex justify-content-end">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#carModelAddModal"
+      >
+        <i class="fa fa-plus-circle"></i> Add
+      </button>
     </div>
   </div>
 
   <div class="card-body maxHeight" style="overflow-y: auto">
     <table class="table table-striped table-bordered table-hover">
-      <thead>
+      <thead class="text-center">
         <tr>
           <th>Car Model</th>
           <th>Action</th>
@@ -27,8 +25,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let carModel of carModels">
-          <td class="col-7">{{ carModel.carmName }}</td>
-          <td>
+          <td>{{ carModel.carmName }}</td>
+          <td class="text-center">
             <button
               type="button"
               class="btn btn-info mr-2"
@@ -42,7 +40,7 @@
             <button
               type="button"
               class="btn btn-danger"
-              (click)="deleteCarModel(carModel)"
+              (click)="deleteCarModel($event, carModel.carmId)"
               data-toggle="tooltip"
               data-placement="bottom"
               title="Delete"
@@ -55,7 +53,7 @@
     </table>
   </div>
 
-  <div class="card-footer clearfix">
+  <!-- <div class="card-footer clearfix">
     <ul class="pagination pagination-sm m-0 float-right">
       <li class="page-item"><a class="page-link" href="#">«</a></li>
       <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -63,7 +61,7 @@
       <li class="page-item"><a class="page-link" href="#">3</a></li>
       <li class="page-item"><a class="page-link" href="#">»</a></li>
     </ul>
-  </div>
+  </div> -->
 </div>
 
 <!-- Modal -->
@@ -71,13 +69,13 @@
   class="modal fade"
   id="carModelAddModal"
   tabindex="-1"
-  aria-labelledby="exampleModalLabel"
+  aria-labelledby="carModelAddModalLabel"
   aria-hidden="true"
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Car Model</h5>
+        <h5 class="modal-title" id="carModelModalLabel">Add Car Model</h5>
         <button
           type="button"
           class="close"
@@ -111,15 +109,15 @@
             <input
               type="text"
               class="form-control"
-              formControlName="carm_name"
+              formControlName="carModel_name"
               id="carModelName"
             />
             <div
-              *ngIf="submitted && form.controls['carm_name'].errors"
+              *ngIf="submitted && form.controls['carModel_name'].errors"
               class="error"
             >
               <span
-                *ngIf="form.controls['carm_name'].errors['required']"
+                *ngIf="form.controls['carModel_name'].errors['required']"
                 class="text-danger"
               >
                 Car Model Name is required
@@ -131,9 +129,9 @@
           <button type="submit" class="btn btn-primary">Save</button>
           <button
             type="button"
-            class="close btn btn-secondary"
+            class="btn btn-secondary"
             data-dismiss="modal"
-            (click)="closeModal()"
+            (click)="closeAddModal()"
           >
             Close
           </button>

@@ -1,25 +1,25 @@
 <div class="card">
-  <div class="card-header d-flex justify-content-between">
-    <div class="col-10">
-      <h4>City</h4>
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <div class="col-6">
+      <h2 class="card-title font-weight-bold">{{ title }}</h2>
     </div>
-    <div class="col-2 d-flex justify-content-end">
+    <div class="col-6 d-flex justify-content-end">
       <button
         type="button"
         class="btn btn-info float-end"
         [routerLink]="['/master/region/city/add']"
       >
-        <i class="fa fa-plus-circle"></i> Tambah
+        <i class="fa fa-plus-circle"></i> Add
       </button>
     </div>
   </div>
 
   <div class="card-body maxHeight">
     <table class="table table-striped table-bordered table-hover">
-      <thead>
+      <thead class="text-center">
         <tr>
           <th>Name</th>
-          <th>Aksi</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody *ngFor="let city of cities">
@@ -37,7 +37,7 @@
               type="button"
               class="btn btn-danger"
               style="margin-right: 5px"
-              (click)="deleteCity(city)"
+              (click)="deleteCity($event, city)"
             >
               <i class="fas fa-trash"></i>
             </button>

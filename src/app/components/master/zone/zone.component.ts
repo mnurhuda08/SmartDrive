@@ -10,6 +10,7 @@ import { ZoneService } from 'src/app/services/master/zone.service';
 })
 export class ZoneComponent implements OnInit {
   zones: Zone[] = [];
+  title = 'Zone';
 
   constructor(private zoneService: ZoneService, private router: Router) {}
 
@@ -27,9 +28,12 @@ export class ZoneComponent implements OnInit {
     this.router.navigate(['master/zone/edit', id]);
   }
 
-  deleteZone(zone: Zone) {
-    this.zones.filter((f) => f !== zone);
-    this.zoneService.deleteZone(zone).subscribe();
+  deleteZone(event: any, zone: Zone) {
+    if (confirm('Delete this data ?')) {
+      event.target.innerText = 'Deleting...';
+      this.zones.filter((f) => f !== zone);
+      this.zoneService.deleteZone(zone).subscribe();
+    }
   }
 
   ngOnInit(): void {

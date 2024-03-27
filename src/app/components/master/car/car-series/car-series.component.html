@@ -1,36 +1,34 @@
-<div class="card">
-  <div class="card-header">
-    <div class="row d-flex justify-content-between">
-      <div>
-        <h3>{{ title }}</h3>
-      </div>
-      <div>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#carSeriesAddModal"
-        >
-          <i class="fa fa-plus-circle"></i> Tambah
-        </button>
-      </div>
+<div class="card pb-5">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <div class="col-6">
+      <h2 class="card-title font-weight-bold">{{ title }}</h2>
+    </div>
+    <div class="col-6 d-flex justify-content-end">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#carSeriesAddModal"
+      >
+        <i class="fa fa-plus-circle"></i> Add
+      </button>
     </div>
   </div>
 
   <div class="card-body maxHeight" style="overflow-y: auto">
     <table class="table table-striped table-bordered table-hover">
-      <thead>
+      <thead class="text-center">
         <tr>
-          <th>Car Series Name</th>
-          <th>Passanger Seat</th>
+          <th>Car Series</th>
+          <th>Seat</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let carSeries of carSeriess">
           <td>{{ carSeries.carsName }}</td>
-          <td>{{ carSeries.carsPassenger }}</td>
-          <td>
+          <td class="text-center">{{ carSeries.carsPassenger }}</td>
+          <td class="text-center">
             <button
               type="button"
               class="btn btn-info mr-2"
@@ -44,9 +42,10 @@
             <button
               type="button"
               class="btn btn-danger"
-              (click)="deleteCarSeries(carSeries)"
-              data-toggle="tooltip"
+              (click)="deleteCarSeries($event, carSeries.carsId)"
+              data-toggle="modal"
               data-placement="bottom"
+              data-target="#deleteModal"
               title="Delete"
             >
               <i class="fas fa-trash"></i>
@@ -57,7 +56,7 @@
     </table>
   </div>
 
-  <div class="card-footer clearfix">
+  <!-- <div class="card-footer clearfix">
     <ul class="pagination pagination-sm m-0 float-right">
       <li class="page-item"><a class="page-link" href="#">«</a></li>
       <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -65,7 +64,7 @@
       <li class="page-item"><a class="page-link" href="#">3</a></li>
       <li class="page-item"><a class="page-link" href="#">»</a></li>
     </ul>
-  </div>
+  </div> -->
 </div>
 
 <!-- Modal -->
@@ -73,13 +72,13 @@
   class="modal fade"
   id="carSeriesAddModal"
   tabindex="-1"
-  aria-labelledby="exampleModalLabel"
+  aria-labelledby="carSeriesModalLabel"
   aria-hidden="true"
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Car Series</h5>
+        <h5 class="modal-title" id="carSeriesModalLabel">Add Car Series</h5>
         <button
           type="button"
           class="close"
@@ -156,7 +155,7 @@
             type="button"
             class="btn btn-secondary"
             data-dismiss="modal"
-            (click)="closeModal()"
+            (click)="closeAddModal()"
           >
             Close
           </button>

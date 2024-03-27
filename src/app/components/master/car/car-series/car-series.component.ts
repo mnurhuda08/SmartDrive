@@ -31,6 +31,11 @@ export class CarSeriesComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    this.getCarSeriess();
+    this.getCarModels();
+  }
+
   getCarModels() {
     this.carModelService.getCarModels().subscribe({
       next: (response) => {
@@ -40,11 +45,6 @@ export class CarSeriesComponent implements OnInit {
         console.error(error);
       },
     });
-  }
-
-  ngOnInit(): void {
-    this.getCarSeriess();
-    this.getCarModels();
   }
 
   getCarSeriess(): void {
@@ -62,20 +62,37 @@ export class CarSeriesComponent implements OnInit {
     this.router.navigate(['master/car/carseries/edit', id]);
   }
 
-  deleteCarSeries(carSeries: CarSeries): void {
-    this.carSeriess = this.carSeriess.filter((f) => f !== carSeries);
-    this.carSeriesService.deleteCarSeries(carSeries).subscribe();
-  }
-
-  openModal(): void {
+  openAddModal(): void {
     const modalID = document.getElementById('carSeriesAddModal');
     if (modalID) {
       modalID.style.display = 'block';
     }
   }
 
-  closeModal(): void {
+  closeAddModal(): void {
     const modalID = document.getElementById('carSeriesAddModal');
+    if (modalID) {
+      modalID.style.display = 'none';
+    }
+  }
+
+  deleteCarSeries(event: any, carsId: number): void {
+    if (confirm(`Delete this data ?`)) {
+      event.target.innerText = 'Deleting....';
+      this.carSeriess = this.carSeriess.filter((cs) => cs.carsId !== carsId);
+      this.carSeriesService.deleteCarSeries(carsId).subscribe();
+    }
+  }
+
+  openDeleteModal(): void {
+    const modalID = document.getElementById('deleteModal');
+    if (modalID) {
+      modalID.style.display = 'block';
+    }
+  }
+
+  closeDeleteModal(): void {
+    const modalID = document.getElementById('deleteModal');
     if (modalID) {
       modalID.style.display = 'none';
     }
@@ -97,6 +114,6 @@ export class CarSeriesComponent implements OnInit {
 
     this.carSeriesService
       .addCarSeries({ carsName, carsPassenger, carsCarmId } as CarSeries)
-      .subscribe(() => this.closeModal());
+      .subscribe(() => this.closeAddModal());
   }
 }
