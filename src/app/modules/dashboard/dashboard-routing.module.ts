@@ -24,6 +24,7 @@ import { AddCustomerRequestComponent } from 'src/app/components/cr/add-customer-
 import { AddAgenRequestComponentn } from 'src/app/components/cr/add-agen-request/add-agen-request.component';
 import { CreateNewPolisComponent } from 'src/app/components/cr/create-new-polis/create-new-polis.component';
 import { SendMoneyComponent } from 'src/app/components/payment/send-money/send-money.component';
+import { TopupComponent } from 'src/app/components/payment/topup/topup.component';
 
 const routes: Routes = [
   {
@@ -135,6 +136,10 @@ const routes: Routes = [
       {
         path: `payment/send-money`,
         component: SendMoneyComponent
+      },
+      {
+        path: `payment/topup-money`,
+        component: TopupComponent
       }
     ],
   },

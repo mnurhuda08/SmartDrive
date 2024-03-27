@@ -1,0 +1,46 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Bank</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Bank List</h3>
+                        </div>
+
+                        <div class="card-body">
+                            <label for="sourceAccount">Source Account</label>
+                            <select class="form-control" id="sourceAccount"
+                                [(ngModel)]="depositTransaction.patrUsacAccountNoTo">
+                                <option *ngFor="let account of data" [value]="account.usacAccountno">{{
+                                    account.usacAccountno }}</option>
+                            </select>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Send Amount</label>
+                                <input type="text" (keypress)="keyPressNumbers($event)" class="form-control"
+                                    [(ngModel)]="depositTransaction.sendAmount">
+                            </div>
+
+                            <button type="button" class="btn btn-info mr-2" (click)="createDeposit()">
+                                <span aria-hidden=" true">Deposit Money</span>
+                            </button>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>

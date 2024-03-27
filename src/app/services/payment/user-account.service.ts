@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserApiService } from '../users/usersapi.service';
 import { Observable } from 'rxjs';
-import { UserAccount } from 'src/app/models/payment/PaymentTransaction';
+import { UserAccount } from "src/app/models/payment/UserAccount";
 import { environment } from 'src/environments/environment';
 
 @Injectable({

@@ -49,6 +49,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AddCustomerRequestComponent } from './components/cr/add-customer-request/add-customer-request.component';
 import { AddAgenRequestComponentn } from './components/cr/add-agen-request/add-agen-request.component';
 import { SendMoneyComponent } from './components/payment/send-money/send-money.component';
+import { TopupComponent } from './components/payment/topup/topup.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { SendMoneyComponent } from './components/payment/send-money/send-money.c
     CreateClosePolisComponent,
     AddCustomerRequestComponent,
     AddAgenRequestComponentn,
-    SendMoneyComponent
+    SendMoneyComponent,
+    TopupComponent
   ],
   imports: [
     BrowserModule,

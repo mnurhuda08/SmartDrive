@@ -114,7 +114,15 @@ export const MenuConstant: IMenus[] = [
         roles: ['EM'],
         exact: false,
         icon: 'fas fa-funnel-dollar',
-      },]
+      },
+      {
+        path: `/payment/topup-money`,
+        title: 'Topup Money',
+        roles: ['EM'],
+        exact: false,
+        icon: 'fas fa-funnel-dollar',
+      },
+    ]
   },
 
 

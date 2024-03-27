@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PaymentTransaction } from 'src/app/models/payment/PaymentTransaction';
 import { PaymentTransactionCreateDto } from "src/app/models/payment/PaymentTransactionCreateDto";
+import { PaymentTransactionDepositDto } from 'src/app/models/payment/PaymentTransactionDepositDto';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -41,5 +42,11 @@ export class PaymentTransactionService {
       `${environment.baseUrl}/${this.url}`,
       PaymentTransaction
     );
+  }
+
+  public createDepositTransaction(depositTransactionDto: PaymentTransactionDepositDto): Observable<PaymentTransactionDepositDto> {
+    return this.http.post<PaymentTransactionDepositDto>(
+      `${environment.baseUrl}/${this.url}/AddDeposit`,
+      depositTransactionDto);
   }
 }

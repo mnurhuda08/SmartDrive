@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IClaims } from 'src/app/interfaces/users/i-login-claims';
-import { UserAccount } from 'src/app/models/payment/PaymentTransaction';
+import { UserAccount } from "src/app/models/payment/UserAccount";
 import { PaymentTransactionCreateDto } from "src/app/models/payment/PaymentTransactionCreateDto";
 import { PaymentTransactionService } from 'src/app/services/payment/payment-transaction.service';
 import { UserAccountService } from 'src/app/services/payment/user-account.service';
@@ -15,13 +15,13 @@ import { environment } from 'src/environments/environment';
 export class SendMoneyComponent implements OnInit, OnChanges {
 
   currentUser!: IClaims
+  data: any = []
   @Input() canSendMoney: boolean = false
   @Input() canSendMoneys: boolean = false
   @Input() selectedSourceAccount!: UserAccount
   @Input() sendAmount!: number
   @Input() targetAccountNumber!: string
   @Input() notes!: string
-  data: any = []
   constructor(private paymentTransactionService: PaymentTransactionService, private userAccountService: UserAccountService, private loginService: LoginService) {
   }
   ngOnChanges(): void {
