@@ -7,3 +7,15 @@ export class PaymentTransactionDepositDto {
 
   patrNotes!: string;
 }
+
+export class PaymentTransactionTransferMoneyDto {
+  sendAmount!: number;
+
+  patrUsacAccountNoFrom!: string;
+  
+  patrUsacAccountNoTo!: string;
+
+  patrType!: string;
+
+  patrNotes!: string;
+}

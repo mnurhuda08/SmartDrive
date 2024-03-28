@@ -1,15 +1,15 @@
 
 export class PaymentTransactionCreateDto {
 
-  sendAmount?: number;
+  sendAmount!: number;
 
-  patrUsacAccountNoFrom?: string;
+  patrUsacAccountNoFrom!: string;
 
-  patrUsacAccountNoTo?: string;
+  patrUsacAccountNoTo!: string;
 
-  patrType?: string;
+  patrType!: string;
 
-  patrNotes?: string;
+  patrNotes!: string;
 }
 
 

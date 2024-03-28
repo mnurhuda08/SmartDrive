@@ -23,8 +23,8 @@ import { CreateClosePolisComponent } from 'src/app/components/cr/create-close-po
 import { AddCustomerRequestComponent } from 'src/app/components/cr/add-customer-request/add-customer-request.component';
 import { AddAgenRequestComponentn } from 'src/app/components/cr/add-agen-request/add-agen-request.component';
 import { CreateNewPolisComponent } from 'src/app/components/cr/create-new-polis/create-new-polis.component';
-import { SendMoneyComponent } from 'src/app/components/payment/send-money/send-money.component';
 import { TopupComponent } from 'src/app/components/payment/topup/topup.component';
+import { TransferMoneyComponent } from 'src/app/components/payment/transfer-money/transfer-money.component';
 
 const routes: Routes = [
   {
@@ -135,7 +135,7 @@ const routes: Routes = [
       },
       {
         path: `payment/send-money`,
-        component: SendMoneyComponent
+        component: TransferMoneyComponent
       },
       {
         path: `payment/topup-money`,

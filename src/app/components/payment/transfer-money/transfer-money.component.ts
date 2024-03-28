@@ -1,26 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IClaims } from 'src/app/interfaces/users/i-login-claims';
-import { PaymentTransactionDepositDto } from 'src/app/models/payment/PaymentTransactionDepositDto';
+import { PaymentTransactionCreateDto } from 'src/app/models/payment/PaymentTransactionCreateDto';
 import { UserAccount } from 'src/app/models/payment/UserAccount';
+
 import { PaymentTransactionService } from 'src/app/services/payment/payment-transaction.service';
 import { UserAccountService } from 'src/app/services/payment/user-account.service';
-import { LoginService } from 'src/app/services/users/login.service';
-import { environment } from 'src/environments/environment';
+import { LoginService } from 'src/app/services/users/login.service'; import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-topup',
-  templateUrl: './topup.component.html',
-  styleUrls: ['./topup.component.css']
+  selector: 'app-transfer-money',
+  templateUrl: './transfer-money.component.html',
+  styleUrls: ['./transfer-money.component.css']
 })
-export class TopupComponent implements OnInit {
-  depositTransaction!: PaymentTransactionDepositDto
+export class TransferMoneyComponent {
+  createTrx!: PaymentTransactionCreateDto
   currentUser!: IClaims
   data: any = []
 
   constructor(private paymentTransactionService: PaymentTransactionService, private userAccountService: UserAccountService, private loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.initCreateDepositTrx()
+    this.initCreateTransferMoney()
     this.fetchMe();
   }
 
@@ -45,16 +45,18 @@ export class TopupComponent implements OnInit {
       });
   }
 
-  initCreateDepositTrx() {
-    this.depositTransaction = new PaymentTransactionDepositDto();
+  initCreateTransferMoney() {
+    this.createTrx = new PaymentTransactionCreateDto();
   }
 
-  createDeposit() {
-    console.log(this.depositTransaction)
-    this.paymentTransactionService.createDepositTransaction(this.depositTransaction)
+  createTransferMoney() {
+    console.log(this.createTrx)
+    this.createTrx.patrType='TRANSFER'
+
+    this.paymentTransactionService.createPaymentTransaction(this.createTrx)
       .subscribe((result) => console.log(result))
   }
-  
+
   keyPressNumbers(event: any) {
     var charCode = (event.which) ? event.which : event.keyCode;
     // Only Numbers 0-9

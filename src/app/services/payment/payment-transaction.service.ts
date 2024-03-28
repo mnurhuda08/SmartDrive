@@ -36,11 +36,11 @@ export class PaymentTransactionService {
   }
 
   public createPaymentTransaction(
-    PaymentTransaction: PaymentTransactionCreateDto
-  ): Observable<PaymentTransaction[]> {
-    return this.http.post<PaymentTransaction[]>(
-      `${environment.baseUrl}/${this.url}`,
-      PaymentTransaction
+    paymentTransactionCreateDto: PaymentTransactionCreateDto
+  ): Observable<PaymentTransactionCreateDto> {
+    return this.http.post<PaymentTransactionCreateDto>(
+      `${environment.baseUrl}/${this.url}/TransferMoney`,
+      paymentTransactionCreateDto
     );
   }
 

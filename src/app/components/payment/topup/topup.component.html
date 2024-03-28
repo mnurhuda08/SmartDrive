@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="card-body">
-                            <label for="sourceAccount">Source Account</label>
+                            <label for="sourceAccount">Account Number</label>
                             <select class="form-control" id="sourceAccount"
                                 [(ngModel)]="depositTransaction.patrUsacAccountNoTo">
                                 <option *ngFor="let account of data" [value]="account.usacAccountno">{{
@@ -28,7 +28,7 @@
                             </select>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Send Amount</label>
+                                <label for="exampleInputEmail1">Topup Amount</label>
                                 <input type="text" (keypress)="keyPressNumbers($event)" class="form-control"
                                     [(ngModel)]="depositTransaction.sendAmount">
                             </div>
